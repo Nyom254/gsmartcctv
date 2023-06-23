@@ -8,9 +8,9 @@ require_once("../../../tinify-php-master/lib/Tinify.php");
 include '../../conn.php';
 session_start();
 
-$queryApi = mysqli_query($conn, "select * from api_key");
+$queryApi = mysqli_query($conn, "select * from api_key where name = `tinify`");
 $dataApi = mysqli_fetch_assoc($queryApi);
-$keyTinyApi = $dataApi[''];
+$keyTinyApi = $dataApi['key'];
 \Tinify\setKey("$keyTinyApi");
 
 
