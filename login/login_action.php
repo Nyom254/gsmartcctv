@@ -3,7 +3,7 @@ include "../conn.php";
 session_start();
 
 
-$queryUser = mysqli_prepare($conn, "select * from user where username = ? and password = ?");
+$queryUser = mysqli_prepare($conn, "select * from user where username = ? and password = ? and status_aktif = 1");
 mysqli_stmt_bind_param($queryUser, "ss", $username, $password);
 
 $username = mysqli_escape_string($conn, $_POST['username']);
