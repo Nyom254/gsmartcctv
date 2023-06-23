@@ -20,10 +20,10 @@ if ($cekDataUser > 0) {
     $_SESSION['id_user'] = $rowUser['id_user'];
     if ($rowUser['level'] == '1') {
         $_SESSION['status'] = "master_login";
-        header("location:../master-home/index.php");
+        header("location:../home/index.php");
     } else if ($rowUser['level'] == '0') {
         $_SESSION['status'] = "user_login";
-        header("location:../master-home/index.php");
+        header("location:../home/index.php");
     }
 } else {
     header("location:./login_page.php?m=gagal");
