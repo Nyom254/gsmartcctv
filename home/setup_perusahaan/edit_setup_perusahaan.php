@@ -1,14 +1,14 @@
 <?php
-require_once("../../../tinify-php-master/lib/Tinify/Exception.php");
-require_once("../../../tinify-php-master/lib/Tinify/ResultMeta.php");
-require_once("../../../tinify-php-master/lib/Tinify/Result.php");
-require_once("../../../tinify-php-master/lib/Tinify/Source.php");
-require_once("../../../tinify-php-master/lib/Tinify/Client.php");
-require_once("../../../tinify-php-master/lib/Tinify.php");
+require_once("../../tinify-php-master/lib/Tinify/Exception.php");
+require_once("../../tinify-php-master/lib/Tinify/ResultMeta.php");
+require_once("../../tinify-php-master/lib/Tinify/Result.php");
+require_once("../../tinify-php-master/lib/Tinify/Source.php");
+require_once("../../tinify-php-master/lib/Tinify/Client.php");
+require_once("../../tinify-php-master/lib/Tinify.php");
 include '../../conn.php';
 session_start();
 
-$queryApi = mysqli_query($conn, "select * from api_key where name = `tinify`");
+$queryApi = mysqli_query($conn, "select * from `api_key` where name = 'tinify'");
 $dataApi = mysqli_fetch_assoc($queryApi);
 $keyTinyApi = $dataApi['key'];
 \Tinify\setKey("$keyTinyApi");
