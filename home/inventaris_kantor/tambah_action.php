@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once("../../tinify-php-master/lib/Tinify/Exception.php");
 require_once("../../tinify-php-master/lib/Tinify/ResultMeta.php");
@@ -13,7 +14,6 @@ $dataApi = mysqli_fetch_assoc($queryApi);
 $keyTinyApi = $dataApi['key'];
 \Tinify\setKey("$keyTinyApi");
 
-session_start();
 
 $queryTambahInventaris = mysqli_prepare($conn, "insert into inventaris_kantor (no_inventaris, tgl, nama_barang, posisi, keterangan, qty, attachment, cruser, crtime) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
 mysqli_stmt_bind_param($queryTambahInventaris, "sssssisss", $no_inventaris, $tanggal, $nama_barang, $posisi, $keterangan, $quantity, $attachment, $cruser, $crtime);
