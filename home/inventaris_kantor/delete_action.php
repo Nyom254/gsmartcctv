@@ -1,6 +1,7 @@
 <?php 
     include '../../conn.php';
 
+    
     session_start();
     
     $no_inventaris = $_GET['no_inventaris'];
