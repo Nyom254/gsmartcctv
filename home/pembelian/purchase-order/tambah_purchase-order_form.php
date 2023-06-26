@@ -142,8 +142,8 @@
                                             <th scope="row"></th>
                                             <td class="col-3">
                                                 <div class="row">
-                                                    <input type="text" id="searchBarang" class="form-control form-control-sm col-9" readonly>
-                                                    <button type="button" class="btn btn-sm btn-success col-3" data-toggle="modal" data-target="#tabelCariBarang"><i class="fas fa-search"></i></button>
+                                                    <input type="text" id="searchBarang" class="form-control form-control-sm col-md-9" readonly>
+                                                    <button type="button" class="btn btn-sm btn-success col-md-3" data-toggle="modal" data-target="#tabelCariBarang"><i class="fas fa-search"></i></button>
                                                 </div>
                                                 <div class="modal fade" id="tabelCariBarang">
                                                     <div class="modal-dialog modal-lg">
@@ -220,10 +220,10 @@
                                     </div>
                                     <div class="form-group row float-right col-9" id="container_ppn">
                                         <label for="ppn" class="col-sm-4 col-form-label-sm">PPN:</label>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3 d-flex">
                                             <input type="number" name="ppn-persen" id="ppn-persen" class="form-control form-control-sm" oninput="limitNumberInput(this,3), getPPN()" value="11">
+                                            <p class="ml-1">%</p>
                                         </div>
-                                        %
                                         <div class="col-sm-4">
                                             <input type="number" name="ppn" class="form-control form-control-sm" id="ppn" readonly>
                                         </div>

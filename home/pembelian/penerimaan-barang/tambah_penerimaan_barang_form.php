@@ -213,7 +213,6 @@
                 var noPenerimaan;
                 for (i = 0; i < response.length; i++) {
                     let item = response[i]
-                    console.log(item)
                     let lastYear = item.no_penerimaan.substr(3, 2)
                     let lastMonth = item.no_penerimaan.substr(5, 2)
 
@@ -290,7 +289,6 @@
                 }
                 for (var i = 0; i < response.length; i++) {
                     let item = response[i];
-                    console.log(item);
                     var newRow = table.insertRow()
                     var cell1 = newRow.insertCell(0)
                     cell1.innerHTML = i + 1;
