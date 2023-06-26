@@ -57,9 +57,8 @@
                                     <td><?php echo $rowPerusahaan['no_telp'] ?></td>
                                     <td><?php echo $rowPerusahaan['no_rek'] ?></td>
                                     <td>
-                                        <p id="loading">Loading ....</p>
                                         <a href="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" data-toggle="lightbox" data-title="setup perusahaan">
-                                            <img decoding="async" src="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" width="70px" height="70px" onload="document.getElementById('loading').style.display = 'none'" class="img-fluid mb-2" alt="setup perusahaan" >
+                                            <img decoding="async" data-lazysrc="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" width="70px" height="70px" class="img-fluid mb-2" >
                                         </a>
                                     </td>
                                 </tr>

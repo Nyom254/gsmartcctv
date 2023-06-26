@@ -1,10 +1,10 @@
 <?php
-  session_start();
-  include '../conn.php';
-  if (!isset($_SESSION['status'])) {
-    header("location:../login/login_page.php");
-  }
-  ?>
+session_start();
+include '../conn.php';
+if (!isset($_SESSION['status'])) {
+  header("location:../login/login_page.php");
+}
+?>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       -moz-appearance: textfield;
     }
   </style>
-  
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -499,7 +499,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         },
       })
       $("#tabelSetupPerusahaan").DataTable({
-        "searching":false,
+        "searching": false,
         "lengthChange": false,
         "responsive": true,
         "lengthChange": false,
@@ -944,6 +944,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
       $(this).ekkoLightbox({
         alwaysShowClose: true
       });
+    });
+
+    function ReLoadImages() {
+      $('img[data-lazysrc]').each(function() {
+        //* set the img src from data-src
+        $(this).attr('src', $(this).attr('data-lazysrc'));
+      });
+    }
+
+    document.addEventListener('readystatechange', event => {
+      if (event.target.readyState === "complete") { //or at "complete" if you want it to execute in the most last state of window.
+        ReLoadImages();
+      }
     });
   </script>
 

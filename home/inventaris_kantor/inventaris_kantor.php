@@ -112,9 +112,8 @@
                                                 <td><?php echo $rowInvetarisKantor['keterangan'] ?></td>
                                                 <td><?php echo $rowInvetarisKantor['qty'] ?></td>
                                                 <td>
-                                                    <p id="loading<?php echo $rowInvetarisKantor['no_inventaris'] ?>">Loading ....</p>
                                                     <a href="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>">
-                                                        <img decoding="async" src="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" width="100px" height="100px" onload="document.getElementById('loading<?php echo $rowInvetarisKantor['no_inventaris'] ?>').style.display = 'none'" class="img-fluid mb-2" alt="<?php echo $rowInvetarisKantor['no_inventaris'] ?>" />
+                                                        <img data-lazysrc="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" width="100px" height="100px" class="img-fluid mb-2"  />
                                                     </a>
                                                 </td>
                                                 <td>
