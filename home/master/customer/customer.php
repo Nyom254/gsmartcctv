@@ -66,25 +66,21 @@
                       <label for="email">Email:</label>
                       <input type="email" name="email" class="form-control" id="email" placeholder="Email">
                     </div>
-                    <div class="col-3">
-                      <div class="form-group">
-                        <label for="status">status</label>
-                        <select type="text" name="status" class="form-control" id="status">
-                          <option value="maintenance">maintenance</option>
-                          <option value="beli_komputer">beli komputer</option>
-                          <option value="beli_cctv">beli cctv</option>
-                          <option value="prospect">prospect</option>
-                        </select>
-                      </div>
+                    <div class="form-group">
+                      <label for="status">status</label>
+                      <select type="text" name="status" class="form-control col-md-3" id="status">
+                        <option value="maintenance">maintenance</option>
+                        <option value="beli_komputer">beli komputer</option>
+                        <option value="beli_cctv">beli cctv</option>
+                        <option value="prospect">prospect</option>
+                      </select>
                     </div>
-                    <div class="col-2">
-                      <div class="form-group ">
-                        <label for="status_aktif">status aktif</label>
-                        <select type="text" name="status_aktif" class="form-control" id="status_aktif">
-                          <option value="1">aktif</option>
-                          <option value="0">tidak aktif</option>
-                        </select>
-                      </div>
+                    <div class="form-group ">
+                      <label for="status_aktif">status aktif</label>
+                      <select type="text" name="status_aktif" class="form-control col-md-2" id="status_aktif">
+                        <option value="1">aktif</option>
+                        <option value="0">tidak aktif</option>
+                      </select>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -171,10 +167,9 @@
                                 <label for="email">Email:</label>
                                 <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?php echo $rowCustomer['email'] ?>">
                               </div>
-                              <div class="col-3">
                                 <div class="form-group ">
                                   <label for="status">Status:</label>
-                                  <select type="text" name="status" class="form-control" id="status">
+                                  <select type="text" name="status" class="form-control col-md-3" id="status">
                                     <option value="maintenance" <?php if ($rowCustomer['status'] == 'maintenance') {
                                                                   echo "selected";
                                                                 } ?>>maintenance</option>
@@ -189,11 +184,9 @@
                                                               } ?>>prospect</option>
                                   </select>
                                 </div>
-                              </div>
-                              <div class="col-2">
                                 <div class="form-group ">
                                   <label for="status_aktif">Status Aktif: </label>
-                                  <select name="status_aktif" class="form-control" id="status_aktif">
+                                  <select name="status_aktif" class="form-control col-md-2" id="status_aktif">
                                     <option value="1" <?php if ($rowCustomer['status_aktif'] == '1') {
                                                         echo "selected";
                                                       } ?>>aktif</option>
@@ -202,7 +195,6 @@
                                                       } ?>>tidak aktif</option>
                                   </select>
                                 </div>
-                              </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

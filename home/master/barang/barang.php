@@ -48,60 +48,52 @@
                       <label for="satuan">Satuan:</label>
                       <input type="text" name="satuan" class="form-control" id="satuan" placeholder="Satuan">
                     </div>
-                    <div class="col-3">
-                      <div class="form-group">
-                        <label for="group_barang">Group Barang</label>
-                        <select name="group_barang" class="form-control" id="group_barang">
-                          <?php
-                          $dataGroupBarang = mysqli_query($conn, "select * from group_barang where status_aktif = '1'");
-                          $cekGroupBarang = $dataGroupBarang->num_rows;
+                    <div class="form-group">
+                      <label for="group_barang">Group Barang</label>
+                      <select name="group_barang" class="form-control col-md-3" id="group_barang">
+                        <?php
+                        $dataGroupBarang = mysqli_query($conn, "select * from group_barang where status_aktif = '1'");
+                        $cekGroupBarang = $dataGroupBarang->num_rows;
 
-                          if ($cekGroupBarang > 0) {
-                            while ($rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang)) { ?>
-                              <option value="<?php echo $rowGroupBarang['id_group']; ?>"> <?php echo $rowGroupBarang['nama_group']; ?></option>
-                          <?php
-                            }
+                        if ($cekGroupBarang > 0) {
+                          while ($rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang)) { ?>
+                            <option value="<?php echo $rowGroupBarang['id_group']; ?>"> <?php echo $rowGroupBarang['nama_group']; ?></option>
+                        <?php
                           }
-                          ?>
-                        </select>
-                      </div>
+                        }
+                        ?>
+                      </select>
                     </div>
-                    <div class="col-3">
-                      <div class="form-group">
-                        <label for="departemen">Departemen</label>
-                        <select name="departemen" class="form-control" id="departemen">
-                          <?php
-                          $dataDepartemen = mysqli_query($conn, "select * from departemen where status_aktif = '1'");
-                          $cekDepartemen = $dataDepartemen->num_rows;
+                    <div class="form-group">
+                      <label for="departemen">Departemen</label>
+                      <select name="departemen" class="form-control col-md-2" id="departemen">
+                        <?php
+                        $dataDepartemen = mysqli_query($conn, "select * from departemen where status_aktif = '1'");
+                        $cekDepartemen = $dataDepartemen->num_rows;
 
-                          if ($cekDepartemen > 0) {
-                            while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                              <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['nama']; ?></option>
-                          <?php
-                            }
+                        if ($cekDepartemen > 0) {
+                          while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
+                            <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['nama']; ?></option>
+                        <?php
                           }
-                          ?>
-                        </select>
-                      </div>
+                        }
+                        ?>
+                      </select>
                     </div>
-                    <div class="col-2">
-                      <div class="form-group">
-                        <label for="type">Type:</label>
-                        <select type="text" name="type" class="form-control" id="type">
-                          <option value="barang">Barang</option>
-                          <option value="jasa">Jasa</option>
-                          <option value="non_persediaan">Non Persediaan</option>
-                        </select>
-                      </div>
+                    <div class="form-group">
+                      <label for="type">Type:</label>
+                      <select type="text" name="type" class="form-control col-md-3" id="type">
+                        <option value="barang">Barang</option>
+                        <option value="jasa">Jasa</option>
+                        <option value="non_persediaan">Non Persediaan</option>
+                      </select>
                     </div>
-                    <div class="col-2">
-                      <div class="form-group">
-                        <label for="status">Status Aktif:</label>
-                        <select type="text" name="status" class="form-control" id="status">
-                          <option value="1">Aktif</option>
-                          <option value="0">Tidak Aktif</option>
-                        </select>
-                      </div>
+                    <div class="form-group">
+                      <label for="status">Status Aktif:</label>
+                      <select type="text" name="status" class="form-control col-md-2" id="status">
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak Aktif</option>
+                      </select>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -170,72 +162,63 @@
                                 <label for="satuan">Satuan:</label>
                                 <input type="text" name="satuan" class="form-control" id="satuan" placeholder="Satuan" value="<?php echo $rowBarang['satuan'] ?>">
                               </div>
-                              <div class="col-3">
-                                <div class="form-group ">
-                                  <label for="group_barang">Group Barang:</label>
-                                  <select type="text" name="group_barang" class="form-control" id="group_barang">
-                                    <?php
-                                    $dataGroupBarang = mysqli_query($conn, "select * from group_barang where status_aktif = '1'");
-                                    $cekGroupBarang = $dataGroupBarang->num_rows;
-
-                                    if ($cekGroupBarang > 0) {
-                                      while ($rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang)) { ?>
-                                        <option value="<?php echo $rowGroupBarang['id_group']; ?>" <?php if ($rowBarang['group_barang'] == $rowGroupBarang['id_group']) {
-                                                                                                      echo "selected";
-                                                                                                    } ?>> <?php echo $rowGroupBarang['nama_group']; ?></option>
-                                    <?php
-                                      }
+                              <div class="form-group ">
+                                <label for="group_barang">Group Barang:</label>
+                                <select type="text" name="group_barang" class="form-control col-md-3" id="group_barang">
+                                  <?php
+                                  $dataGroupBarang = mysqli_query($conn, "select * from group_barang where status_aktif = '1'");
+                                  $cekGroupBarang = $dataGroupBarang->num_rows;
+                                  if ($cekGroupBarang > 0) {
+                                    while ($rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang)) { ?>
+                                      <option value="<?php echo $rowGroupBarang['id_group']; ?>" <?php if ($rowBarang['group_barang'] == $rowGroupBarang['id_group']) {
+                                                                                                    echo "selected";
+                                                                                                  } ?>> <?php echo $rowGroupBarang['nama_group']; ?></option>
+                                  <?php
                                     }
-                                    ?>
-                                  </select>
-                                </div>
+                                  }
+                                  ?>
+                                </select>
                               </div>
-                              <div class="col-3">
-                                <div class="form-group">
-                                  <label for="departemen">Departemen</label>
-                                  <select name="departemen" class="form-control" id="departemen">
-                                    <?php
-                                    $dataDepartemen = mysqli_query($conn, "select * from departemen where status_aktif = '1'");
-                                    $cekDepartemen = $dataDepartemen->num_rows;
+                              <div class="form-group">
+                                <label for="departemen">Departemen</label>
+                                <select name="departemen" class="form-control col-md-3" id="departemen">
+                                  <?php
+                                  $dataDepartemen = mysqli_query($conn, "select * from departemen where status_aktif = '1'");
+                                  $cekDepartemen = $dataDepartemen->num_rows;
 
-                                    if ($cekDepartemen > 0) {
-                                      while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                        <option value="<?php echo $rowDepartemen['kode']; ?>" <?php if ($rowDepartemen['kode'] == $rowBarang['kode_departemen']) {
-                                                                                                      echo "selected";
-                                                                                                    } ?> > <?php echo $rowDepartemen['nama']; ?></option>
-                                    <?php
-                                      }
+                                  if ($cekDepartemen > 0) {
+                                    while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
+                                      <option value="<?php echo $rowDepartemen['kode']; ?>" <?php if ($rowDepartemen['kode'] == $rowBarang['kode_departemen']) {
+                                                                                              echo "selected";
+                                                                                            } ?>> <?php echo $rowDepartemen['nama']; ?></option>
+                                  <?php
                                     }
-                                    ?>
-                                  </select>
-                                </div>
+                                  }
+                                  ?>
+                                </select>
                               </div>
-                              <div class="col-2">
-                                <div class="form-group">
-                                  <label for="type">Type:</label>
-                                  <select type="text" name="type" class="form-control" id="type">
-                                    <option value="barang">Barang</option>
-                                    <option value="jasa" <?php if ($rowBarang['type'] == 'jasa') {
-                                                            echo "selected";
-                                                          } ?>>Jasa</option>
-                                    <option value="non_persediaan" <?php if ($rowBarang['type'] == 'non_persediaan') {
-                                                            echo "selected";
-                                                          }?>>Non Persediaan</option>
-                                  </select>
-                                </div>
+                              <div class="form-group">
+                                <label for="type">Type:</label>
+                                <select type="text" name="type" class="form-control col-md-2" id="type">
+                                  <option value="barang">Barang</option>
+                                  <option value="jasa" <?php if ($rowBarang['type'] == 'jasa') {
+                                                          echo "selected";
+                                                        } ?>>Jasa</option>
+                                  <option value="non_persediaan" <?php if ($rowBarang['type'] == 'non_persediaan') {
+                                                                    echo "selected";
+                                                                  } ?>>Non Persediaan</option>
+                                </select>
                               </div>
-                              <div class="col-2">
-                                <div class="form-group ">
-                                  <label for="status">Status Aktif:</label>
-                                  <select name="status" class="form-control" id="status">
-                                    <option value="1" <?php if ($rowBarang['status_aktif'] == '1') {
-                                                        echo "selected";
-                                                      } ?>>aktif</option>
-                                    <option value="0" <?php if ($rowBarang['status_aktif'] == '0') {
-                                                        echo "selected";
-                                                      } ?>>tidak aktif</option>
-                                  </select>
-                                </div>
+                              <div class="form-group ">
+                                <label for="status">Status Aktif:</label>
+                                <select name="status" class="form-control col-md-2" id="status">
+                                  <option value="1" <?php if ($rowBarang['status_aktif'] == '1') {
+                                                      echo "selected";
+                                                    } ?>>aktif</option>
+                                  <option value="0" <?php if ($rowBarang['status_aktif'] == '0') {
+                                                      echo "selected";
+                                                    } ?>>tidak aktif</option>
+                                </select>
                               </div>
                             </div>
                             <!-- /.card-body -->

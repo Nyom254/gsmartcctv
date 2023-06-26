@@ -50,7 +50,7 @@
                                             <label for="penanggung_jawab">Penanggung Jawab</label>
                                             <input type="text" name="penanggung_jawab" class="form-control" id="penanggung_jawab" placeholder="Penanggung jawab" required>
                                         </div>
-                                        <div class="form-group col-2">
+                                        <div class="form-group col-md-2">
                                             <label for="status">Status Aktif:</label>
                                             <select name="status" class="form-control" id="status">
                                                 <option value="1">aktif</option>
@@ -112,7 +112,7 @@
                                                                     <label for="penanggung_jawab">Penanggung Jawab</label>
                                                                     <input type="text" name="penanggung_jawab" class="form-control" id="penanggung_jawab" value="<?php echo $rowGudang['penanggung_jawab'] ?>" placeholder="Penanggung jawab" required>
                                                                 </div>
-                                                                <div class="form-group col-2">
+                                                                <div class="form-group col-md-2">
                                                                     <label for="status" class="form-label">Status Aktif:</label>
                                                                     <select name="status" id="status" class="form-control">
                                                                         <option value="1" <?php if ($rowGudang['status_aktif'] == '1') {

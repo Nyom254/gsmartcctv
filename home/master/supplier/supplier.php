@@ -62,14 +62,12 @@
                       <label for="keterangan">Keterangan:</label>
                       <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="keterangan">
                     </div>
-                    <div class="col-2">
-                      <div class="form-group ">
-                        <label for="status">Status:</label>
-                        <select type="text" name="status" class="form-control" id="status">
-                          <option value="1">aktif</option>
-                          <option value="0">tidak aktif</option>
-                        </select>
-                      </div>
+                    <div class="form-group ">
+                      <label for="status">Status:</label>
+                      <select type="text" name="status" class="form-control col-md-2" id="status">
+                        <option value="1">aktif</option>
+                        <option value="0">tidak aktif</option>
+                      </select>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -148,18 +146,16 @@
                                 <label for="keterangan">keterangan:</label>
                                 <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?php echo $rowSupplier['keterangan'] ?>">
                               </div>
-                              <div class="col-2">
-                                <div class="form-group ">
-                                  <label for="status" class="form-label">status</label>
-                                  <select type="text" name="status" class="form-control" id="status">
-                                    <option value="1" <?php if ($rowSupplier['status_aktif'] == '1') {
-                                                        echo "selected";
-                                                      } ?>>aktif</option>
-                                    <option value="0" <?php if ($rowSupplier['status_aktif'] == '0') {
-                                                        echo "selected";
-                                                      } ?>>tidak aktif</option>
-                                  </select>
-                                </div>
+                              <div class="form-group ">
+                                <label for="status" class="form-label">status</label>
+                                <select type="text" name="status" class="form-control col-md-2" id="status">
+                                  <option value="1" <?php if ($rowSupplier['status_aktif'] == '1') {
+                                                      echo "selected";
+                                                    } ?>>aktif</option>
+                                  <option value="0" <?php if ($rowSupplier['status_aktif'] == '0') {
+                                                      echo "selected";
+                                                    } ?>>tidak aktif</option>
+                                </select>
                               </div>
                             </div>
                             <!-- /.card-body -->

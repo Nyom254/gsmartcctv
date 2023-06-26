@@ -40,14 +40,12 @@
                       <label for="nama_group">Nama Group:</label>
                       <input type="text" name="nama_group" class="form-control" id="nama_group" placeholder="Nama Group">
                     </div>
-                    <div class="col-2">
-                      <div class="form-group ">
-                        <label for="status">Status:</label>
-                        <select type="text" name="status" class="form-control select2" id="status">
-                          <option value="1">aktif</option>
-                          <option value="0">tidak aktif</option>
-                        </select>
-                      </div>
+                    <div class="form-group ">
+                      <label for="status">Status:</label>
+                      <select type="text" name="status" class="form-control col-md-2" id="status">
+                        <option value="1">aktif</option>
+                        <option value="0">tidak aktif</option>
+                      </select>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -76,12 +74,12 @@
                       <tr>
                         <td class="col-6"><?php echo $rowGroupBarang['nama_group']  ?></td>
                         <td class="col-4"><?php
-                            if ($rowGroupBarang['status_aktif'] == 0) {
-                              echo "tidak aktif";
-                            } else {
-                              echo "aktif";
-                            }
-                            ?>
+                                          if ($rowGroupBarang['status_aktif'] == 0) {
+                                            echo "tidak aktif";
+                                          } else {
+                                            echo "aktif";
+                                          }
+                                          ?>
                         </td>
                         <td class="col2">
                           <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditGroupBarang<?php echo $rowGroupBarang['id_group'] ?>"><span class="material-symbols-outlined">edit</span></button>
@@ -96,14 +94,16 @@
                                 <label for="nama_grou">Nama Group</label>
                                 <input type="text" name="nama_group" class="form-control" id="nama_group" placeholder="Nama Group" value="<?php echo $rowGroupBarang['nama_group'] ?>">
                               </div>
-                              <div class="col-2">
-                                <div class="form-group ">
-                                  <label for="status">status aktif</label>
-                                  <select type="text" name="status" class="form-control select2" id="status">
-                                    <option value="1" <?php if ($rowGroupBarang['status_aktif'] == '1') {echo "selected";} ?>>aktif</option>
-                                    <option value="0" <?php if ($rowGroupBarang['status_aktif'] == '0') {echo "selected";} ?>>tidak aktif</option>
-                                  </select>
-                                </div>
+                              <div class="form-group ">
+                                <label for="status">status aktif</label>
+                                <select type="text" name="status" class="form-control col-md-2" id="status">
+                                  <option value="1" <?php if ($rowGroupBarang['status_aktif'] == '1') {
+                                                      echo "selected";
+                                                    } ?>>aktif</option>
+                                  <option value="0" <?php if ($rowGroupBarang['status_aktif'] == '0') {
+                                                      echo "selected";
+                                                    } ?>>tidak aktif</option>
+                                </select>
                               </div>
                             </div>
                             <!-- /.card-body -->

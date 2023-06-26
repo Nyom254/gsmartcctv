@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="status">status aktif:</label>
-                                            <select name="status" id="status" class="form-control col-2">
+                                            <select name="status" id="status" class="form-control col-md-2">
                                                 <option value="1">aktif</option>
                                                 <option value="0">tidak aktif</option>
                                             </select>
@@ -102,7 +102,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="status">status aktif:</label>
-                                                            <select name="status" id="status" class="form-control col-2">
+                                                            <select name="status" id="status" class="form-control col-md-2">
                                                                 <option value="1" <?php if ($rowDepartemen['status_aktif'] == 1) {
                                                                                         echo "selected";
                                                                                     } ?>>aktif</option>

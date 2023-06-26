@@ -50,7 +50,7 @@
                       <label for="exampleInputPassword1">Password</label>
                       <input type="password" name="password" class="form-control" id="Password" placeholder="Password" required>
                     </div>
-                    <div class="col-2">
+                    <div class="col-md-2">
                       <div class="form-group ">
                         <label for="level">level</label>
                         <select type="text" name="level" class="form-control" id="level" required>
@@ -59,7 +59,7 @@
                         </select>
                       </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-md-2">
                       <div class="form-group ">
                         <label for="status">status aktif:</label>
                         <select name="status" class="form-control" id="status" required>
@@ -140,13 +140,13 @@
                                 <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?php echo $rowUser['username'] ?>">
                               </div>
                               <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="<?php echo $rowUser['password'] ?>">
+                                <label for="password">Password</label>
+                                <input type="text" name="password" class="form-control" id="password" placeholder="Password" value="<?php echo $rowUser['password'] ?>">
                               </div>
-                              <div class="col-2">
+                              <div class="col-md-2">
                                 <div class="form-group ">
                                   <label for="level">level</label>
-                                  <select type="text" name="level" class="form-control" id="username" placeholder="Username">
+                                  <select type="text" name="level" class="form-control" id="level" placeholder="Username">
                                     <option value="1" <?php if ($rowUser['level'] == '1') {
                                                         echo "selected";
                                                       } ?>>admin</option>
@@ -156,7 +156,7 @@
                                   </select>
                                 </div>
                               </div>
-                              <div class="col-2">
+                              <div class="col-md-2">
                                 <div class="form-group ">
                                   <label for="status">status aktif:</label>
                                   <select name="status" class="form-control" id="status" required>
