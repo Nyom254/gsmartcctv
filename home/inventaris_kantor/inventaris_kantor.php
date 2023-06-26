@@ -64,7 +64,7 @@
                                                 <div class="form-group row">
                                                     <label for="keterangan" class="col-sm-6 col-form-label">Keterangan</label>
                                                     <div class="col-sm-6">
-                                                        <textarea name="keterangan" class="form-control" id="keterangan"> </textarea>
+                                                        <textarea name="keterangan" class="form-control" id="keterangan"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -174,7 +174,7 @@
                                                         <div class="form-group row">
                                                             <label for="keterangan" class="col-sm-6 col-form-label">Keterangan</label>
                                                             <div class="col-sm-6">
-                                                                <textarea name="keterangan" class="form-control" id="keterangan"><?php echo $rowInvetarisKantor['keterangan'] ?> </textarea>
+                                                                <textarea name="keterangan" class="form-control" id="keterangan"><?php echo $rowInvetarisKantor['keterangan'] ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
