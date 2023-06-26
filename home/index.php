@@ -46,6 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     /* Firefox */
     input[type=number] {
       -moz-appearance: textfield;
+      appearance: textfield;
     }
   </style>
 
