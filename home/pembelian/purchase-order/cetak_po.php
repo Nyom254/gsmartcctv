@@ -87,14 +87,14 @@
                 <h3><?php echo $dataSupplier['nama'] ?></h3>
                 <p><?php echo $dataSupplier['alamat'] ?>, <?php echo $dataSupplier['kota'] ?></p>
             </div>
-            <div style="width:250px;padding-top:20px;">
-                <div style="display:flex;padding-right:30px;">
+            <div style="width:300px;padding-top:20px;display:flex;">
+                <div style="display:flex;padding-right:0;flex-direction:column">
                     <p style="width:110px">Nomor</p>
-                    <p>:<?php echo $dataPurchaseOrder['NO_TRANSAKSI'] ?></p>
-                </div>
-                <div style="display:flex;padding-right:30px;">
                     <p style="width:110px">Tanggal</p>
-                    <p>:<?php $date = $dataPurchaseOrder['TANGGAL']; // The original date in 'Y-m-d' format
+                </div>
+                <div style="display:flex;flex-direction:column">
+                    <p>: <?php echo $dataPurchaseOrder['NO_TRANSAKSI'] ?></p>
+                    <p>: <?php $date = $dataPurchaseOrder['TANGGAL']; // The original date in 'Y-m-d' format
                         $reformattedDate = date('d/m/Y', strtotime($date)); // Reformatted date in 'd/m/Y' format
                         echo $reformattedDate; ?></p>
                 </div>
@@ -161,8 +161,6 @@
             <p><?php echo $dataPurchaseOrder['KETERANGAN']; ?></p>
         </div>
         <div style="width: 25%;margin-top:30px">
-            <p>Pengambil / Penerima,</p>
-            <p style="margin-top:40px"><?php echo $dataPurchaseOrder['PENGAMBIL'] ?></p>
         </div>
         <div style="margin-top:30px;">
             <p>Pembuat,</p>
