@@ -119,11 +119,11 @@
                 $dataBarang = mysqli_fetch_assoc($queryBarang);
             ?>
                 <tr>
-                    <td style="text-align: left;"><?php echo $rowDetail['URUTAN'] ?>.</td>
-                    <td style="text-align: center;"><?php echo $dataBarang['nama'] ?></td>
+                    <td style="text-align: center;"><?php echo $rowDetail['URUTAN'] ?>.</td>
+                    <td style="text-align: left;"><?php echo $dataBarang['nama'] ?></td>
                     <td style="text-align: center;"><?php echo $rowDetail['QUANTITY'] ?></td>
-                    <td style="text-align: center;"><?php echo number_format($rowDetail['HARGA'], '0', ',', '.'); ?></td>
-                    <td style="text-align: center;"><?php echo number_format($rowDetail['HARGA'] * $rowDetail['QUANTITY'], '0', ',', '.'); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($rowDetail['HARGA'], '0', ',', '.'); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($rowDetail['HARGA'] * $rowDetail['QUANTITY'], '0', ',', '.'); ?></td>
 
                 </tr>
             <?php
@@ -171,7 +171,7 @@
     </div>
 </body>
 <script>
-    // window.addEventListener("load", window.print());
+    window.addEventListener("load", window.print());
 </script>
 
 </html>

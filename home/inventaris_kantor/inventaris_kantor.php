@@ -67,18 +67,23 @@
                                                         <textarea name="keterangan" class="form-control" id="keterangan"></textarea>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-10">
+                                                        <img id="previewTambah" src="#" max-width="150px" height="150px" class="float-right m-1" style="display: none;" />
+                                                    </div>
+                                                </div>
                                                 <div class="form-group row">
                                                     <label class="col-sm-6 col-form-label">Attachment</label>
                                                     <div class="input-group col-sm-6">
                                                         <div class="custom-file">
-                                                            <input type="file" accept="image/*;capture=camera" name="gambar" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                            <input type="file" accept="image/*;capture=camera" name="gambar" class="custom-file-input" id="inputFileTambah" aria-describedby="inputGroupFileAddon01">
+                                                            <label class="custom-file-label" for="inputFileTambah" id="labelFileTambah">Choose file</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-footer col-12">
-                                                <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardTambahInventarisKantor">Cancel</button>
+                                                <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardTambahInventarisKantor" onclick="removeImagePreview('previewTambah', 'labelFileTambah')">Cancel</button>
                                                 <button type="submit" class="btn btn-primary float-right">Submit</button>
                                             </div>
                                         </div>
@@ -113,7 +118,7 @@
                                                 <td><?php echo $rowInvetarisKantor['qty'] ?></td>
                                                 <td>
                                                     <a href="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>">
-                                                        <img data-lazysrc="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" width="100px" height="100px" class="img-fluid mb-2"  />
+                                                        <img data-lazysrc="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" width="100px" height="100px" class="img-fluid mb-2" />
                                                     </a>
                                                 </td>
                                                 <td>
@@ -177,23 +182,59 @@
                                                                 <textarea name="keterangan" class="form-control" id="keterangan"><?php echo $rowInvetarisKantor['keterangan'] ?></textarea>
                                                             </div>
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-10">
+                                                                <img id="previewEdit<?php
+                                                                                    $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
+                                                                                    $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
+                                                                                    $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
+                                                                                    echo "$bulan$tahun$sequence"; ?>" src="#" max-width="150px" height="150px" class="float-right m-1" style="display: none;" />
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group row">
                                                             <label class="col-sm-6 col-form-label">Attachment</label>
                                                             <div class="input-group col-sm-6">
                                                                 <div class="custom-file">
-                                                                    <input type="file" name="gambar" accept="image/;capture=camera" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                                    <input type="file" name="gambar" accept="image/;capture=camera" class="custom-file-input" id="inputFileEdit<?php
+                                                                                                                                                                                $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
+                                                                                                                                                                                $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
+                                                                                                                                                                                $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
+                                                                                                                                                                                echo "$bulan$tahun$sequence"; ?>" aria-describedby="inputGroupFileAddon01" onchange="displayImagePreviewEdit('inputFileEdit<?php
+                                                                                                                                                                                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
+                                                                                                                                                                                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
+                                                                                                                                                                                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
+                                                                                                                                                                                                                                                                                                            echo "$bulan$tahun$sequence"; ?>', 'previewEdit<?php
+                                                                                                                                                                                                                                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
+                                                                                                                                                                                                                                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
+                                                                                                                                                                                                                                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
+                                                                                                                                                                                                                                                                                                                                                            echo "$bulan$tahun$sequence"; ?>')">
+                                                                    <label class="custom-file-label" for="inputFileEdit" id="labelFileEdit<?php
+                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
+                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
+                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
+                                                                                                                                            echo "$bulan$tahun$sequence";
+                                                                                                                                            ?>">Choose file</label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer">
-                                                        <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditInventarisKantor<?php
+                                                        <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" onclick="removeImagePreview('previewEdit<?php
                                                                                                                                                                                         $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
                                                                                                                                                                                         $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
                                                                                                                                                                                         $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
                                                                                                                                                                                         echo "$bulan$tahun$sequence";
-                                                                                                                                                                                        ?>">Cancel</button>
+                                                                                                                                                                                        ?>', 'labelFileEdit<?php
+                                                                                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
+                                                                                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
+                                                                                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
+                                                                                                                                                                                                            echo "$bulan$tahun$sequence";
+                                                                                                                                                                                                            ?>')" data-target="#cardEditInventarisKantor<?php
+                                                                                                                                                                                                                                                        $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
+                                                                                                                                                                                                                                                        $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
+                                                                                                                                                                                                                                                        $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
+                                                                                                                                                                                                                                                        echo "$bulan$tahun$sequence";
+                                                                                                                                                                                                                                                        ?>">Cancel</button>
                                                         <button type="submit" class="btn btn-warning float-right">Submit</button>
                                                     </div>
                                                 </form>
@@ -284,5 +325,30 @@
         }
         xhr.open('GET', './inventaris_kantor/data_no_inventaris_kantor.php', true)
         xhr.send()
+    }
+
+    document.getElementById("inputFileTambah").onchange = evt => {
+        const [file] = document.getElementById("inputFileTambah").files
+        if (file) {
+            document.getElementById("previewTambah").style.display = "block";
+            document.getElementById("previewTambah").src = URL.createObjectURL(file)
+        } else {
+            document.getElementById("previewTambah").style.display = "none";
+        }
+    }
+
+    function displayImagePreviewEdit(inputId, imgId) {
+        const [file] = document.getElementById(inputId).files
+        if (file) {
+            document.getElementById(imgId).style.display = "block";
+            document.getElementById(imgId).src = URL.createObjectURL(file)
+        } else {
+            document.getElementById(imgId).style.display = "none";
+        }
+    }
+
+    function removeImagePreview(imgId, label) {
+        document.getElementById(imgId).style.display = 'none';
+        document.getElementById(label).innerHTML = 'Choose file';
     }
 </script>
