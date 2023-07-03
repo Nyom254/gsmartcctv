@@ -53,7 +53,6 @@
             mysqli_close($conn);
             header("location:../../index.php?content=purchase-order");
         } else {
-            mysqli_stmt_close($queryTambahUser);
             mysqli_close($conn);
             header("location:../../index.php?content=purchase-order");
         }
