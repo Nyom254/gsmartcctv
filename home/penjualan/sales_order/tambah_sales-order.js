@@ -371,7 +371,7 @@ function generateNoTransaksi() {
 
         }
     }
-    xhr.open('GET', './sales_order/data_no-transaksi.php', true)
+    xhr.open('GET', './penjualan/sales_order/data_no-transaksi.php', true)
     xhr.send()
 }
 

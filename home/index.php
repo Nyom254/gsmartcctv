@@ -283,13 +283,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a href="?content=sales_order" class="nav-link">
-                <i class="nav-icon far fa-circle"></i>
+            <li class="nav-item menu-close">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-cart-plus"></i>
                 <p>
-                  Sales Order
+                  Penjualan
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="?content=sales_order" class="nav-link">
+                    <i class="nav-icon far fa-circle"></i>
+                    <p>
+                      Sales Order
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="?content=invoice_penjualan" class="nav-link">
+                    <i class="nav-icon far fa-circle"></i>
+                    <p>
+                      Invoice Penjualan
+                    </p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item">
               <a href="?content=pemakaian_kertas" class="nav-link">
@@ -390,10 +409,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
           include './profile/profile.php';
           break;
         case 'sales_order':
-          include './sales_order/sales-order.php';
+          include './penjualan/sales_order/sales-order.php';
           break;
         case 'tambah-sales-order':
-          include './sales_order/tambah_sales-order_form.php';
+          include './penjualan/sales_order/tambah_sales-order_form.php';
+          break;
+        case 'invoice_penjualan':
+          include './penjualan/invoice_penjualan/invoice_penjualan.php';
           break;
         case 'dashboard':
           include './dashboard/dashboard.php';

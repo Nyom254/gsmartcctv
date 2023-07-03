@@ -128,7 +128,7 @@
                 }
             }
         }
-        xhr.open('GET', './sales_order/data_detail-sales-order.php?no=' + noTransaksi, true)
+        xhr.open('GET', './penjualan/sales_order/data_detail-sales-order.php?no=' + noTransaksi, true)
         xhr.send()
     }
 </script>

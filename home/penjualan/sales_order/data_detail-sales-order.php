@@ -1,5 +1,5 @@
 <?php 
-    include '../../conn.php';
+    include '../../../conn.php';
     $noTransaksi = $_GET['no'];
     $dataDetailPO = mysqli_query($conn, "select * from detail_sales_order where NO_TRANSAKSI = '$noTransaksi'");
     $data = array();

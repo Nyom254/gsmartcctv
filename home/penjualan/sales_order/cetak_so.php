@@ -57,7 +57,7 @@
 <body>
     <?php
 
-    include '../../conn.php';
+    include '../../../conn.php';
 
     $noTransaksi = $_GET['no'];
     $queryPerusahaan = mysqli_query($conn, "select * from setup_perusahaan");

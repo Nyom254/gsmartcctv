@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form action="./sales_order/tambah_sales-order_action.php" id="form_transaksi" method="post">
+                    <form action="./penjualan/sales_order/tambah_sales-order_action.php" id="form_transaksi" method="post">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-4">
@@ -233,4 +233,4 @@
         text-align: center;
     }
 </style>
-<script src="./sales_order/tambah_sales-order.js"></script>
+<script src="./penjualan/sales_order/tambah_sales-order.js"></script>

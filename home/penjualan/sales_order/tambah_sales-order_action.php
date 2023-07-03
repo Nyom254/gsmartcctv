@@ -1,5 +1,5 @@
 <?php 
-    include '../../conn.php';
+    include '../../../conn.php';
     session_start();
     $queryTambahSalesOrder = mysqli_prepare($conn, "insert into sales_order (no_transaksi, tanggal, no_ref, keterangan, jatuh_tempo, diskon, dpp, ppn, jenis_ppn, subtotal, ppn_persentase, batal, term, pengirim, cruser, kode_departemen) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     mysqli_stmt_bind_param($queryTambahSalesOrder, "sssssdddsdiiisss", $no_transaksi, $tanggal, $no_ref, $keterangan, $jatuh_tempo, $diskon, $dpp, $ppn, $jenis_ppn, $subtotal, $ppn_persentase, $batal, $term, $pengirim, $cruser, $kode_departemen);
@@ -50,13 +50,13 @@
             mysqli_stmt_close($queryTambahDetailSalesOrder);
             mysqli_stmt_close($queryTambahSalesOrder);
             mysqli_close($conn);
-            header("location:../index.php?content=sales_order");
+            header("location:../../index.php?content=sales_order");
         } else {
             mysqli_close($conn);
-            header("location:../index.php?content=sales_order");
+            header("location:../../index.php?content=sales_order");
         }
     
     } else {
         $m = "mohon isi barang yang akan di PO";
-        header("location:../index.php?content=tambah-sales-order&t=$m");
+        header("location:../../index.php?content=tambah-sales-order&t=$m");
     }
