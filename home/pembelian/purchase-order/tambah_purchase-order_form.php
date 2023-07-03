@@ -108,7 +108,7 @@
                                     <div class="form-group row">
                                         <label for="term" class="col-sm-4 col-form-label-sm">Term:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="term" id="term" class="form-control form-control-sm" required>
+                                            <input type="number" name="term" id="term" class="form-control form-control-sm" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">

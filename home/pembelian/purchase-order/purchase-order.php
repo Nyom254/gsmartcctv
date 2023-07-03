@@ -56,7 +56,7 @@
                                             <td><?php echo $rowPO['JATUH_TEMPO']  ?></td>
                                             <td><?php
                                                 $jumlahTotal = $rowPO['DPP'] + $rowPO['PPN'] ;
-                                                $total = number_format($jumlahTotal, '0', ',', '.');
+                                                $total = number_format($jumlahTotal, '2', ",", ".");
                                                 echo $total;
                                                 ?></td>
                                             <td><?php echo $rowPO['status']  ?></td>

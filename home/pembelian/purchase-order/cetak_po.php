@@ -108,6 +108,7 @@
                 <th>Nama Barang</th>
                 <th>Qty</th>
                 <th>Harga</th>
+                <th>Diskon</th>
                 <th>Subtotal</th>
             </tr>
         </thead>
@@ -122,8 +123,9 @@
                     <td style="text-align: center;"><?php echo $rowDetail['URUTAN'] ?>.</td>
                     <td style="text-align: left;"><?php echo $dataBarang['nama'] ?></td>
                     <td style="text-align: center;"><?php echo $rowDetail['QUANTITY'] ?></td>
-                    <td style="text-align: right;"><?php echo number_format($rowDetail['HARGA'], '0', ',', '.'); ?></td>
-                    <td style="text-align: right;"><?php echo number_format($rowDetail['HARGA'] * $rowDetail['QUANTITY'], '0', ',', '.'); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($rowDetail['HARGA'], '2', ',', '.'); ?></td>
+                    <td style="text-align: right;"><?php echo number_format($rowDetail['DISKON'], '2', ',', '.'); ?></td>
+                    <td style="text-align: right;"><?php echo number_format(($rowDetail['HARGA'] * $rowDetail['QUANTITY']) - ($rowDetail['QUANTITY'] * $rowDetail['DISKON']), '2', ',', '.'); ?></td>
 
                 </tr>
             <?php
@@ -136,21 +138,26 @@
                 <td></td>
                 <td style="text-align: right;"><b>DPP:</b></td>
                 <td></td>
-                <td style="text-align: center;"><?php echo number_format($dataPurchaseOrder['DPP'], '0', ',', '.'); ?></td>
+                <td style="text-align: center;"><?php echo number_format($dataPurchaseOrder['DPP'], '2', ',', '.'); ?></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td style="text-align: right;"><b>PPN:</b></td>
                 <td></td>
-                <td style="text-align: center;"><?php echo number_format($dataPurchaseOrder['PPN'], '0', ',', '.'); ?></td>
+                <td style="text-align: center;"><?php 
+                                                    echo number_format($dataPurchaseOrder['PPN'], '2', ',', '.');
+                                                    ?></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td style="text-align: right;"><b>Grand Total:</b></td>
                 <td></td>
-                <td style="text-align: center;"><?php echo number_format($dataPurchaseOrder['DPP'] + $dataPurchaseOrder['PPN'], '0', ',', '.'); ?></td>
+                <td style="text-align: center;"><?php 
+                                                    $grandTotal = $dataPurchaseOrder['DPP'] + $dataPurchaseOrder['PPN'];
+                                                    echo number_format($grandTotal, '2', ',', '.');
+                                                    ?></td>
             </tr>
         </tfoot>
     </table>

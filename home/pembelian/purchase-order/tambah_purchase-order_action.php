@@ -2,7 +2,7 @@
     include '../../../conn.php';
     session_start();
     $queryTambahPurchaseOrder = mysqli_prepare($conn, "insert into purcahse_order (NO_TRANSAKSI, TANGGAL, NO_REF, KODE_SUPPLIER, KETERANGAN, JATUH_TEMPO, DISKON, DPP, PPN, JENIS_PPN, SUBTOTAL, PPN_PERSENTASE, BATAL, TERM, PENGAMBIL, CRUSER, kode_departemen) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($queryTambahPurchaseOrder, "ssssssiiisiiiisss", $no_transaksi, $tanggal, $no_ref, $kode_supplier, $keterangan, $jatuh_tempo, $diskon, $dpp, $ppn, $jenis_ppn, $subtotal, $ppn_persentase, $batal, $term, $pengambil, $cruser, $kode_departemen);
+    mysqli_stmt_bind_param($queryTambahPurchaseOrder, "ssssssdddsdiiisss", $no_transaksi, $tanggal, $no_ref, $kode_supplier, $keterangan, $jatuh_tempo, $diskon, $dpp, $ppn, $jenis_ppn, $subtotal, $ppn_persentase, $batal, $term, $pengambil, $cruser, $kode_departemen);
 
     $no_transaksi = mysqli_escape_string($conn, $_POST['no_transaksi']);
     $tanggal = mysqli_escape_string($conn, $_POST['tanggal']);
