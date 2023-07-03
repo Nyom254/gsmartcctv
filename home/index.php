@@ -284,6 +284,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </ul>
             </li>
             <li class="nav-item">
+              <a href="?content=sales_order" class="nav-link">
+                <i class="nav-icon far fa-circle"></i>
+                <p>
+                  Sales Order
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="?content=pemakaian_kertas" class="nav-link">
                 <i class="nav-icon far fa-circle"></i>
                 <p>
@@ -380,6 +388,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           break;
         case 'profile':
           include './profile/profile.php';
+          break;
+        case 'sales_order':
+          include './sales_order/sales-order.php';
+          break;
+        case 'tambah-sales-order':
+          include './sales_order/tambah_sales-order_form.php';
           break;
         case 'dashboard':
           include './dashboard/dashboard.php';
