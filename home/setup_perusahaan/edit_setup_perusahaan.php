@@ -13,10 +13,11 @@ $dataApi = mysqli_fetch_assoc($queryApi);
 $keyTinyApi = $dataApi['key'];
 \Tinify\setKey("$keyTinyApi");
 
+$id = $_GET['id'];
 
 if (file_exists($_FILES['logo_perusahaan']['tmp_name']) || is_uploaded_file($_FILES['logo_perusahaan']['tmp_name'])) {
-    $queryEditPerusahaan = mysqli_prepare($conn, "update setup_perusahaan set inisial = ?, nama = ?, alamat = ?, kota = ?, provinsi = ?, kode_pos = ?, no_telp = ?, no_rek = ?, logo_perusahaan = ?");
-    mysqli_stmt_bind_param($queryEditPerusahaan, "sssssisss", $inisial, $nama, $alamat, $kota, $provinsi, $kode_pos, $no_telp, $no_rek, $logo_perusahaan);
+    $queryEditPerusahaan = mysqli_prepare($conn, "update setup_perusahaan set inisial = ?, nama = ?, alamat = ?, kota = ?, provinsi = ?, kode_pos = ?, no_telp = ?, no_rek = ?, logo_perusahaan = ? where id = ?");
+    mysqli_stmt_bind_param($queryEditPerusahaan, "sssssisssi", $inisial, $nama, $alamat, $kota, $provinsi, $kode_pos, $no_telp, $no_rek, $logo_perusahaan, $id);
 
     $inisial = mysqli_escape_string($conn, $_POST['inisial']);
     $nama = mysqli_escape_string($conn, $_POST['nama']);
@@ -97,8 +98,8 @@ if (file_exists($_FILES['logo_perusahaan']['tmp_name']) || is_uploaded_file($_FI
         header("location:../index.php?content=setup_perusahaan&t=$m");
     }
 } else {
-    $queryEditPerusahaan = mysqli_prepare($conn, "update setup_perusahaan set inisial = ?, nama = ?, alamat = ?, kota = ?, provinsi = ?, kode_pos = ?, no_telp = ?, no_rek = ?");
-    mysqli_stmt_bind_param($queryEditPerusahaan, "sssssiss", $inisial, $nama, $alamat, $kota, $provinsi, $kode_pos, $no_telp, $no_rek);
+    $queryEditPerusahaan = mysqli_prepare($conn, "update setup_perusahaan set inisial = ?, nama = ?, alamat = ?, kota = ?, provinsi = ?, kode_pos = ?, no_telp = ?, no_rek = ? where id = ?");
+    mysqli_stmt_bind_param($queryEditPerusahaan, "sssssissi", $inisial, $nama, $alamat, $kota, $provinsi, $kode_pos, $no_telp, $no_rek, $id);
 
     $inisial = mysqli_escape_string($conn, $_POST['inisial']);
     $nama = mysqli_escape_string($conn, $_POST['nama']);
@@ -112,7 +113,7 @@ if (file_exists($_FILES['logo_perusahaan']['tmp_name']) || is_uploaded_file($_FI
     $queryLogEditSetupPerusahaan = mysqli_prepare($conn, "insert into log_transaksi (NO_TRANSAKSI, ACTION, KETERANGAN, USERID) values (?, ?, ?, ?)");
     mysqli_stmt_bind_param($queryLogEditSetupPerusahaan, "ssss", $no_transaksi, $action, $keterangan, $userid);
 
-    $queryDataPerusahaanLama = mysqli_query($conn, "select * from setup_perusahaan");
+    $queryDataPerusahaanLama = mysqli_query($conn, "select * from setup_perusahaan where id = $id");
     $rowDataPerusahaanLama = mysqli_fetch_assoc($queryDataPerusahaanLama);
 
     $editedBarang = array();
