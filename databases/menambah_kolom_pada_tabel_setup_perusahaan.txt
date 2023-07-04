@@ -1,0 +1,2 @@
+ALTER TABLE `setup_perusahaan` ADD COLUMN kode_departemen varchar(20);
+ALTER TABLE `setup_perusahaan` ADD COLUMN id int(4) AUTO_INCREMENT PRIMARY KEY;
