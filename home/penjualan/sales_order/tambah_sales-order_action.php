@@ -1,8 +1,8 @@
 <?php 
     include '../../../conn.php';
     session_start();
-    $queryTambahSalesOrder = mysqli_prepare($conn, "insert into sales_order (no_transaksi, tanggal, no_ref, keterangan, jatuh_tempo, diskon, dpp, ppn, jenis_ppn, subtotal, ppn_persentase, batal, term, pengirim, cruser, kode_departemen) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($queryTambahSalesOrder, "sssssdddsdiiisss", $no_transaksi, $tanggal, $no_ref, $keterangan, $jatuh_tempo, $diskon, $dpp, $ppn, $jenis_ppn, $subtotal, $ppn_persentase, $batal, $term, $pengirim, $cruser, $kode_departemen);
+    $queryTambahSalesOrder = mysqli_prepare($conn, "insert into sales_order (no_transaksi, tanggal, no_ref, keterangan, jatuh_tempo, diskon, dpp, ppn, jenis_ppn, subtotal, ppn_persentase, batal, term, pengirim, cruser, kode_departemen, kode_customer) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    mysqli_stmt_bind_param($queryTambahSalesOrder, "sssssdddsdiiissss", $no_transaksi, $tanggal, $no_ref, $keterangan, $jatuh_tempo, $diskon, $dpp, $ppn, $jenis_ppn, $subtotal, $ppn_persentase, $batal, $term, $pengirim, $cruser, $kode_departemen, $kode_customer);
 
     $no_transaksi = mysqli_escape_string($conn, $_POST['no_transaksi']);
     $tanggal = mysqli_escape_string($conn, $_POST['tanggal']);
@@ -21,6 +21,7 @@
     $pengirim = mysqli_escape_string($conn, $_POST['pengirim']);
     $cruser = $_SESSION['username'];
     $kode_departemen = mysqli_escape_string($conn, $_POST['departemen']);
+    $kode_customer = mysqli_escape_string($conn, $_POST['customer']);
 
 
     $kode_barang = $_POST['kode-barang'];

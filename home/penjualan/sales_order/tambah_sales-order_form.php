@@ -8,7 +8,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="?">Home</a></li>
-                    <li class="breadcrumb-item"><a href="?content=purchase-order">Sales Order</a></li>
+                    <li class="breadcrumb-item"><a href="?content=sales_order">Sales Order</a></li>
                     <li class="breadcrumb-item">Tambah Sales Order</li>
                 </ol>
             </div>
@@ -57,6 +57,23 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
+                                    <div class="form-group row">
+                                        <label for="customer" class="col-sm-4 col-form-label col-form-label-sm">Customer:</label>
+                                        <div class="col-sm-8">
+                                            <select name="customer" class="form-control form-control-sm" id="customer">
+                                                <?php
+                                                $dataCustomer = mysqli_query($conn, "select * from customer where status_aktif = '1'");
+                                                $cekCustomer = $dataCustomer->num_rows;
+                                                if ($cekCustomer > 0) {
+                                                    while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) { ?>
+                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>"> <?php echo $rowCustomer['nama']; ?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label for="jatuh_tempo" class="col-sm-4 col-form-label col-form-label-sm">Jatuh Tempo:</label>
                                         <div class="col-sm-8">

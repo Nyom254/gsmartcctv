@@ -417,6 +417,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         case 'invoice_penjualan':
           include './penjualan/invoice_penjualan/invoice_penjualan.php';
           break;
+        case 'tambah-invoice-penjualan':
+          include './penjualan/invoice_penjualan/tambah_invoice-penjualan_form.php';
+          break;
         case 'dashboard':
           include './dashboard/dashboard.php';
           break;
@@ -913,6 +916,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
           required: "Mohon Tambahkan attachment",
           extension: "Mohon Masukan Gambar dengan extensi png,jpg,jpeg,svg atau avif ",
           filesize: "Ukuran gambar harus kurang dari 20 MB",
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function(error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function(element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function(element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+
+    $("#formTambahInvoicePenjualan").validate({
+      rules: {
+        no_so: {
+          required: true,
+        },
+        tanggal: {
+          required: true,
+        },
+      },
+      messages: {
+        no_so: {
+          required: "Mohon Pilih SO"
+        },
+        tanggal: {
+          required: "Mohon isi Tanggal"
         },
       },
       errorElement: 'span',

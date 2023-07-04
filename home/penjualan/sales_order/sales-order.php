@@ -21,12 +21,13 @@
                 <div class="card">
                     <div class="card-body">
                         <a href="?content=tambah-sales-order" class="btn btn-primary mb-2">Tambah SO</a>
-                        <table id="tabel-sales-order" class="table table-striped table-hover table-bordered">
+                        <table id="example1" class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
                                     <th>No Transaksi</th>
                                     <th>Tanggal</th>
                                     <th>Pengirim</th>
+                                    <th>Customer</th>
                                     <th>Keterangan</th>
                                     <th>Term</th>
                                     <th>Jatuh Tempo </th>
@@ -36,7 +37,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $dataSO = mysqli_query($conn, "SELECT * FROM sales_order");
+                                $dataSO = mysqli_query($conn, "SELECT * FROM sales_order INNER JOIN (SELECT id_customer, nama FROM customer)AS cust ON sales_order.kode_customer = cust.id_customer;");
                                 $cekDataSO = $dataSO->num_rows;
 
                                 if ($cekDataSO > 0) {
@@ -45,6 +46,7 @@
                                             <td><?php echo $rowSO['no_transaksi']  ?></td>
                                             <td><?php echo $rowSO['tanggal'] ?></td>
                                             <td><?php echo $rowSO['pengirim'] ?></td>
+                                            <td><?php echo $rowSO['nama'] ?></td>
                                             <td class="text-break"><?php echo $rowSO['keterangan']  ?></td>
                                             <td><?php echo $rowSO['term']  ?></td>
                                             <td><?php echo $rowSO['jatuh_tempo']  ?></td>
@@ -54,7 +56,7 @@
                                                 echo $total;
                                                 ?></td>
                                             <td class="small">
-                                                <a class="a" href="./sales_order/cetak_so.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak SO</a>
+                                                <a class="a" href="./penjualan/sales_order/cetak_so.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak SO</a>
                                             </td>
                                         </tr>
                                 <?php
