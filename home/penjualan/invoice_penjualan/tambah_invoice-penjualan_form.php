@@ -180,7 +180,7 @@
                                     <div class="form-group row">
                                         <label for="term" class="col-sm-4 col-form-label-sm">Term:</label>
                                         <div class="col-sm-8">
-                                            <input type="number" name="term" id="term" class="form-control form-control-sm"  readonly>
+                                            <input type="number" name="term" id="term" class="form-control form-control-sm" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -309,11 +309,11 @@
                 document.getElementById("ppn").value = item.ppn;
                 document.getElementById("ppn-persen").value = item.ppn;
                 document.getElementById("grandtotal").value = parseInt(item.dpp) + parseFloat(item.ppn);
-                console.log(response);
             }
         }
         xhr.open('GET', './penjualan/invoice_penjualan/data_SO.php?no=' + noSO, true)
         xhr.send()
+        generateNoTransaksi();
     }
 
     function generateNoTransaksi() {
@@ -325,23 +325,26 @@
                 const tahun = dateParts[0].slice(-2)
                 const bulan = dateParts[1]
                 var noTransaksi;
+                const departemen = document.getElementById("departemen");
+                const inisial = departemen.options[departemen.selectedIndex].text;
                 for (i = 0; i < response.length; i++) {
-                    let item = response[i]
-                    let lastYear = item.no_transaksi.substr(2, 2)
-                    let lastMonth = item.no_transaksi.substr(4, 2)
+                    let item = response[i];
+                    let lastYear = item.no_transaksi.substr(8, 2);
+                    let lastMonth = item.no_transaksi.substr(10, 2);
+                    let lastInisial = item.no_transaksi.substr(3, 4);
 
-                    if (lastYear == tahun && lastMonth == bulan) {
-                        var lastSequence = parseInt(item.no_transaksi.substr(6));
+                    if (lastYear == tahun && lastMonth == bulan && lastInisial == inisial) {
+                        var lastSequence = parseInt(item.no_transaksi.substr(13));
                         var sequence = (lastSequence + 1).toString().padStart(4, '0');
                         //console.log(`PO/${tahun}${bulan}/${sequence}`)
-                        noTransaksi = `PJ${tahun}${bulan}${sequence}`
+                        noTransaksi = `PJ/${inisial}/${tahun}${bulan}/${sequence}`
                     }
                 }
                 if (typeof(noTransaksi) === "string") {
                     document.getElementById("no_transaksi").value = noTransaksi
                     return
                 } else {
-                    document.getElementById("no_transaksi").value = `PJ${tahun}${bulan}0001`
+                    document.getElementById("no_transaksi").value = `PJ/${inisial}/${tahun}${bulan}/0001`
                 }
 
             }
