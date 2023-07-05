@@ -104,7 +104,7 @@
                                     <div class="form-group row">
                                         <label for="departemen" class="col-sm-4 col-form-label col-form-label-sm">Departemen:</label>
                                         <div class="col-sm-8">
-                                            <select name="departemen" class="form-control form-control-sm" id="departemen" readonly>
+                                            <select name="departemen" class="form-control form-control-sm" id="departemen" oninput="generateNoTransaksi()" readonly>
                                                 <?php
                                                 $dataDepartemen = mysqli_query($conn, "select * from departemen where status_aktif = '1'");
                                                 $cekDepartemen = $dataDepartemen->num_rows;
