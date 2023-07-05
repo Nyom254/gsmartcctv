@@ -10,7 +10,7 @@
 <style media="print">
     @page {
         size: A4;
-        margin: 12mm;
+        margin: 5mm;
     }
 </style>
 <style>
@@ -22,6 +22,7 @@
     body {
         margin: 10px;
         width: 794px;
+        position: relative;
     }
 
     h2 {
@@ -30,6 +31,18 @@
 
     h3 {
         font-weight: lighter;
+    }
+
+    .tanggal {
+        position: absolute;
+        top: 20px;
+        right: 100px;
+    }
+
+    .kepada {
+        position: absolute;
+        top: 85px;
+        right: 200px;
     }
 
     table {
@@ -69,10 +82,12 @@
     include '../../../conn.php';
 
     $noTransaksi = $_GET['no'];
-    $queryPerusahaan = mysqli_query($conn, "select * from setup_perusahaan");
-    $queryInvoicePenjualan = mysqli_query($conn, "SELECT * FROM `invoice_penjualan` INNER JOIN customer ON invoice_penjualan.kode_customer = customer.id_customer;");
-
+    $queryInvoicePenjualan = mysqli_query($conn, "SELECT * FROM `invoice_penjualan` INNER JOIN customer ON invoice_penjualan.kode_customer = customer.id_customer WHERE invoice_penjualan.no_transaksi = '$noTransaksi'");
     $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
+
+    $departemen = $dataInvoicePenjualan['kode_departemen'];
+    $queryPerusahaan = mysqli_query($conn, "SELECT * FROM setup_perusahaan WHERE kode_departemen = '$departemen'");
+
     $no_so = $dataInvoicePenjualan['no_so'];
     $queryDetailSalesOrder = mysqli_query($conn, "select * from detail_sales_order where no_transaksi = '$no_so'");
     $dataPerusahaan = mysqli_fetch_assoc($queryPerusahaan);
@@ -81,21 +96,43 @@
 
     <div>
         <h2><?php echo $dataPerusahaan['nama'] ?></h2>
-        <p><?php echo $dataPerusahaan['alamat'] ?></p>
+        <p style="width: 300px;"><?php echo $dataPerusahaan['alamat'] ?></p>
         <p><?php echo $dataPerusahaan['kota'] . ", " . $dataPerusahaan['provinsi'] . " " . $dataPerusahaan['kode_pos'] ?></p>
         <p>Telp. <?php echo $dataPerusahaan['no_telp'] ?></p>
+    </div>
+    <p class="tanggal"><?php
+        $formatter = new IntlDateFormatter('id_ID', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+        $formatter->setTimeZone('Asia/Jakarta');
+        $date = $dataInvoicePenjualan['tanggal']; // The original date in 'Y-m-d' format
+        $formatDate = date('d M Y', strtotime($date)); // Reformatted date in 'd/m/Y' format
+        $reformattedDate = $formatter->format(strtotime($formatDate));
+
+        echo $reformattedDate; ?>
+    </p>
+    <div class="kepada">
+        <p>Kepada Yth:</p>
+        <p>
+            <?php
+            echo $dataInvoicePenjualan['nama'];
+            ?>
+        </p>
+        <p>
+            <?php
+            echo $dataInvoicePenjualan['kota'];
+            ?>
+        </p>
     </div>
     <div>
         <h2 style="text-align: center; padding-right:30px;"><u>SURAT JALAN</u></h2>
         <div style="display: flex; justify-content:space-between">
             <div style="width:300px;padding-top:20px;display:flex;margin-bottom:-20px;margin-top:20px;">
                 <div style="display:flex;padding-right:0;flex-direction:column">
-                    <p style="width:110px">Nomor</p>
+                    <p style="width:70px">Nomor</p>
                 </div>
                 <div style="display:flex;flex-direction:column">
                     <p>: <?php
-                            echo "S" .substr($dataInvoicePenjualan['no_transaksi'], 1); 
-                        ?></p>
+                            echo "S" . substr($dataInvoicePenjualan['no_transaksi'], 1);
+                            ?></p>
                 </div>
             </div>
         </div>

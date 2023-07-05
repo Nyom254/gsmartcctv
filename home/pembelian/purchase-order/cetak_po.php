@@ -60,11 +60,14 @@
     include '../../../conn.php';
 
     $noTransaksi = $_GET['no'];
-    $queryPerusahaan = mysqli_query($conn, "select * from setup_perusahaan");
+
     $queryPurchaseOrder = mysqli_query($conn, "select * from purcahse_order where NO_TRANSAKSI = '$noTransaksi'");
     $queryDetailPurchaseOrder = mysqli_query($conn, "select * from detail_purcashe_order where NO_TRANSAKSI = '$noTransaksi'");
 
     $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
+    
+    $departemen = $dataPurchaseOrder['kode_departemen'];
+    $queryPerusahaan = mysqli_query($conn, "SELECT * FROM setup_perusahaan WHERE kode_departemen = '$departemen'");
     $dataPerusahaan = mysqli_fetch_assoc($queryPerusahaan);
 
     $querySupplier = mysqli_query($conn, "select * from supplier where id_supplier = '" . $dataPurchaseOrder['KODE_SUPPLIER'] . "'");

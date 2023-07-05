@@ -104,6 +104,7 @@
                                     <th>Kode Pos</th>
                                     <th>No Telp</th>
                                     <th>No rek</th>
+                                    <th>Departemen</th>
                                     <th>Logo Perusahaan</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -124,6 +125,7 @@
                                         <td><?php echo $rowPerusahaan['kode_pos'] ?></td>
                                         <td><?php echo $rowPerusahaan['no_telp'] ?></td>
                                         <td><?php echo $rowPerusahaan['no_rek'] ?></td>
+                                        <td><?php echo $rowPerusahaan['kode_departemen'] ?></td>
                                         <td>
                                             <a href="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" data-toggle="lightbox" data-title="setup perusahaan">
                                                 <img decoding="async" data-lazysrc="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" width="70px" height="70px" class="img-fluid mb-2">

@@ -10,7 +10,7 @@
 <style media="print">
     @page {
         size: A4;
-        margin: 12mm;
+        margin: 5mm;
     }
 </style>
 <style>
@@ -60,11 +60,12 @@
     include '../../../conn.php';
 
     $noTransaksi = $_GET['no'];
-    $queryPerusahaan = mysqli_query($conn, "select * from setup_perusahaan");
-    $queryInvoicePenjualan = mysqli_query($conn, "SELECT * FROM `invoice_penjualan` INNER JOIN customer ON invoice_penjualan.kode_customer = customer.id_customer;");
-
+    $queryInvoicePenjualan = mysqli_query($conn, "SELECT * FROM `invoice_penjualan` INNER JOIN customer ON invoice_penjualan.kode_customer = customer.id_customer WHERE invoice_penjualan.no_transaksi = '$noTransaksi'");
     $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
+    $departemen = $dataInvoicePenjualan['kode_departemen'];
+    $queryPerusahaan = mysqli_query($conn, "SELECT * FROM setup_perusahaan WHERE kode_departemen = '$departemen'");
     $no_so = $dataInvoicePenjualan['no_so'];
+
     $queryDetailSalesOrder = mysqli_query($conn, "select * from detail_sales_order where no_transaksi = '$no_so'");
     $dataPerusahaan = mysqli_fetch_assoc($queryPerusahaan);
     ?>
