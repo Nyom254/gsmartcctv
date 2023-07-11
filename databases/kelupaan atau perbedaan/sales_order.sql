@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 04, 2023 at 08:36 AM
+-- Generation Time: Jul 11, 2023 at 09:54 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invoice_penjualan`
+-- Table structure for table `sales_order`
 --
 
-CREATE TABLE `invoice_penjualan` (
+CREATE TABLE `sales_order` (
   `no_transaksi` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `tanggal` date NOT NULL,
   `no_ref` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -39,14 +39,13 @@ CREATE TABLE `invoice_penjualan` (
   `jenis_ppn` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `subtotal` double NOT NULL DEFAULT 0,
   `ppn_persentase` float NOT NULL,
-  `batal` bit(1) NOT NULL DEFAULT b'0',
-  `term` int(11) NOT NULL DEFAULT 0,
+  `batal` bit(1) NOT NULL,
   `pengirim` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `cruser` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `crtime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `lama_invoice` int(5) DEFAULT NULL,
   `kode_departemen` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `kode_customer` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `no_so` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
+  `kode_customer` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -54,9 +53,9 @@ CREATE TABLE `invoice_penjualan` (
 --
 
 --
--- Indexes for table `invoice_penjualan`
+-- Indexes for table `sales_order`
 --
-ALTER TABLE `invoice_penjualan`
+ALTER TABLE `sales_order`
   ADD PRIMARY KEY (`no_transaksi`);
 COMMIT;
 

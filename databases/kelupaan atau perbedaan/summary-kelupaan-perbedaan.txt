@@ -1,0 +1,10 @@
+menambahkan tabel detail_invoice_penjualan
+manambahkan tabel invoice_penjualan
+menambah primary key pada field no_penerimaan di tabel penerimaan
+menambah primary key pada field no_transaksi di tabel purcahse_order
+menambah primary key pada field no_transaksi dan kode_barang di tabel saldo_stok
+menghapus field term, menambahkan lama_invoice(int(5)) dan kode_customer varchar(10) di tabel sales_order
+menambahkan field keterangan(varchar(100)) dan menambahkan primary key pada field no_transaksi dan kode_barang di tabel detail_sales_order
+menambahkan field kode_departemen(varchar(20)) dan id(int(4) primary key not null auto increment) di tabel setup dataPerusahaan
+menambahkan primary key pada field id_supplier di tabel id_supplier
+nama, username, password pada tabel user not null
