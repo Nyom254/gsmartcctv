@@ -64,19 +64,12 @@
     $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
     $departemen = $dataInvoicePenjualan['kode_departemen'];
     $queryPerusahaan = mysqli_query($conn, "SELECT * FROM setup_perusahaan WHERE kode_departemen = '$departemen'");
-    $no_so = $dataInvoicePenjualan['no_so'];
 
-    $queryDetailSalesOrder = mysqli_query($conn, "select * from detail_sales_order where no_transaksi = '$no_so'");
+    $queryDetailSalesOrder = mysqli_query($conn, "select * from detail_invoice_penjualan where no_transaksi = '$noTransaksi'");
     $dataPerusahaan = mysqli_fetch_assoc($queryPerusahaan);
     ?>
 
 
-    <div>
-        <h2><?php echo $dataPerusahaan['nama'] ?></h2>
-        <p><?php echo $dataPerusahaan['alamat'] ?></p>
-        <p><?php echo $dataPerusahaan['kota'] . ", " . $dataPerusahaan['provinsi'] . " " . $dataPerusahaan['kode_pos'] ?></p>
-        <p>Telp. <?php echo $dataPerusahaan['no_telp'] ?></p>
-    </div>
     <div>
         <h2 style="text-align: end; padding-right:30px;"><u>INVOICE</u></h2>
         <div style="display: flex; justify-content:space-between">
@@ -113,12 +106,14 @@
         <tbody>
 
             <?php
+            $urutan = 0;
             while ($rowDetail = mysqli_fetch_assoc($queryDetailSalesOrder)) {
                 $queryBarang = mysqli_query($conn, "select nama from barang where id_barang = '" . $rowDetail['kode_barang'] . "'");
                 $dataBarang = mysqli_fetch_assoc($queryBarang);
+                $urutan += 1;
             ?>
                 <tr>
-                    <td style="text-align: center;"><?php echo $rowDetail['urutan'] ?>.</td>
+                    <td style="text-align: center;"><?php echo $urutan ?>.</td>
                     <td style="text-align: left;"><?php echo $dataBarang['nama'] ?></td>
                     <td style="text-align: center;"><?php echo $rowDetail['quantity'] ?></td>
                     <td style="text-align: right;"><?php echo number_format($rowDetail['harga'], '0', ',', '.'); ?></td>
@@ -137,7 +132,7 @@
                 <td></td>
                 <td style="text-align: right;"><b>DPP:</b></td>
                 <td></td>
-                <td style="text-align: center;"><?php echo number_format($dataInvoicePenjualan['dpp'], '0', ',', '.'); ?></td>
+                <td style="text-align: right;"><?php echo number_format($dataInvoicePenjualan['dpp'], '0', ',', '.'); ?></td>
             </tr>
             <tr>
                 <td></td>
@@ -145,7 +140,7 @@
                 <td></td>
                 <td style="text-align: right;"><b>PPN:</b></td>
                 <td></td>
-                <td style="text-align: center;"><?php echo number_format($dataInvoicePenjualan['ppn'], '2', ',', '.'); ?></td>
+                <td style="text-align: right;"><?php echo number_format($dataInvoicePenjualan['ppn'], '2', ',', '.'); ?></td>
             </tr>
             <tr>
                 <td></td>
@@ -153,7 +148,7 @@
                 <td></td>
                 <td style="text-align: right;border-top: 1px solid black;"><b>Grand Total:</b></td>
                 <td style="border-top: 1px solid black;"></td>
-                <td style="text-align: center;border-top: 1px solid black;"><?php echo number_format($dataInvoicePenjualan['dpp'] + $dataInvoicePenjualan['ppn'], '2', ',', '.'); ?></td>
+                <td style="text-align: right;border-top: 1px solid black;"><?php echo number_format($dataInvoicePenjualan['dpp'] + $dataInvoicePenjualan['ppn'], '2', ',', '.'); ?></td>
             </tr>
         </tfoot>
     </table>

@@ -42,7 +42,7 @@
 
                                 if ($cekDataSO > 0) {
                                     while ($rowSO = mysqli_fetch_assoc($dataSO)) { ?>
-                                        <tr>
+                                        <tr onclick="getDetailInvoicePenjualan('<?php echo $rowSO['no_transaksi'] ?>')">
                                             <td><?php echo $rowSO['no_transaksi']  ?></td>
                                             <td><?php echo $rowSO['tanggal'] ?></td>
                                             <td><?php echo $rowSO['no_so'] ?></td>
@@ -57,7 +57,8 @@
                                                 ?></td>
                                             <td class="small">
                                                 <a class="a" href="./penjualan/invoice_penjualan/cetak_invoice.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak Invoice</a> |
-                                                <a class="a" href="./penjualan/invoice_penjualan/cetak_surat_jalan.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak Surat Jalan</a>
+                                                <a class="a" href="./penjualan/invoice_penjualan/cetak_surat_jalan.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak Surat Jalan</a> |
+                                                <a class="a" href="?content=edit-invoice-penjualan&no=<?php echo $rowSO['no_transaksi'] ?>" style="cursor: pointer;">Edit</a>
                                             </td>
                                         </tr>
                                 <?php
@@ -70,5 +71,75 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="detail-invoice-penjualan" class="table  table-hover table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No Transaksi</th>
+                                        <th>Kode Barang</th>
+                                        <th>Nama Barang</th>
+                                        <th>Quantity</th>
+                                        <th>Harga</th>
+                                        <th>Diskon Persentase</th>
+                                        <th>Diskon</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+<script>
+    function getDetailInvoicePenjualan(noInvoice) {
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText)
+                const table = document.getElementById("detail-invoice-penjualan")
+                for (var i = 1; i < table.rows.length;) {
+                    table.deleteRow(i);
+                }
+                for (var i = 0; i < response.length; i++) {
+                    let item = response[i]
+                    var newRow = table.insertRow()
+                    var cell1 = newRow.insertCell(0)
+                    cell1.innerHTML = item.no_transaksi
+
+                    var cell2 = newRow.insertCell(1)
+                    cell2.innerHTML = item.kode_barang
+
+                    var cell3 = newRow.insertCell(2)
+                    cell3.innerHTML = item.nama
+
+                    var cell4 = newRow.insertCell(3)
+                    cell4.innerHTML = item.quantity
+
+                    var cell5 = newRow.insertCell(4)
+                    const harga = parseInt(item.harga)
+                    cell5.innerHTML = harga.toLocaleString('en-IE', {
+                        useGrouping: true
+                    })
+
+                    var cell6 = newRow.insertCell(5)
+                    cell6.innerHTML = item.diskon_persentase
+
+                    var cell7 = newRow.insertCell(6)
+                    cell7.innerHTML = item.diskon
+                }
+            }
+        }
+        xhr.open('GET', './penjualan/invoice_penjualan/data_detail-invoice-penjualan.php?no=' + noInvoice, true)
+        xhr.send()
+    }
+</script>

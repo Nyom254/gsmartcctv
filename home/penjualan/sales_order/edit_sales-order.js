@@ -8,6 +8,8 @@ document.getElementById("jenis_ppn").addEventListener("input", () => {
         document.getElementById("ppn-persen").value = 11
         console.log("pajak")
     }
+
+    getPPN();
 })
 
 
@@ -191,7 +193,7 @@ function addBarangRowTable() {
             'style', 'color:#26abff;cursor:pointer;font-size:18px;'
         )
         editButton.addEventListener("click", () => {
-            editRow(editButton)
+            editRow(editButton, total)
         })
 
 
@@ -243,8 +245,9 @@ function addBarangRowTable() {
     getDPP()
 
 }
+var totalRowLama
 
-function editRow(button) {
+function editRow(button, total) {
     var row = button.parentNode.parentNode;
     var td = row.children;
     var tdKeterangan = td[3];
@@ -260,9 +263,10 @@ function editRow(button) {
 
     } else {
         setAttribute(qty, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:right')
-        setAttribute(keterangan, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:right')
+        setAttribute(keterangan, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:left')
         setAttribute(diskonPersen, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:right')
     }
+    totalRowLama = total;
 }
 
 function editDone(button) {
@@ -275,7 +279,7 @@ function editDone(button) {
     qty = tdQty.children[0];
     diskonPersen = tdDiskonPersen.children[0];
     setAttribute(qty, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:right');
-    setAttribute(keterangan, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:right')
+    setAttribute(keterangan, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:left')
     setAttribute(diskonPersen, 'style', 'pointer-events:none;background-color:transparent;border:none;width:100%;text-align:right');
     qty.blur();
     diskonPersen.blur();
@@ -287,7 +291,6 @@ function editDone(button) {
 function hasilTotalRow(e) {
     var row = e.parentNode.parentNode
     var td = row.children
-
     td[7].children[0].value = td[6].children[0].value / 100 * td[5].children[0].value; // diskon satuan
     td[8].children[0].innerHTML = td[4].children[0].value * td[5].children[0].value - td[7].children[0].value * td[4].children[0].value // subtotal
     hasilSubTotal()
@@ -305,8 +308,8 @@ function hasilSubTotal() {
     const tr = table.rows
     var subtotal = 0
     for (i = 2; i < tr.length; i++) {
-        let td = tr[i].children
-        let p = td[10].children[0]
+        let td = tr[i].children;
+        let p = td[8].children[0];
         subtotal += parseInt(p.innerHTML)
     }
 
@@ -341,46 +344,9 @@ function getGrandTotal() {
     const grandTotal = parseInt(dpp) + parseInt(ppn);
     document.getElementById("grandtotal").value = grandTotal;
 
-    hasilTotalProfit();
 }
 
 
-function generateNoTransaksi() {
-    var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText)
-            const dateParts = document.getElementById("tanggal").value.split("-")
-            const tahun = dateParts[0].slice(-2)
-            const bulan = dateParts[1]
-            var noTransaksi;
-            const departemen = document.getElementById("departemen");
-            const inisial = departemen.options[departemen.selectedIndex].text;
-
-            for (i = 0; i < response.length; i++) {
-                let item = response[i]
-                let lastYear = item.no_transaksi.substr(8, 2)
-                let lastMonth = item.no_transaksi.substr(10, 2)
-                let lastInisial = item.no_transaksi.substr(3, 4);
-
-                if (lastYear == tahun && lastMonth == bulan && lastInisial == inisial) {
-                    var lastSequence = parseInt(item.no_transaksi.substr(13));
-                    var sequence = (lastSequence + 1).toString().padStart(4, '0');
-                    //console.log(`PO/${tahun}${bulan}/${sequence}`)
-                    noTransaksi = `SO/${inisial}/${tahun}${bulan}/${sequence}`
-                }
-            }
-            if (typeof (noTransaksi) === "string") {
-                document.getElementById("no_transaksi").value = noTransaksi
-                return
-            } else {
-                document.getElementById("no_transaksi").value = `SO/${inisial}/${tahun}${bulan}/0001`
-            }
-
-        }
-    }
-    xhr.open('GET', './penjualan/sales_order/data_no-transaksi.php', true)
-    xhr.send()
-}
-
-generateNoTransaksi();
+setTimeout(() => {
+    hasilSubTotal()
+}, 100);

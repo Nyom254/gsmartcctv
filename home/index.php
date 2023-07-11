@@ -387,6 +387,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         case 'tambah-purchase-order':
           include './pembelian/purchase-order/tambah_purchase-order_form.php';
           break;
+        case 'edit-purchase-order':
+          include './pembelian/purchase-order/edit_po_form.php';
+          break;
         case 'setup_perusahaan':
           include './setup_perusahaan/setup_perusahaan.php';
           break;
@@ -414,11 +417,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         case 'tambah-sales-order':
           include './penjualan/sales_order/tambah_sales-order_form.php';
           break;
+        case 'edit-sales-order':
+          include './penjualan/sales_order/edit_sales_order_form.php';
+          break;
         case 'invoice_penjualan':
           include './penjualan/invoice_penjualan/invoice_penjualan.php';
           break;
         case 'tambah-invoice-penjualan':
           include './penjualan/invoice_penjualan/tambah_invoice-penjualan_form.php';
+          break;
+        case 'edit-invoice-penjualan':
+          include './penjualan/invoice_penjualan/edit_invoice-penjualan_form.php';
           break;
         case 'dashboard':
           include './dashboard/dashboard.php';

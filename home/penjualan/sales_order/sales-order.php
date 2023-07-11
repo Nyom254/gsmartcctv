@@ -26,18 +26,19 @@
                                 <tr>
                                     <th>No Transaksi</th>
                                     <th>Tanggal</th>
-                                    <th>Pengirim</th>
+                                    <th>Pembuat</th>
                                     <th>Customer</th>
                                     <th>Keterangan</th>
-                                    <th>Term</th>
                                     <th>Jatuh Tempo </th>
                                     <th>Total</th>
+                                    <th>Lama Invoice</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $dataSO = mysqli_query($conn, "SELECT * FROM sales_order INNER JOIN (SELECT id_customer, nama FROM customer)AS cust ON sales_order.kode_customer = cust.id_customer;");
+                                $dataSO = mysqli_query($conn, "SELECT sales_order.no_transaksi, sales_order.tanggal, sales_order.lama_invoice, customer.nama, sales_order.cruser, sales_order.keterangan, sales_order.jatuh_tempo, sales_order.dpp + sales_order.ppn AS total, CASE WHEN SUM(so_invoice.st) > 0 AND SUM(so_invoice.st) < COUNT(so_invoice.no_transaksi) THEN 'partial' WHEN so_invoice.stk = 1 THEN 'terpenuhi' ELSE 'baru' END AS status FROM sales_order LEFT JOIN so_invoice ON sales_order.no_transaksi = so_invoice.no_transaksi INNER JOIN customer ON customer.id_customer = sales_order.kode_customer GROUP BY sales_order.no_transaksi;");
                                 $cekDataSO = $dataSO->num_rows;
 
                                 if ($cekDataSO > 0) {
@@ -45,18 +46,24 @@
                                         <tr onclick="getDetailSalesOrder('<?php echo $rowSO['no_transaksi'] ?>')">
                                             <td><?php echo $rowSO['no_transaksi']  ?></td>
                                             <td><?php echo $rowSO['tanggal'] ?></td>
-                                            <td><?php echo $rowSO['pengirim'] ?></td>
+                                            <td><?php echo $rowSO['cruser'] ?></td>
                                             <td><?php echo $rowSO['nama'] ?></td>
                                             <td class="text-break"><?php echo $rowSO['keterangan']  ?></td>
-                                            <td><?php echo $rowSO['term']  ?></td>
                                             <td><?php echo $rowSO['jatuh_tempo']  ?></td>
                                             <td><?php
-                                                $jumlahTotal = $rowSO['dpp'] + $rowSO['ppn'] ;
-                                                $total = number_format($jumlahTotal, '2', ",", ".");
-                                                echo $total;
+                                                echo number_format($rowSO['total'], '2', ",", ".");
+                                                ;
                                                 ?></td>
+                                            <td><?php if($rowSO['lama_invoice'] != null) { echo  $rowSO['lama_invoice'] . " hari"; } ?> </td>
+                                            <td><?php echo $rowSO['status'] ?></td>
                                             <td class="small">
-                                                <a class="a" href="./penjualan/sales_order/cetak_so.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak SO</a>
+                                                <a class="a" href="./penjualan/sales_order/cetak_so.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak SO</a> 
+                                                <?php
+                                                if ($rowSO['lama_invoice'] == null){
+                                                ?>
+                                                |
+                                                <a class="a" href="?content=edit-sales-order&no=<?php echo $rowSO['no_transaksi'] ?>" style="cursor: pointer;">Edit</a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                 <?php
@@ -81,6 +88,8 @@
                                 <tr>
                                     <th>No Urut</th>
                                     <th>Kode Barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>Keterangan</th>
                                     <th>Quantity</th>
                                     <th>Harga</th>
                                     <th>Diskon (%)</th>
@@ -114,19 +123,25 @@
 
                     var cell2 = newRow.insertCell(1)
                     cell2.innerHTML = item.kode_barang
-
+                    
                     var cell3 = newRow.insertCell(2)
-                    cell3.innerHTML = item.quantity
-
+                    cell3.innerHTML = item.nama
+                    
                     var cell4 = newRow.insertCell(3)
-                    const harga = parseInt(item.harga)
-                    cell4.innerHTML = harga.toLocaleString('en-IE', {useGrouping: true})
+                    cell4.innerHTML = item.keterangan
 
                     var cell5 = newRow.insertCell(4)
-                    cell5.innerHTML = item.diskon_persentase
+                    cell5.innerHTML = item.quantity
 
                     var cell6 = newRow.insertCell(5)
-                    cell6.innerHTML = item.diskon
+                    const harga = parseInt(item.harga)
+                    cell6.innerHTML = harga.toLocaleString('en-IE', {useGrouping: true})
+
+                    var cell7 = newRow.insertCell(6)
+                    cell7.innerHTML = item.diskon_persentase
+
+                    var cell8 = newRow.insertCell(7)
+                    cell8.innerHTML = item.diskon
                 }
             }
         }

@@ -1,8 +1,8 @@
 <?php
 include '../../../conn.php';
 session_start();
-$queryTambahSalesOrder = mysqli_prepare($conn, "insert into invoice_penjualan (no_transaksi, tanggal, no_ref, keterangan, jatuh_tempo, diskon, dpp, ppn, jenis_ppn, subtotal, ppn_persentase, batal, pengirim, cruser, kode_departemen, kode_customer, no_so) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-mysqli_stmt_bind_param($queryTambahSalesOrder, "sssssdddsdiisssss", $no_transaksi, $tanggal, $no_ref, $keterangan, $jatuh_tempo, $diskon, $dpp, $ppn, $jenis_ppn, $subtotal, $ppn_persentase, $batal, $pengirim, $cruser, $kode_departemen, $kode_customer, $no_so);
+$queryEditInvoicePenjualan = mysqli_prepare($conn, "UPDATE invoice_penjualan set tanggal = ?, no_ref = ?, keterangan = ?, jatuh_tempo = ?, diskon = ?, dpp = ?, ppn = ?, jenis_ppn = ?, subtotal = ?, ppn_persentase = ?, pengirim = ?, cruser = ?, kode_departemen = ?, kode_customer = ? where no_transaksi = ?");
+mysqli_stmt_bind_param($queryEditInvoicePenjualan, "ssssdddsddsssss", $tanggal, $no_ref, $keterangan, $jatuh_tempo, $diskon, $dpp, $ppn, $jenis_ppn, $subtotal, $ppn_persentase, $pengirim, $cruser, $kode_departemen, $kode_customer, $no_transaksi);
 
 $no_transaksi = mysqli_escape_string($conn, $_POST['no_transaksi']);
 $tanggal = mysqli_escape_string($conn, $_POST['tanggal']);
@@ -16,12 +16,10 @@ $ppn = $_POST['ppn'];
 $jenis_ppn = mysqli_escape_string($conn, $_POST['jenis_ppn']);
 $subtotal = $_POST['subtotal'];
 $ppn_persentase = mysqli_escape_string($conn, $_POST['ppn-persen']);
-$batal = 0;
 $pengirim = mysqli_escape_string($conn, $_POST['pengirim']);
 $cruser = $_SESSION['username'];
 $kode_departemen = mysqli_escape_string($conn, $_POST['departemen']);
 $kode_customer = mysqli_escape_string($conn, $_POST['customer']);
-$no_so = mysqli_escape_string($conn, $_POST['no_so']);
 $gudang = mysqli_escape_string($conn, $_POST['gudang']);
 
 $kode_barang = $_POST['kode-barang'];
@@ -32,30 +30,20 @@ $diskonPersentase = $_POST['diskon-persentase'];
 $diskonDetail = $_POST['diskon-satuan'];
 
 
-$queryUpdateSO = mysqli_prepare($conn, "UPDATE sales_order set lama_invoice = ? where no_transaksi = '$no_so'");
-mysqli_stmt_bind_param($queryUpdateSO, "i", $lama_invoice);
+$queryLogEditInvoicePenjualan = mysqli_prepare($conn, "insert into log_transaksi (NO_TRANSAKSI, ACTION, KETERANGAN, USERID) values (?, ?, ?, ?)");
+mysqli_stmt_bind_param($queryLogEditInvoicePenjualan, "ssss", $no_transaksi, $action, $keteranganLog, $userid);
 
-$queryGetTanggalSO = mysqli_query($conn, "SELECT tanggal from sales_order where no_transaksi = '$no_so'");
-$rowTanggalSO = mysqli_fetch_assoc($queryGetTanggalSO);
-$tanggalSO = DateTime::createFromFormat('Y-m-d', $rowTanggalSO['tanggal']);
-$tanggalInvoice = DateTime::createFromFormat('Y-m-d', $tanggal);
-$interval = $tanggalSO->diff($tanggalInvoice);
-$lama_invoice = $interval->days;
-
-
-$queryLogTambahInvoicePenjualan = mysqli_prepare($conn, "insert into log_transaksi (NO_TRANSAKSI, ACTION, KETERANGAN, USERID) values (?, ?, ?, ?)");
-mysqli_stmt_bind_param($queryLogTambahInvoicePenjualan, "ssss", $no_transaksi, $action, $keteranganLog, $userid);
-
-$action = "INSERT";
-$keteranganLog = $_SESSION['username'] . " menambahkan Invoice Penjualan  " . $no_transaksi;
+$action = "UPDATE";
+$keteranganLog = $_SESSION['username'] . " mengubah Invoice Penjualan  " . $no_transaksi;
 $userid = $_SESSION['id_user'];
 
 if (array_key_exists('kode-barang', $_POST)) {
-    if (mysqli_stmt_execute($queryTambahSalesOrder)) {
+    if (mysqli_stmt_execute($queryEditInvoicePenjualan)) {
         for ($i = 0; $i < count($_POST['kode-barang']); $i++) {
 
-            $queryTambahDetailInvoicePenjualan = mysqli_prepare($conn, "insert into detail_invoice_penjualan (no_transaksi, kode_barang, keterangan, quantity, harga, diskon_persentase, diskon) values (?, ?, ?, ?, ?, ?, ?)");
+            $queryTambahDetailInvoicePenjualan = mysqli_prepare($conn, "INSERT into detail_invoice_penjualan (no_transaksi, kode_barang, keterangan, quantity, harga, diskon_persentase, diskon) values (?, ?, ?, ?, ?, ?, ?) on DUPLICATE KEY UPDATE keterangan=VALUES(keterangan), quantity=VALUES(quantity)");
             mysqli_stmt_bind_param($queryTambahDetailInvoicePenjualan, "sssiddd", $no_transaksi, $kode_barang[$i], $keteranganDetail[$i], $quantity[$i], $harga[$i], $diskonPersentase[$i], $diskonDetail[$i]);
+            mysqli_stmt_execute($queryTambahDetailInvoicePenjualan);
 
             if (isset($quantity[$i]) && $quantity[$i] != '' && $quantity[$i] != 0) {
                 $queryBarang = mysqli_query($conn, "select satuan, harga, type, kode_departemen from barang where id_barang = '$kode_barang[$i]'");
@@ -69,17 +57,23 @@ if (array_key_exists('kode-barang', $_POST)) {
                 }
                 $kode_departemen = $dataBarang['kode_departemen'];
                 $quantityDetail = -$quantity[$i];
-                $queryTambahSaldoStok = mysqli_prepare($conn, "insert into saldo_stok (no_transaksi, tgl, gudang, kode_barang, qty, satuan, harga, status_stok, kode_departmen) values (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+                $queryTambahSaldoStok = mysqli_prepare($conn, "INSERT into saldo_stok (no_transaksi, tgl, gudang, kode_barang, qty, satuan, harga, status_stok, kode_departmen) values (?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE qty=(qty)");
                 mysqli_stmt_bind_param($queryTambahSaldoStok, "ssssisiis", $no_transaksi, $tanggal, $gudang, $kode_barang[$i], $quantityDetail, $satuan, $harga[$i], $status_stok, $kode_departemen);
-                mysqli_stmt_execute($queryTambahDetailInvoicePenjualan);
                 mysqli_stmt_execute($queryTambahSaldoStok);
             } else {
+                $queryDeleteDetailInvoicePenjualan = mysqli_prepare($conn, "DELETE from detail_invoice_penjualan where no_transaksi = ? and kode_barang = ?");
+                mysqli_stmt_bind_param($queryDeleteDetailInvoicePenjualan, "ss", $no_transaksi, $kode_barang[$i]);
+                $queryDeleteSaldoStok = mysqli_prepare($conn, "DELETE from saldo_stok where no_transaksi = ? and kode_barang = ?");
+                mysqli_stmt_bind_param($queryDeleteSaldoStok, "ss", $no_transaksi, $kode_barang[$i]);
+                mysqli_stmt_execute($queryDeleteDetailInvoicePenjualan);
+                mysqli_stmt_execute($queryDeleteSaldoStok);
+                mysqli_stmt_close($queryDeleteDetailInvoicePenjualan);
+                mysqli_stmt_close($queryDeleteSaldoStok);
                 continue;
             }
         }
-        mysqli_stmt_execute($queryUpdateSO);
-        mysqli_stmt_execute($queryLogTambahInvoicePenjualan);
-        mysqli_stmt_close($queryTambahSalesOrder);
+        mysqli_stmt_execute($queryLogEditInvoicePenjualan);
+        mysqli_stmt_close($queryEditInvoicePenjualan);
         mysqli_close($conn);
         header("location:../../index.php?content=invoice_penjualan");
     } else {
@@ -87,6 +81,6 @@ if (array_key_exists('kode-barang', $_POST)) {
         header("location:../../index.php?content=invoice_penjualan");
     }
 } else {
-    $m = "mohon pilih Sales Order yang telah terjual";
-    header("location:../../index.php?content=invoice_penjualan?t=$m");
+    $m = "mohon maaf terjadi kesalahan";
+    header("location:../../index.php?content=invoice_penjualan&t=$m");
 }

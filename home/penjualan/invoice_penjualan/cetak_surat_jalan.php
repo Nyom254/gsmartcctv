@@ -42,7 +42,7 @@
     .kepada {
         position: absolute;
         top: 85px;
-        right: 200px;
+        left: 520px;
     }
 
     table {
@@ -159,8 +159,17 @@
                 </tr>
             <?php
             }
+            $queryTotalQty = mysqli_query($conn, "SELECT sum(quantity) as total_qty from detail_sales_order where no_transaksi = '$no_so'");
+            $totalQty = mysqli_fetch_assoc($queryTotalQty);
             ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td style="text-align: right;"><b>Total Qty:</b></td>
+                <td style="text-align: center"><b><?php echo $totalQty['total_qty'] ?></b></td>
+            </tr>
+        </tfoot>
     </table>
 
 
@@ -170,7 +179,7 @@
             <p>(...................................)</p>
         </div>
         <div class="footer" style="margin-top:30px;">
-            <p>Hormat Kami,</p>
+            <p>Pengirim,</p>
             <p>(...................................)</p>
         </div>
     </div>

@@ -3,18 +3,25 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1>Transaksi</h1>
+                <h1>Edit</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="?">Home</a></li>
                     <li class="breadcrumb-item"><a href="?content=sales_order">Sales Order</a></li>
-                    <li class="breadcrumb-item">Tambah Sales Order</li>
+                    <li class="breadcrumb-item">Edit Sales Order</li>
                 </ol>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
+
+<?php
+
+$no_so = $_GET['no'];
+$querySalesOrder = mysqli_query($conn, "SELECT * from sales_order where no_transaksi = '$no_so'");
+$dataSO = mysqli_fetch_assoc($querySalesOrder);
+?>
 
 <!-- Main content -->
 <section class="content">
@@ -22,20 +29,20 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form action="./penjualan/sales_order/tambah_sales-order_action.php" id="form_transaksi" method="post">
+                    <form action="./penjualan/sales_order/edit_sales_order_action.php" id="form_transaksi" method="post">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group row">
                                         <label for="no_transaksi" class="col-sm-4 col-form-label col-form-label-sm">No. Transaksi:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" readonly>
+                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" value="<?php echo $dataSO['no_transaksi'] ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="tanggal" class="col-sm-4 col-form-label col-form-label-sm"> Tanggal:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" oninput="generateNoTransaksi()" value="<?php echo date('Y-m-d'); ?>" required>
+                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" oninput="generateNoTransaksi()" value="<?php echo $dataSO['tanggal'] ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -47,7 +54,9 @@
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['inisial']; ?></option>
+                                                        <option value="<?php echo $rowDepartemen['kode']; ?>" <?php if ($rowDepartemen['kode'] == $dataSO['kode_departemen']) {
+                                                                                                                    echo "selected";
+                                                                                                                } ?>> <?php echo $rowDepartemen['inisial']; ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -60,13 +69,15 @@
                                     <div class="form-group row">
                                         <label for="customer" class="col-sm-4 col-form-label col-form-label-sm">Customer:</label>
                                         <div class="col-sm-8">
-                                            <select name="customer" class="form-control select2 form-control-sm" id="customer">
+                                            <select name="customer" class="form-control form-control-sm" id="customer">
                                                 <?php
                                                 $dataCustomer = mysqli_query($conn, "select * from customer where status_aktif = '1'");
                                                 $cekCustomer = $dataCustomer->num_rows;
                                                 if ($cekCustomer > 0) {
                                                     while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) { ?>
-                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>"> <?php echo $rowCustomer['nama']; ?></option>
+                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>" <?php if ($rowCustomer['id_customer'] == $dataSO['kode_customer']) {
+                                                                                                                        echo "selected";
+                                                                                                                    } ?>> <?php echo $rowCustomer['nama']; ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -77,7 +88,7 @@
                                     <div class="form-group row">
                                         <label for="jatuh_tempo" class="col-sm-4 col-form-label col-form-label-sm">Jatuh Tempo:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo date('Y-m-d'); ?>" required>
+                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo $dataSO['jatuh_tempo']; ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -89,7 +100,9 @@
                                                 $cekUser = $dataUser->num_rows;
                                                 if ($cekUser > 0) {
                                                     while ($rowUser = mysqli_fetch_assoc($dataUser)) { ?>
-                                                        <option value="<?php echo $rowUser['nama'] ?>"><?php echo $rowUser['nama'] ?></option>
+                                                        <option value="<?php echo $rowUser['nama'] ?>" <?php if ($rowUser['nama'] == $dataSO['pengirim']) {
+                                                                                                            echo "selected";
+                                                                                                        } ?>><?php echo $rowUser['nama'] ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -102,7 +115,7 @@
                                     <div class="form-group row">
                                         <label for="no_ref" class="col-sm-4 col-form-label col-form-label-sm">No. Ref:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm">
+                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm" value="<?php echo $dataSO['no_ref'] ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -113,6 +126,9 @@
                                                 <option value="PKP">PKP</option>
                                                 <option value="Include">Include</option>
                                             </select>
+                                            <script>
+                                                document.getElementById("jenis_ppn").value = "<?php echo $dataSO['jenis_ppn'] ?>"
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -181,15 +197,42 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td><p id="nama-barang"></p></td>
+                                                <td>
+                                                    <p id="nama-barang"></p>
+                                                </td>
                                                 <td><input type="text" class="form-control form-control-sm" id="keterangan-detail"></td>
                                                 <td><input type="number" class="form-control form-control-sm" id="quantity" oninput="getSubTotal()"></td>
-                                                <td> <input type="number" class="form-control form-control-sm" id="harga" oninput="getDiskonSatuan(), getSubTotal()" readonly></td>
+                                                <td> <input type="number" class="form-control form-control-sm" id="harga" oninput="getDiskonSatuan(), getSubTotal(), getProfit()"></td>
                                                 <td><input type="number" class="form-control form-control-sm" id="diskon-persen" oninput="getDiskonSatuan()"></td>
                                                 <td><input type="number" class="form-control form-control-sm" id="diskon-satuan" readonly></td>
                                                 <td> <input type="number" class="form-control form-control-sm" id="subtotal-satuan" readonly></td>
                                                 <td><i class="fas fa-plus" style="cursor:pointer" onclick="addBarangRowTable()"></i></td>
                                             </tr>
+
+                                            <?php
+                                            $queryDetailSalesOrder = mysqli_query($conn, "SELECT * from detail_sales_order INNER JOIN (SELECT id_barang, nama from barang) as barang ON barang.id_barang = detail_sales_order.kode_barang where detail_sales_order.no_transaksi = '$no_so'");
+
+                                            if ($queryDetailSalesOrder->num_rows > 0 ) {
+                                                while($rowDetailSO = mysqli_fetch_assoc($queryDetailSalesOrder)) {?>
+                                                <tr>
+                                                    <td><input type="text" name="no-urut[]" value="<?php echo $rowDetailSO['urutan']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;width:20px;" readonly></td>
+                                                    <td><input type="text" name="kode-barang[]" value="<?php echo $rowDetailSO['kode_barang']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:left;" readonly></td>
+                                                    <td><?php echo $rowDetailSO['nama']?></td>
+                                                    <td><input id="keteranganBarang" type="text" name="keterangan-detail[]" value="<?php echo $rowDetailSO['keterangan']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:left;" ></td>
+                                                    <td><input id="quantityBarang" type="text" name="quantity[]" value="<?php echo $rowDetailSO['quantity']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;" oninput="hasilTotalRow(this)" ></td>
+                                                    <td><input type="text" name="harga[]" value="<?php echo $rowDetailSO['harga']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;" readonly></td>
+                                                    <td><input id="diskonPersentaseBarang" type="text" name="diskon-persentase[]" value="<?php echo $rowDetailSO['diskon_persentase']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;" oninput="hasilTotalRow(this)"></td>
+                                                    <td><input type="text" name="diskon-barang[]" value="<?php echo $rowDetailSO['diskon']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;" readonly></td>
+                                                    <td style="text-align: right;"><p><?php echo $rowDetailSO['harga'] * $rowDetailSO['quantity'] - $rowDetailSO['diskon'] * $rowDetailSO['quantity'] ?></p></td>
+                                                    <td>
+                                                        <span class="material-symbols-outlined" style="color:#26abff;cursor:pointer;font-size:18px;" onclick="editRow(this)">edit</span>
+                                                        <span class="material-symbols-outlined" style="color:#ff4122;cursor:pointer;font-size:18px;" onclick="deleteRow(this)">delete</span>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -250,4 +293,4 @@
         text-align: center;
     }
 </style>
-<script src="./penjualan/sales_order/tambah_sales-order.js"></script>
+<script src="./penjualan/sales_order/edit_sales-order.js"></script>

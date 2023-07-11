@@ -62,6 +62,7 @@
                                             <td><?php echo $rowPO['status']  ?></td>
                                             <td class="small">
                                                 <a class="a" href="./pembelian/purchase-order/cetak_po.php?no=<?php echo $rowPO['NO_TRANSAKSI'] ?>" target="_blank" style="cursor: pointer;">Cetak PO</a>
+                                                <a class="a" href="?content=edit-purchase-order&no=<?php echo $rowPO['NO_TRANSAKSI'] ?>" style="cursor: pointer;">Edit</a>
                                             </td>
                                         </tr>
                                 <?php
