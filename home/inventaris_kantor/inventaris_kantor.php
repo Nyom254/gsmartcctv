@@ -114,7 +114,7 @@
                                                 <td><?php echo $rowInvetarisKantor['tgl'] ?></td>
                                                 <td><?php echo $rowInvetarisKantor['nama_barang'] ?></td>
                                                 <td><?php echo $rowInvetarisKantor['posisi'] ?></td>
-                                                <td><?php echo $rowInvetarisKantor['keterangan'] ?></td>
+                                                <td><?php echo str_replace('\r\n', PHP_EOL, $rowInvetarisKantor['keterangan']) ?></td>
                                                 <td><?php echo $rowInvetarisKantor['qty'] ?></td>
                                                 <td>
                                                     <a href="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>">
@@ -122,24 +122,13 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-warning btn-sm" data-toggle="collapse" data-target="#cardEditInventarisKantor<?php
-                                                                                                                                                        $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                        $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                        $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                        echo "$bulan$tahun$sequence";
+                                                    <button class="btn btn-warning btn-sm" data-toggle="collapse" data-target="#cardEditInventarisKantor<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']);
                                                                                                                                                         ?>"><span class="material-symbols-outlined">edit</span></button>
-                                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapusInventaris<?php
-                                                                                                                                                $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                echo "$bulan$tahun$sequence" ?>"><span class="material-symbols-outlined">delete</span></button>
+                                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapusInventaris<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>"><span class="material-symbols-outlined">delete</span></button>
                                                 </td>
                                             </tr>
                                             <div class="card card-outline card-warning mt-2 collapse" id="cardEditInventarisKantor<?php
-                                                                                                                                    $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                    $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                    $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                    echo "$bulan$tahun$sequence";
+                                                                                                                                    echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']);
                                                                                                                                     ?>">
                                                 <!-- /.card-header -->
                                                 <!-- form start -->
@@ -179,16 +168,12 @@
                                                         <div class="form-group row">
                                                             <label for="keterangan" class="col-sm-6 col-form-label">Keterangan</label>
                                                             <div class="col-sm-6">
-                                                                <textarea name="keterangan" class="form-control" id="keterangan"><?php echo $rowInvetarisKantor['keterangan'] ?></textarea>
+                                                                <textarea name="keterangan" class="form-control" id="keterangan"><?php echo str_replace('\r\n', PHP_EOL, $rowInvetarisKantor['keterangan']) ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-10">
-                                                                <img id="previewEdit<?php
-                                                                                    $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                    $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                    $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                    echo "$bulan$tahun$sequence"; ?>" src="#" max-width="150px" height="150px" class="float-right m-1" style="display: none;" />
+                                                                <img id="previewEdit<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])  ?>" src="#" max-width="150px" height="150px" class="float-right m-1" style="display: none;" />
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -196,23 +181,11 @@
                                                             <div class="input-group col-sm-6">
                                                                 <div class="custom-file">
                                                                     <input type="file" name="gambar" accept="image/;capture=camera" class="custom-file-input" id="inputFileEdit<?php
-                                                                                                                                                                                $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                                                $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                                                $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                                                echo "$bulan$tahun$sequence"; ?>" aria-describedby="inputGroupFileAddon01" onchange="displayImagePreviewEdit('inputFileEdit<?php
-                                                                                                                                                                                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                                                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                                                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                                                                                                                                                                            echo "$bulan$tahun$sequence"; ?>', 'previewEdit<?php
-                                                                                                                                                                                                                                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                                                                                                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                                                                                                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                                                                                                                                                                                                                            echo "$bulan$tahun$sequence"; ?>')">
+                                                                                                                                                                                echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>" aria-describedby="inputGroupFileAddon01" onchange="displayImagePreviewEdit('inputFileEdit<?php
+                                                                                                                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>', 'previewEdit<?php
+                                                                                                                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>')">
                                                                     <label class="custom-file-label" for="inputFileEdit" id="labelFileEdit<?php
-                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                            echo "$bulan$tahun$sequence";
+                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) 
                                                                                                                                             ?>">Choose file</label>
                                                                 </div>
                                                             </div>
@@ -220,20 +193,11 @@
                                                     </div>
                                                     <div class="card-footer">
                                                         <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" onclick="removeImagePreview('previewEdit<?php
-                                                                                                                                                                                        $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                                                        $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                                                        $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                                                        echo "$bulan$tahun$sequence";
+                                                                                                                                                                                        echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])
                                                                                                                                                                                         ?>', 'labelFileEdit<?php
-                                                                                                                                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                                                                            echo "$bulan$tahun$sequence";
+                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) 
                                                                                                                                                                                                             ?>')" data-target="#cardEditInventarisKantor<?php
-                                                                                                                                                                                                                                                        $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                                                                                                                                                                                        $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                                                                                                                                                                                        $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                                                                                                                                                                                        echo "$bulan$tahun$sequence";
+                                                                                                                                                                                                                                                        echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']); 
                                                                                                                                                                                                                                                         ?>">Cancel</button>
                                                         <button type="submit" class="btn btn-warning float-right">Submit</button>
                                                     </div>
@@ -241,11 +205,7 @@
                                             </div>
 
 
-                                            <div class="modal fade" id="modalHapusInventaris<?php
-                                                                                            $sequence = substr($rowInvetarisKantor['no_inventaris'], 0, 4);
-                                                                                            $bulan = substr($rowInvetarisKantor['no_inventaris'], 9, 2);
-                                                                                            $tahun = substr($rowInvetarisKantor['no_inventaris'], 12, 4);
-                                                                                            echo "$bulan$tahun$sequence" ?>">
+                                            <div class="modal fade" id="modalHapusInventaris<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -304,11 +264,13 @@
                 const bulan = romanNumerals[monthString];
                 var noInventaris;
                 for (i = 0; i < response.length; i++) {
-                    let item = response[i]
-                    let lastYear = item.no_inventaris.substr(12, 4)
-                    let lastMonth = item.no_inventaris.substr(9, 2)
+                    let item = response[i];
+                    let noInventarisParts = item.no_inventaris.split("/");
+                    console.log(noInventarisParts);
+                    let lastYear = noInventarisParts[3];
+                    let lastMonth = noInventarisParts[2];
                     if (lastYear == tahun && lastMonth == bulan) {
-                        var lastSequence = parseInt(item.no_inventaris.substr(0, 4));
+                        var lastSequence = parseInt(noInventarisParts[0]);
                         var sequence = (lastSequence + 1).toString().padStart(4, '0');
                         noInventaris = `${sequence}/HRD/${bulan}/${tahun}`;
                     }
