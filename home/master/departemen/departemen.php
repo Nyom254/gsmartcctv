@@ -53,7 +53,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <table class="table table-bordered table-striped table-hover">
+                            <table id="example1" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>Kode</th>
@@ -61,6 +61,7 @@
                                         <th>Keterangan</th>
                                         <th>inisial</th>
                                         <th>Status</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
