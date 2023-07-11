@@ -8,7 +8,7 @@
 
     $nama = mysqli_escape_string($conn, $_POST['nama']);
     $username = mysqli_escape_string($conn, $_POST['username']);
-    $password = mysqli_escape_string($conn, $_POST['password']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $level = mysqli_escape_string($conn, $_POST['level']);
     $status_aktif = mysqli_escape_string($conn, $_POST['status']);
 
@@ -30,7 +30,7 @@
         $editedGroup[] = "username user dari " . $rowDataUserLama['username'] . " menjadi $username";
     }
     if($password !== $rowDataUserLama['password']){
-        $editedGroup[] = "password user dari " . $rowDataUserLama['password'] . " menjadi $password";
+        $editedGroup[] = "password user ";
     }
     if($level !== $rowDataUserLama['level']){
         $editedGroup[] = "level user dari " . $rowDataUserLama['level'] . " menjadi $level";

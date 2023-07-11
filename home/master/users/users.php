@@ -82,7 +82,6 @@
                   <tr>
                     <th>nama</th>
                     <th>username</th>
-                    <th>password</th>
                     <th>level</th>
                     <th>status</th>
                     <th></th>
@@ -99,13 +98,6 @@
                       <tr>
                         <td><?php echo $rowUser['nama']  ?></td>
                         <td><?php echo $rowUser['username'] ?></td>
-                        <td class="user-pwd">
-                          <p id="pwd-text"><?php echo $rowUser['password'] ?></p>
-                          <!--
-                                <span class="material-symbols-outlined" id="pwdBtnOn">visibility</span>
-                                <span class="material-symbols-outlined" id="pwdBtnOff" >visibility_off</span>
-                                -->
-                        </td>
                         <td><?php
                             if ($rowUser['level'] == 0) {
                               echo "user";
@@ -133,15 +125,15 @@
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo $rowUser['nama'] ?>">
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo $rowUser['nama'] ?>" required>
                               </div>
                               <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?php echo $rowUser['username'] ?>">
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?php echo $rowUser['username'] ?>" required>
                               </div>
                               <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="text" name="password" class="form-control" id="password" placeholder="Password" value="<?php echo $rowUser['password'] ?>">
+                                <input type="text" name="password" class="form-control" id="password" placeholder="Password" required>
                               </div>
                               <div class="col-md-2">
                                 <div class="form-group ">

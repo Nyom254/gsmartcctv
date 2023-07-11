@@ -4,11 +4,12 @@
     session_start();
 
     $queryTambahUser = mysqli_prepare($conn, "insert into user (nama, username, password, level, status_aktif) values (?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($queryTambahUser,"ssssi",$nama,$username,$password, $level, $status_aktif);
+    mysqli_stmt_bind_param($queryTambahUser,"ssssi",$nama,$username,$hashedPassword, $level, $status_aktif);
 
     $nama = mysqli_escape_string($conn,$_POST['nama']);
     $username = mysqli_escape_string($conn,$_POST['username']);
     $password = mysqli_escape_string($conn,$_POST['password']);
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $level = mysqli_escape_string($conn, $_POST['level']);
     $status_aktif = mysqli_escape_string($conn, $_POST['status']);
 
