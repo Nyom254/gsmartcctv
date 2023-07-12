@@ -105,7 +105,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $queryInventarisKantor = mysqli_query($conn, "select * from inventaris_kantor");
+                                    $queryInventarisKantor = mysqli_query($conn, "select no_inventaris, tgl, nama_barang, posisi, keterangan, qty, attachment from inventaris_kantor");
                                     if ($queryInventarisKantor->num_rows > 0) {
                                         while ($rowInvetarisKantor = mysqli_fetch_assoc($queryInventarisKantor)) { ?>
 
@@ -118,7 +118,7 @@
                                                 <td><?php echo $rowInvetarisKantor['qty'] ?></td>
                                                 <td>
                                                     <a href="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>">
-                                                        <img data-lazysrc="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" width="100px" height="100px" class="img-fluid mb-2" />
+                                                        <img src="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" width="100px" height="100px" class="img-fluid mb-2" />
                                                     </a>
                                                 </td>
                                                 <td>
