@@ -396,6 +396,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         case 'penerimaan_barang':
           include './pembelian/penerimaan-barang/penerimaan.php';
           break;
+        case 'edit_penerimaan_barang':
+          include './pembelian/penerimaan-barang/edit_form.php';
+          break;
         case 'tambah-penerimaan-barang':
           include './pembelian/penerimaan-barang/tambah_penerimaan_barang_form.php';
           break;
@@ -539,7 +542,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         ],
       })
       $("#pemakaian_kertas").DataTable({
-        "responsive": true,
         "lengthChange": true,
         "autoWidth": false,
         fixedHeader: {
@@ -1023,19 +1025,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       $(this).ekkoLightbox({
         alwaysShowClose: true
       });
-    });
-
-    function ReLoadImages() {
-      $('img[data-lazysrc]').each(function() {
-        //* set the img src from data-src
-        $(this).attr('src', $(this).attr('data-lazysrc'));
-      });
-    }
-
-    document.addEventListener('readystatechange', event => {
-      if (event.target.readyState === "complete") { //or at "complete" if you want it to execute in the most last state of window.
-        ReLoadImages();
-      }
     });
   </script>
 
