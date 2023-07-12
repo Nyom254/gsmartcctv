@@ -105,7 +105,6 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    mysqli_query($conn, "SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED");
                                     $queryInventarisKantor = mysqli_query($conn, "select no_inventaris, tgl, nama_barang, posisi, keterangan, qty, attachment from inventaris_kantor");
                                     if ($queryInventarisKantor->num_rows > 0) {
                                         while ($rowInvetarisKantor = mysqli_fetch_assoc($queryInventarisKantor)) { ?>
@@ -230,7 +229,6 @@
                                             <!-- /.modal -->
                                     <?php
                                         }
-                                        mysqli_query($conn, "SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ ;");
                                     }
 
 
