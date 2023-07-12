@@ -107,7 +107,6 @@
                                     <?php
                                     mysqli_query($conn, "SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED");
                                     $queryInventarisKantor = mysqli_query($conn, "select no_inventaris, tgl, nama_barang, posisi, keterangan, qty, attachment from inventaris_kantor");
-                                    mysqli_query($conn, "SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ ;");
                                     if ($queryInventarisKantor->num_rows > 0) {
                                         while ($rowInvetarisKantor = mysqli_fetch_assoc($queryInventarisKantor)) { ?>
 
@@ -184,10 +183,10 @@
                                                                 <div class="custom-file">
                                                                     <input type="file" name="gambar" accept="image/;capture=camera" class="custom-file-input" id="inputFileEdit<?php
                                                                                                                                                                                 echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>" aria-describedby="inputGroupFileAddon01" onchange="displayImagePreviewEdit('inputFileEdit<?php
-                                                                                                                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>', 'previewEdit<?php
-                                                                                                                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>')">
+                                                                                                                                                                                                                                                                                                                                                echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>', 'previewEdit<?php
+                                                                                                                                                                                                                                                                                                                                                                                                echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>')">
                                                                     <label class="custom-file-label" for="inputFileEdit" id="labelFileEdit<?php
-                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) 
+                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])
                                                                                                                                             ?>">Choose file</label>
                                                                 </div>
                                                             </div>
@@ -197,9 +196,9 @@
                                                         <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" onclick="removeImagePreview('previewEdit<?php
                                                                                                                                                                                         echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])
                                                                                                                                                                                         ?>', 'labelFileEdit<?php
-                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) 
+                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])
                                                                                                                                                                                                             ?>')" data-target="#cardEditInventarisKantor<?php
-                                                                                                                                                                                                                                                        echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']); 
+                                                                                                                                                                                                                                                        echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']);
                                                                                                                                                                                                                                                         ?>">Cancel</button>
                                                         <button type="submit" class="btn btn-warning float-right">Submit</button>
                                                     </div>
@@ -231,6 +230,7 @@
                                             <!-- /.modal -->
                                     <?php
                                         }
+                                        mysqli_query($conn, "SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ ;");
                                     }
 
 
