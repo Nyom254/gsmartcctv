@@ -118,8 +118,8 @@
                                                 <td><?php echo str_replace('\r\n', PHP_EOL, $rowInvetarisKantor['keterangan']) ?></td>
                                                 <td><?php echo $rowInvetarisKantor['qty'] ?></td>
                                                 <td>
-                                                    <a href="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>">
-                                                        <img src="data:image/*;base64,<?php echo base64_encode($rowInvetarisKantor['attachment']) ?>" width="100px" height="100px" class="img-fluid mb-2" />
+                                                    <a href="./inventaris_kantor/data_attachment.php?id='<?php echo urlencode($rowInvetarisKantor['no_inventaris']) ?>'" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>" data-type="image">
+                                                        <img src="./inventaris_kantor/data_attachment.php?id='<?php echo urlencode($rowInvetarisKantor['no_inventaris']) ?>'" width="100px" height="100px" class="img-fluid mb-2" />
                                                     </a>
                                                 </td>
                                                 <td>
