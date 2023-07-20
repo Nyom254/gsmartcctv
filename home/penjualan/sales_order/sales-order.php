@@ -43,26 +43,26 @@
 
                                 if ($cekDataSO > 0) {
                                     while ($rowSO = mysqli_fetch_assoc($dataSO)) { ?>
-                                        <tr onclick="getDetailSalesOrder('<?php echo $rowSO['no_transaksi'] ?>')">
-                                            <td><?php echo $rowSO['no_transaksi']  ?></td>
-                                            <td><?php echo $rowSO['tanggal'] ?></td>
-                                            <td><?php echo $rowSO['cruser'] ?></td>
-                                            <td><?php echo $rowSO['nama'] ?></td>
-                                            <td class="text-break"><?php echo $rowSO['keterangan']  ?></td>
-                                            <td><?php echo $rowSO['jatuh_tempo']  ?></td>
+                                        <tr onclick="getDetailSalesOrder('<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>')">
+                                            <td><?php echo htmlspecialchars($rowSO['no_transaksi']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['tanggal']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['cruser']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['nama']) ?></td>
+                                            <td class="text-break"><?php echo htmlspecialchars($rowSO['keterangan'])  ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['jatuh_tempo']) ?></td>
                                             <td><?php
-                                                echo number_format($rowSO['total'], '2', ",", ".");
+                                                echo htmlspecialchars(number_format($rowSO['total'], '2', ",", "."));
                                                 ;
                                                 ?></td>
-                                            <td><?php if($rowSO['lama_invoice'] != null) { echo  $rowSO['lama_invoice'] . " hari"; } ?> </td>
-                                            <td><?php echo $rowSO['status'] ?></td>
+                                            <td><?php if($rowSO['lama_invoice'] != null) { echo  htmlspecialchars($rowSO['lama_invoice']) . " hari"; } ?> </td>
+                                            <td><?php echo htmlspecialchars($rowSO['status']) ?></td>
                                             <td class="small">
-                                                <a class="a" href="./penjualan/sales_order/cetak_so.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak SO</a> 
+                                                <a class="a" href="./penjualan/sales_order/cetak_so.php?no=<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>" target="_blank" style="cursor: pointer;">Cetak SO</a> 
                                                 <?php
                                                 if ($rowSO['lama_invoice'] == null){
                                                 ?>
                                                 |
-                                                <a class="a" href="?content=edit-sales-order&no=<?php echo $rowSO['no_transaksi'] ?>" style="cursor: pointer;">Edit</a>
+                                                <a class="a" href="?content=edit-sales-order&no=<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>" style="cursor: pointer;">Edit</a>
                                                 <?php } ?>
                                             </td>
                                         </tr>

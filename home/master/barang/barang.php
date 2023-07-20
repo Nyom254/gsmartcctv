@@ -57,7 +57,7 @@
 
                         if ($cekGroupBarang > 0) {
                           while ($rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang)) { ?>
-                            <option value="<?php echo $rowGroupBarang['id_group']; ?>"> <?php echo $rowGroupBarang['nama_group']; ?></option>
+                            <option value="<?php echo htmlspecialchars($rowGroupBarang['id_group']); ?>"> <?php echo htmlspecialchars($rowGroupBarang['nama_group']); ?></option>
                         <?php
                           }
                         }
@@ -73,7 +73,7 @@
 
                         if ($cekDepartemen > 0) {
                           while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                            <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['nama']; ?></option>
+                            <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo htmlspecialchars($rowDepartemen['nama']); ?></option>
                         <?php
                           }
                         }
@@ -127,12 +127,12 @@
                       $rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang);
                   ?>
                       <tr>
-                        <td><?php echo $rowBarang['nama']  ?></td>
-                        <td><?php echo $rowBarang['harga'] ?></td>
-                        <td><?php echo $rowBarang['satuan'] ?></td>
-                        <td><?php echo $rowGroupBarang['nama_group'] ?></td>
-                        <td><?php echo $rowBarang['type'] ?></td>
-                        <td><?php echo $rowBarang['nama_departemen'] ?></td>
+                        <td><?php echo htmlspecialchars($rowBarang['nama'])  ?></td>
+                        <td><?php echo htmlspecialchars($rowBarang['harga']) ?></td>
+                        <td><?php echo htmlspecialchars($rowBarang['satuan']) ?></td>
+                        <td><?php echo htmlspecialchars($rowGroupBarang['nama_group']) ?></td>
+                        <td><?php echo htmlspecialchars($rowBarang['type']) ?></td>
+                        <td><?php echo htmlspecialchars($rowBarang['nama_departemen']) ?></td>
                         <td><?php
                             if ($rowBarang['status_aktif'] == 0) {
                               echo "tidak aktif";
@@ -142,25 +142,25 @@
                             ?>
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditUser<?php echo $rowBarang['id_barang'] ?>"><span class="material-symbols-outlined">edit</span></button>
-                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusUser<?php echo $rowBarang['id_barang'] ?>"><span class="material-symbols-outlined">delete</span></button>
+                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditUser<?php echo htmlspecialchars($rowBarang['id_barang']) ?>"><span class="material-symbols-outlined">edit</span></button>
+                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusUser<?php echo htmlspecialchars($rowBarang['id_barang']) ?>"><span class="material-symbols-outlined">delete</span></button>
                         </td>
-                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditUser<?php echo $rowBarang['id_barang'] ?>">
+                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditUser<?php echo htmlspecialchars($rowBarang['id_barang']) ?>">
                           <!-- /.card-header -->
                           <!-- form start -->
-                          <form method="post" action="./master/barang/edit_action.php?id_barang=<?php echo $rowBarang['id_barang'] ?>">
+                          <form method="post" action="./master/barang/edit_action.php?id_barang=<?php echo htmlspecialchars($rowBarang['id_barang']) ?>">
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="nama">Nama Barang:</label>
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Barang" value="<?php echo $rowBarang['nama'] ?>">
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Barang" value="<?php echo htmlspecialchars($rowBarang['nama']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="harga">Harga: </label>
-                                <input type="number" name="harga" class="form-control" id="harga" placeholder="Harga" value="<?php echo $rowBarang['harga'] ?>">
+                                <input type="number" name="harga" class="form-control" id="harga" placeholder="Harga" value="<?php echo htmlspecialchars($rowBarang['harga']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="satuan">Satuan:</label>
-                                <input type="text" name="satuan" class="form-control" id="satuan" placeholder="Satuan" value="<?php echo $rowBarang['satuan'] ?>">
+                                <input type="text" name="satuan" class="form-control" id="satuan" placeholder="Satuan" value="<?php echo htmlspecialchars($rowBarang['satuan']) ?>">
                               </div>
                               <div class="form-group ">
                                 <label for="group_barang">Group Barang:</label>
@@ -172,7 +172,7 @@
                                     while ($rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang)) { ?>
                                       <option value="<?php echo $rowGroupBarang['id_group']; ?>" <?php if ($rowBarang['group_barang'] == $rowGroupBarang['id_group']) {
                                                                                                     echo "selected";
-                                                                                                  } ?>> <?php echo $rowGroupBarang['nama_group']; ?></option>
+                                                                                                  } ?>> <?php echo htmlspecialchars($rowGroupBarang['nama_group']); ?></option>
                                   <?php
                                     }
                                   }
@@ -190,7 +190,7 @@
                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
                                       <option value="<?php echo $rowDepartemen['kode']; ?>" <?php if ($rowDepartemen['kode'] == $rowBarang['kode_departemen']) {
                                                                                               echo "selected";
-                                                                                            } ?>> <?php echo $rowDepartemen['nama']; ?></option>
+                                                                                            } ?>> <?php echo htmlspecialchars($rowDepartemen['nama']); ?></option>
                                   <?php
                                     }
                                   }
@@ -223,13 +223,13 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditUser<?php echo $rowBarang['id_barang'] ?>">Cancel</button>
+                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditUser<?php echo htmlspecialchars($rowBarang['id_barang']) ?>">Cancel</button>
                               <button type="submit" class="btn btn-warning float-right ">Submit</button>
                             </div>
                           </form>
                         </div>
                       </tr>
-                      <div class="modal fade" id="modalHapusUser<?php echo $rowBarang['id_barang'] ?>">
+                      <div class="modal fade" id="modalHapusUser<?php echo htmlspecialchars($rowBarang['id_barang']) ?>">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -243,7 +243,7 @@
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-danger" onclick="location.href='./master/barang/delete_action.php?id_barang=<?php echo $rowBarang['id_barang'] ?>'">DELETE</button>
+                              <button type="button" class="btn btn-danger" onclick="location.href='./master/barang/delete_action.php?id_barang=<?php echo htmlspecialchars($rowBarang['id_barang']) ?>'">DELETE</button>
                             </div>
                           </div>
                           <!-- /.modal-content -->

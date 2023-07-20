@@ -114,14 +114,14 @@
                     while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) {
                   ?>
                       <tr>
-                        <td><?php echo $rowCustomer['nama']  ?></td>
-                        <td><?php echo $rowCustomer['alamat'] ?></td>
-                        <td><?php echo $rowCustomer['telp'] ?></td>
-                        <td><?php echo $rowCustomer['kota'] ?></td>
-                        <td><?php echo $rowCustomer['provinsi'] ?></td>
-                        <td><?php echo $rowCustomer['keterangan'] ?></td>
-                        <td><?php echo $rowCustomer['email'] ?></td>
-                        <td><?php echo $rowCustomer['status'] ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['nama'])  ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['alamat']) ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['telp']) ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['kota']) ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['provinsi']) ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['keterangan']) ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['email']) ?></td>
+                        <td><?php echo htmlspecialchars($rowCustomer['status']) ?></td>
                         <td><?php
                             if ($rowCustomer['status_aktif'] == 0) {
                               echo "tidak aktif";
@@ -131,41 +131,41 @@
                             ?>
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditCustomer<?php echo $rowCustomer['id_customer'] ?>"><span class="material-symbols-outlined">edit</span></button>
-                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusCustomer<?php echo $rowCustomer['id_customer'] ?>"><span class="material-symbols-outlined">delete</span></button>
+                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditCustomer<?php echo htmlspecialchars($rowCustomer['id_customer']) ?>"><span class="material-symbols-outlined">edit</span></button>
+                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusCustomer<?php echo htmlspecialchars($rowCustomer['id_customer']) ?>"><span class="material-symbols-outlined">delete</span></button>
                         </td>
-                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditCustomer<?php echo $rowCustomer['id_customer'] ?>">
+                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditCustomer<?php echo htmlspecialchars($rowCustomer['id_customer']) ?>">
                           <!-- /.card-header -->
                           <!-- form start -->
-                          <form method="post" action="./master/customer/edit_action.php?id_customer=<?php echo $rowCustomer['id_customer'] ?>">
+                          <form method="post" action="./master/customer/edit_action.php?id_customer=<?php echo htmlspecialchars($rowCustomer['id_customer']) ?>">
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo $rowCustomer['nama'] ?>">
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo htmlspecialchars($rowCustomer['nama']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="alamat">Alamat:</label>
-                                <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat" value="<?php echo $rowCustomer['alamat'] ?>">
+                                <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat" value="<?php echo htmlspecialchars($rowCustomer['alamat']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="telp">no .Telp</label>
-                                <input type="number" name="no_telp" class="form-control" id="telp" placeholder="no. Telp" value="<?php echo $rowCustomer['telp'] ?>">
+                                <input type="number" name="no_telp" class="form-control" id="telp" placeholder="no. Telp" value="<?php echo htmlspecialchars($rowCustomer['telp']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="kota">Kota:</label>
-                                <input type="text" name="kota" class="form-control" id="kota" placeholder="Kota" value="<?php echo $rowCustomer['kota'] ?>">
+                                <input type="text" name="kota" class="form-control" id="kota" placeholder="Kota" value="<?php echo htmlspecialchars($rowCustomer['kota']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="provinsi">Provinsi:</label>
-                                <input type="text" name="provinsi" class="form-control" id="provinsi" placeholder="Provinsi" value="<?php echo $rowCustomer['provinsi'] ?>">
+                                <input type="text" name="provinsi" class="form-control" id="provinsi" placeholder="Provinsi" value="<?php echo htmlspecialchars($rowCustomer['provinsi']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="keterangan">Keterangan:</label>
-                                <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?php echo $rowCustomer['keterangan'] ?>">
+                                <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?php echo htmlspecialchars($rowCustomer['keterangan']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?php echo $rowCustomer['email'] ?>">
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?php echo htmlspecialchars($rowCustomer['email']) ?>">
                               </div>
                                 <div class="form-group ">
                                   <label for="status">Status:</label>
@@ -198,13 +198,13 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditCustomer<?php echo $rowCustomer['id_customer'] ?>">Cancel</button>
+                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditCustomer<?php echo htmlspecialchars($rowCustomer['id_customer']) ?>">Cancel</button>
                               <button type="submit" class="btn btn-warning float-right">Submit</button>
                             </div>
                           </form>
                         </div>
                       </tr>
-                      <div class="modal fade" id="modalHapusCustomer<?php echo $rowCustomer['id_customer'] ?>">
+                      <div class="modal fade" id="modalHapusCustomer<?php echo htmlspecialchars($rowCustomer['id_customer']) ?>">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -218,7 +218,7 @@
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-danger" onclick="location.href='./master/customer/delete_action.php?id_customer=<?php echo $rowCustomer['id_customer'] ?>'">DELETE</button>
+                              <button type="button" class="btn btn-danger" onclick="location.href='./master/customer/delete_action.php?id_customer=<?php echo htmlspecialchars($rowCustomer['id_customer']) ?>'">DELETE</button>
                             </div>
                           </div>
                           <!-- /.modal-content -->

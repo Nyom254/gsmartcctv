@@ -47,7 +47,7 @@
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['inisial']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowDepartemen['kode']); ?>"> <?php echo htmlspecialchars($rowDepartemen['inisial']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -66,7 +66,7 @@
                                                 $cekCustomer = $dataCustomer->num_rows;
                                                 if ($cekCustomer > 0) {
                                                     while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) { ?>
-                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>"> <?php echo $rowCustomer['nama']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowCustomer['id_customer']); ?>"> <?php echo htmlspecialchars($rowCustomer['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -89,7 +89,7 @@
                                                 $cekUser = $dataUser->num_rows;
                                                 if ($cekUser > 0) {
                                                     while ($rowUser = mysqli_fetch_assoc($dataUser)) { ?>
-                                                        <option value="<?php echo $rowUser['nama'] ?>"><?php echo $rowUser['nama'] ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowUser['nama']) ?>"><?php echo htmlspecialchars($rowUser['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -166,9 +166,9 @@
                                                                             if ($cekBarang > 0) {
                                                                                 while ($rowBarang = mysqli_fetch_assoc($dataBarang)) { ?>
                                                                                     <tr>
-                                                                                        <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo $rowBarang['id_barang'] ?>','<?php echo $rowBarang['harga'] ?>','<?php echo $rowBarang['nama'] ?>' ), getSubTotal(), getProfit()"><?php echo $rowBarang['id_barang'] ?></a></td>
-                                                                                        <td> <?php echo $rowBarang['nama'] ?></td>
-                                                                                        <td> <?php echo $rowBarang['harga'] ?></td>
+                                                                                        <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo htmlspecialchars($rowBarang['id_barang']) ?>','<?php echo htmlspecialchars($rowBarang['harga']) ?>','<?php echo htmlspecialchars($rowBarang['nama']) ?>' ), getSubTotal(), getProfit()"><?php echo htmlspecialchars($rowBarang['id_barang']) ?></a></td>
+                                                                                        <td> <?php echo htmlspecialchars($rowBarang['nama']) ?></td>
+                                                                                        <td> <?php echo htmlspecialchars($rowBarang['harga']) ?></td>
                                                                                     </tr>
                                                                             <?php
                                                                                 }

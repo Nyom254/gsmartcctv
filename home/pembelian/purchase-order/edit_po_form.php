@@ -35,13 +35,13 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                     <div class="form-group row">
                                         <label for="no_transaksi" class="col-sm-4 col-form-label col-form-label-sm">No. Transaksi:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" value="<?php echo $dataPurchaseOrder['NO_TRANSAKSI'] ?>" readonly>
+                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataPurchaseOrder['NO_TRANSAKSI']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="tanggal" class="col-sm-4 col-form-label col-form-label-sm"> Tanggal:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" value="<?php echo $dataPurchaseOrder['TANGGAL'] ?>" required>
+                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataPurchaseOrder['TANGGAL']) ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -53,7 +53,7 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>" <?php if($rowDepartemen['kode'] == $dataPurchaseOrder['kode_departemen']) {echo 'selected';} ?> > <?php echo $rowDepartemen['inisial']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowDepartemen['kode']); ?>" <?php if($rowDepartemen['kode'] == $dataPurchaseOrder['kode_departemen']) {echo 'selected';} ?> > <?php echo htmlspecialchars($rowDepartemen['inisial']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -72,7 +72,7 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                                 $cekSupplier = $dataSupplier->num_rows;
                                                 if ($cekSupplier > 0) {
                                                     while ($rowSupplier = mysqli_fetch_assoc($dataSupplier)) { ?>
-                                                        <option value="<?php echo $rowSupplier['id_supplier']; ?>" <?php if($rowSupplier['id_supplier'] == $dataPurchaseOrder['KODE_SUPPLIER']) {echo 'selected';} ?> > <?php echo $rowSupplier['nama']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowSupplier['id_supplier']); ?>" <?php if($rowSupplier['id_supplier'] == $dataPurchaseOrder['KODE_SUPPLIER']) {echo 'selected';} ?> > <?php echo htmlspecialchars($rowSupplier['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -83,7 +83,7 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                     <div class="form-group row">
                                         <label for="jatuh_tempo" class="col-sm-4 col-form-label col-form-label-sm">Jatuh Tempo:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo $dataPurchaseOrder['JATUH_TEMPO'] ?>" readonly>
+                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataPurchaseOrder['JATUH_TEMPO']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -95,7 +95,7 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                                 $cekUser = $dataUser->num_rows;
                                                 if ($cekUser > 0) {
                                                     while ($rowUser = mysqli_fetch_assoc($dataUser)) { ?>
-                                                        <option value="<?php echo $rowUser['nama'] ?>" <?php if($rowUser['nama'] == $dataPurchaseOrder['PENGAMBIL']) {echo 'selected';} ?> ><?php echo $rowUser['nama'] ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowUser['nama']) ?>" <?php if($rowUser['nama'] == $dataPurchaseOrder['PENGAMBIL']) {echo 'selected';} ?> ><?php echo htmlspecialchars($rowUser['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -108,13 +108,13 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                     <div class="form-group row">
                                         <label for="no_ref" class="col-sm-4 col-form-label col-form-label-sm">No. Ref:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm" value="<?php echo $dataPurchaseOrder['NO_REF'] ?>">
+                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataPurchaseOrder['NO_REF']) ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="term" class="col-sm-4 col-form-label-sm">Term:</label>
                                         <div class="col-sm-8">
-                                            <input type="number" name="term" id="term" class="form-control form-control-sm" value="<?php echo $dataPurchaseOrder['TERM'] ?>" required>
+                                            <input type="number" name="term" id="term" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataPurchaseOrder['TERM']) ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -179,9 +179,9 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                                                         if ($cekBarang > 0) {
                                                                             while ($rowBarang = mysqli_fetch_assoc($dataBarang)) { ?>
                                                                                 <tr>
-                                                                                    <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo $rowBarang['id_barang'] ?>',' <?php echo $rowBarang['harga'] ?>'), getTotalSatuan()"><?php echo $rowBarang['id_barang'] ?></a></td>
-                                                                                    <td> <?php echo $rowBarang['nama'] ?></td>
-                                                                                    <td> <?php echo $rowBarang['harga'] ?></td>
+                                                                                    <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo htmlspecialchars($rowBarang['id_barang']) ?>',' <?php echo htmlspecialchars($rowBarang['harga']) ?>'), getTotalSatuan()"><?php echo htmlspecialchars($rowBarang['id_barang']) ?></a></td>
+                                                                                    <td> <?php echo htmlspecialchars($rowBarang['nama']) ?></td>
+                                                                                    <td> <?php echo htmlspecialchars($rowBarang['harga']) ?></td>
                                                                                 </tr>
                                                                         <?php
                                                                             }
@@ -210,35 +210,35 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                             <div class="row">
                                 <div class="col-6">
                                     <label for="keterangan">Keterangan:</label>
-                                    <textarea name="keterangan" id="keterangan" rows="3" class="form-control"><?php echo $dataPurchaseOrder['KETERANGAN'] ?></textarea>
+                                    <textarea name="keterangan" id="keterangan" rows="3" class="form-control"><?php echo htmlspecialchars($dataPurchaseOrder['KETERANGAN']) ?></textarea>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group row float-right col-9">
                                         <label for="subtotal" class="col-sm-4 col-form-label-sm">Subtotal:</label>
                                         <div class="col-sm-7 ">
-                                            <input type="number" name="subtotal" class="form-control form-control-sm" id="subtotal" value="<?php echo $dataPurchaseOrder['SUBTOTAL'] ?>" onformchange="getDPP()" readonly>
+                                            <input type="number" name="subtotal" class="form-control form-control-sm" id="subtotal" value="<?php echo htmlspecialchars($dataPurchaseOrder['SUBTOTAL']) ?>" onformchange="getDPP()" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9">
                                         <label for="diskon" class="col-sm-4 col-form-label-sm">Diskon:</label>
                                         <div class="col-sm-7">
-                                            <input type="number" name="diskon" id="diskon-keseluruhan" class="form-control form-control-sm" value="<?php echo $dataPurchaseOrder['DISKON'] ?>" oninput="getDPP()">
+                                            <input type="number" name="diskon" id="diskon-keseluruhan" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataPurchaseOrder['DISKON']) ?>" oninput="getDPP()">
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9">
                                         <label for="DPP" class="col-sm-4 col-form-label-sm">DPP:</label>
                                         <div class="col-sm-7 ">
-                                            <input type="number" name="dpp" class="form-control form-control-sm" id="dpp" value="<?php echo $dataPurchaseOrder['DPP'] ?>" onchange="getGrandTotal()" readonly>
+                                            <input type="number" name="dpp" class="form-control form-control-sm" id="dpp" value="<?php echo htmlspecialchars($dataPurchaseOrder['DPP']) ?>" onchange="getGrandTotal()" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9" id="container_ppn">
                                         <label for="ppn" class="col-sm-4 col-form-label-sm">PPN:</label>
                                         <div class="col-sm-3 d-flex">
-                                            <input type="number" name="ppn-persen" id="ppn-persen" class="form-control form-control-sm" value="<?php echo $dataPurchaseOrder['PPN_PERSENTASE'] ?>" oninput="limitNumberInput(this,3), getPPN()" value="11">
+                                            <input type="number" name="ppn-persen" id="ppn-persen" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataPurchaseOrder['PPN_PERSENTASE']) ?>" oninput="limitNumberInput(this,3), getPPN()" value="11">
                                             <p class="ml-1">%</p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="number" name="ppn" class="form-control form-control-sm" id="ppn" value="<?php echo $dataPurchaseOrder['PPN'] ?>" readonly>
+                                            <input type="number" name="ppn" class="form-control form-control-sm" id="ppn" value="<?php echo htmlspecialchars($dataPurchaseOrder['PPN']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9">

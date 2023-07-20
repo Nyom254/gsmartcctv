@@ -50,7 +50,7 @@
                                                 $cekCustomer = $dataCustomer->num_rows;
                                                 if ($cekCustomer > 0) {
                                                     while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) { ?>
-                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>"> <?php echo $rowCustomer['nama']; ?></option>
+                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>"> <?php echo htmlspecialchars($rowCustomer['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -67,7 +67,7 @@
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['inisial']; ?></option>
+                                                        <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo htmlspecialchars($rowDepartemen['inisial']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -125,13 +125,13 @@
                                                                             if ($cekInvoice > 0) {
                                                                                 while ($rowInvoice = mysqli_fetch_assoc($dataInvoice)) { ?>
                                                                                     <tr>
-                                                                                        <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="putInvoice('<?php echo $rowInvoice['no_invoice'] . '\',\'' . $rowInvoice['total'] ?>')"><?php echo $rowInvoice['no_invoice'] ?></a></td>
-                                                                                        <td><?php echo $rowInvoice['tanggal'] ?></td>
-                                                                                        <td><?php echo $rowInvoice['jatuh_tempo'] ?></td>
-                                                                                        <td><?php echo $rowInvoice['keterangan'] ?></td>
-                                                                                        <td><?php echo $rowInvoice['total'] ?></td>
-                                                                                        <td><?php echo $rowInvoice['departemen'] ?></td>
-                                                                                        <td><?php echo $rowInvoice['customer'] ?></td>
+                                                                                        <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="putInvoice('<?php echo $rowInvoice['no_invoice'] . '\',\'' . $rowInvoice['total'] ?>')"><?php echo htmlspecialchars($rowInvoice['no_invoice']) ?></a></td>
+                                                                                        <td><?php echo htmlspecialchars($rowInvoice['tanggal']) ?></td>
+                                                                                        <td><?php echo htmlspecialchars($rowInvoice['jatuh_tempo']) ?></td>
+                                                                                        <td><?php echo htmlspecialchars($rowInvoice['keterangan']) ?></td>
+                                                                                        <td><?php echo htmlspecialchars($rowInvoice['total']) ?></td>
+                                                                                        <td><?php echo htmlspecialchars($rowInvoice['departemen']) ?></td>
+                                                                                        <td><?php echo htmlspecialchars($rowInvoice['customer']) ?></td>
                                                                                     </tr>
                                                                             <?php
                                                                                 }

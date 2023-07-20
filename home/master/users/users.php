@@ -96,8 +96,8 @@
                     while ($rowUser = mysqli_fetch_assoc($dataUser)) {
                   ?>
                       <tr>
-                        <td><?php echo $rowUser['nama']  ?></td>
-                        <td><?php echo $rowUser['username'] ?></td>
+                        <td><?php echo htmlspecialchars($rowUser['nama'])  ?></td>
+                        <td><?php echo htmlspecialchars($rowUser['username']) ?></td>
                         <td><?php
                             if ($rowUser['level'] == 0) {
                               echo "user";
@@ -115,21 +115,21 @@
                             ?>
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditUser<?php echo $rowUser['id_user'] ?>"><span class="material-symbols-outlined">edit</span></button>
-                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusUser<?php echo $rowUser['id_user'] ?>"><span class="material-symbols-outlined">delete</span></button>
+                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditUser<?php echo htmlspecialchars($rowUser['id_user']) ?>"><span class="material-symbols-outlined">edit</span></button>
+                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusUser<?php echo htmlspecialchars($rowUser['id_user']) ?>"><span class="material-symbols-outlined">delete</span></button>
                         </td>
-                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditUser<?php echo $rowUser['id_user'] ?>">
+                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditUser<?php echo htmlspecialchars($rowUser['id_user']) ?>">
                           <!-- /.card-header -->
                           <!-- form start -->
-                          <form method="post" action="./master/users/edit_action.php?id_user=<?php echo $rowUser['id_user'] ?>">
+                          <form method="post" action="./master/users/edit_action.php?id_user=<?php echo htmlspecialchars($rowUser['id_user']) ?>">
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo $rowUser['nama'] ?>" required>
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo htmlspecialchars($rowUser['nama']) ?>" required>
                               </div>
                               <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?php echo $rowUser['username'] ?>" required>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?php echo htmlspecialchars($rowUser['username']) ?>" required>
                               </div>
                               <div class="form-group">
                                 <label for="password">Password</label>
@@ -162,13 +162,13 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditUser<?php echo $rowUser['id_user'] ?>">Cancel</button>
+                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditUser<?php echo htmlspecialchars($rowUser['id_user']) ?>">Cancel</button>
                               <button type="submit" class="btn btn-warning float-right">Submit</button>
                             </div>
                           </form>
                         </div>
                       </tr>
-                      <div class="modal fade" id="modalHapusUser<?php echo $rowUser['id_user'] ?>">
+                      <div class="modal fade" id="modalHapusUser<?php echo htmlspecialchars($rowUser['id_user']) ?>">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">

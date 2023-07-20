@@ -52,15 +52,15 @@
 
                                                     if ($cekDataSO > 0) {
                                                         while ($rowSO = mysqli_fetch_assoc($dataSO)) { ?>
-                                                            <tr onclick="getDetailSalesOrder('<?php echo $rowSO['no_transaksi'] ?>')">
-                                                                <td> <a class="a" data-dismiss="modal" onclick="putSOValue('<?php echo $rowSO['no_transaksi'] ?>')" style="cursor:pointer;"><?php echo $rowSO['no_transaksi'] ?></a></td>
-                                                                <td><?php echo $rowSO['tanggal'] ?></td>
-                                                                <td><?php echo $rowSO['nama'] ?></td>
-                                                                <td><?php echo $rowSO['pengirim'] ?></td>
-                                                                <td class="text-break"><?php echo $rowSO['keterangan']  ?></td>
-                                                                <td><?php echo $rowSO['jatuh_tempo']  ?></td>
-                                                                <td><?php echo $rowSO['total'] ?></td>
-                                                                <td><?php echo $rowSO['status'] ?></td>
+                                                            <tr onclick="getDetailSalesOrder('<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>')">
+                                                                <td> <a class="a" data-dismiss="modal" onclick="putSOValue('<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>')" style="cursor:pointer;"><?php echo htmlspecialchars($rowSO['no_transaksi']) ?></a></td>
+                                                                <td><?php echo htmlspecialchars($rowSO['tanggal']) ?></td>
+                                                                <td><?php echo htmlspecialchars($rowSO['nama']) ?></td>
+                                                                <td><?php echo htmlspecialchars($rowSO['pengirim']) ?></td>
+                                                                <td class="text-break"><?php echo htmlspecialchars($rowSO['keterangan'])  ?></td>
+                                                                <td><?php echo htmlspecialchars($rowSO['jatuh_tempo'])  ?></td>
+                                                                <td><?php echo htmlspecialchars($rowSO['total']) ?></td>
+                                                                <td><?php echo htmlspecialchars($rowSO['status']) ?></td>
                                                             </tr>
                                                     <?php
                                                         }
@@ -110,7 +110,7 @@
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['inisial']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowDepartemen['kode']); ?>"> <?php echo htmlspecialchars($rowDepartemen['inisial']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -138,7 +138,7 @@
                                                 $cekCustomer = $dataCustomer->num_rows;
                                                 if ($cekCustomer > 0) {
                                                     while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) { ?>
-                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>"> <?php echo $rowCustomer['nama']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowCustomer['id_customer']); ?>"> <?php echo htmlspecialchars($rowCustomer['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -161,7 +161,7 @@
                                                 $cekUser = $dataUser->num_rows;
                                                 if ($cekUser > 0) {
                                                     while ($rowUser = mysqli_fetch_assoc($dataUser)) { ?>
-                                                        <option value="<?php echo $rowUser['nama'] ?>"><?php echo $rowUser['nama'] ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowUser['nama']) ?>"><?php echo htmlspecialchars($rowUser['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -196,7 +196,7 @@
                                                 $cekGudang = $dataGudang->num_rows;
                                                 if ($cekGudang > 0) {
                                                     while ($rowGudang = mysqli_fetch_assoc($dataGudang)) { ?>
-                                                        <option value="<?php echo $rowGudang['kode'] ?>"><?php echo $rowGudang['nama'] ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowGudang['kode']) ?>"><?php echo htmlspecialchars($rowGudang['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }

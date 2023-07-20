@@ -1,8 +1,10 @@
 <?php
     include '../../../conn.php';
 
-    $queryTambahDepartemen = mysqli_prepare($conn, "insert into departemen (kode, nama, keterangan, status_aktif) values(?, ?, ?, ?)");
-    mysqli_stmt_bind_param($queryTambahDepartemen, "sssi", $kode, $nama, $keterangan, $status_aktif);
+    session_start();
+
+    $queryTambahDepartemen = mysqli_prepare($conn, "insert into departemen (kode, nama, keterangan, status_aktif, inisial) values(?, ?, ?, ?, ?)");
+    mysqli_stmt_bind_param($queryTambahDepartemen, "sssis", $kode, $nama, $keterangan, $status_aktif, $inisial);
 
 
     $queryKodeDepartemen= mysqli_query($conn, "select kode from departemen order by kode desc limit 1");
@@ -23,12 +25,13 @@
     $nama = mysqli_escape_string($conn, $_POST['nama']);
     $keterangan = mysqli_escape_string($conn, $_POST['keterangan']);
     $status_aktif = mysqli_escape_string($conn, $_POST['status']);
+    $inisial = mysqli_escape_string($conn, $_POST['inisial']);
 
     $queryLogHapusDepartemen = mysqli_prepare($conn, "insert into log_transaksi (NO_TRANSAKSI, ACTION, KETERANGAN, USERID) values (?, ?, ?, ?)");
-    mysqli_stmt_bind_param($queryLogHapusDepartemen, "ssss", $no_transaksi, $action, $keterangan, $userid);
+    mysqli_stmt_bind_param($queryLogHapusDepartemen, "ssss", $no_transaksi, $action, $keteranganLog, $userid);
     $no_transaksi = $kode;
     $action = "DELETE" ;
-    $keterangan = $_SESSION['username'] . " menambah departemen " . $nama;
+    $keteranganLog = $_SESSION['username'] . " menambah departemen " . $nama;
     $userid = $_SESSION['id_user'];
 
 

@@ -36,13 +36,13 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                     <div class="form-group row">
                                         <label for="no_transaksi" class="col-sm-4 col-form-label col-form-label-sm">No. Transaksi:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" value="<?php echo $dataInvoicePenjualan['no_transaksi'] ?>" readonly>
+                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataInvoicePenjualan['no_transaksi']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="tanggal" class="col-sm-4 col-form-label col-form-label-sm"> Tanggal:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" value="<?php echo $dataInvoicePenjualan['tanggal'] ?>" required>
+                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataInvoicePenjualan['tanggal']) ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -54,9 +54,9 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>" <?php if ($rowDepartemen['kode'] == $dataInvoicePenjualan['kode_departemen']) {
+                                                        <option value="<?php echo htmlspecialchars($rowDepartemen['kode']); ?>" <?php if ($rowDepartemen['kode'] == $dataInvoicePenjualan['kode_departemen']) {
                                                                                                                     echo 'selected';
-                                                                                                                } ?>> <?php echo $rowDepartemen['inisial']; ?></option>
+                                                                                                                } ?>> <?php echo htmlspecialchars($rowDepartemen['inisial']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -68,7 +68,7 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                         <label for="searchSO" class="col-sm-4 col-form-label col-form-label-sm"> No SO:</label>
                                         <div class="col-sm-8">
                                             <div class="row">
-                                                <input type="text" name="no_so" id="searchSO" class="form-control form-control-sm col-9" value="<?php echo $dataInvoicePenjualan['no_so'] ?>" readonly required>
+                                                <input type="text" name="no_so" id="searchSO" class="form-control form-control-sm col-9" value="<?php echo htmlspecialchars($dataInvoicePenjualan['no_so']) ?>" readonly required>
                                             </div>
                                         </div>
                                     </div>
@@ -83,9 +83,9 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                                 $cekCustomer = $dataCustomer->num_rows;
                                                 if ($cekCustomer > 0) {
                                                     while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) { ?>
-                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>" <?php if ($rowCustomer['id_customer'] == $dataInvoicePenjualan['kode_customer']) {
+                                                        <option value="<?php echo htmlspecialchars($rowCustomer['id_customer']); ?>" <?php if ($rowCustomer['id_customer'] == $dataInvoicePenjualan['kode_customer']) {
                                                                                                                         echo 'selected';
-                                                                                                                    } ?>> <?php echo $rowCustomer['nama']; ?></option>
+                                                                                                                    } ?>> <?php echo htmlspecialchars($rowCustomer['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -96,7 +96,7 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                     <div class="form-group row">
                                         <label for="jatuh_tempo" class="col-sm-4 col-form-label col-form-label-sm">Jatuh Tempo:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo $dataInvoicePenjualan['jatuh_tempo'] ?>">
+                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataInvoicePenjualan['jatuh_tempo']) ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -108,9 +108,9 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                                 $cekUser = $dataUser->num_rows;
                                                 if ($cekUser > 0) {
                                                     while ($rowUser = mysqli_fetch_assoc($dataUser)) { ?>
-                                                        <option value="<?php echo $rowUser['nama'] ?>" <?php if ($rowUser['nama'] == $dataInvoicePenjualan['pengirim']) {
+                                                        <option value="<?php echo htmlspecialchars($rowUser['nama']) ?>" <?php if ($rowUser['nama'] == $dataInvoicePenjualan['pengirim']) {
                                                                                                             echo 'selected';
-                                                                                                        } ?>><?php echo $rowUser['nama'] ?></option>
+                                                                                                        } ?>><?php echo htmlspecialchars($rowUser['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -123,7 +123,7 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                     <div class="form-group row">
                                         <label for="no_ref" class="col-sm-4 col-form-label col-form-label-sm">No. Ref:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm" value="<?php echo $dataInvoicePenjualan['no_ref'] ?>" readonly>
+                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataInvoicePenjualan['no_ref']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -151,13 +151,13 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                                 $dataGudangSaldoStok = mysqli_fetch_assoc($querySaldoStok);
                                                 if ($cekGudang > 0) {
                                                     while ($rowGudang = mysqli_fetch_assoc($dataGudang)) { ?>
-                                                        <option value="<?php echo $rowGudang['kode'] ?>" <?php
+                                                        <option value="<?php echo htmlspecialchars($rowGudang['kode']) ?>" <?php
                                                                                                             if (isset($dataGudangSaldoStok['gudang'])) {
                                                                                                                 if ($rowGudang['kode'] == $dataGudangSaldoStok['gudang']) {
                                                                                                                     echo 'selected';
                                                                                                                 }
                                                                                                             }
-                                                                                                            ?>><?php echo $rowGudang['nama'] ?></option>
+                                                                                                            ?>><?php echo htmlspecialchars($rowGudang['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -192,10 +192,10 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                             if ($queryDetailInvoicePenjualan->num_rows > 0) {
                                                 while ($rowDetailInvoicePenjualan = mysqli_fetch_assoc($queryDetailInvoicePenjualan)) { ?>
                                                     <tr>
-                                                        <td><?php echo $rowDetailInvoicePenjualan['no'] ?></td>
+                                                        <td><?php echo htmlspecialchars($rowDetailInvoicePenjualan['no']) ?></td>
                                                         <td><input type="hidden" name="kode-barang[]" value="<?php echo $rowDetailInvoicePenjualan['kode_barang'] ?>"><?php echo $rowDetailInvoicePenjualan['kode_barang'] ?></td>
                                                         <td><?php echo $rowDetailInvoicePenjualan['nama_barang'] ?></td>
-                                                        <td><input type="text" name="keterangan-detail[]" value="<?php echo $rowDetailInvoicePenjualan['keterangan'] ?>" class="form-control form-control-sm"></td>
+                                                        <td><input type="text" name="keterangan-detail[]" value="<?php echo htmlspecialchars($rowDetailInvoicePenjualan['keterangan']) ?>" class="form-control form-control-sm"></td>
                                                         <td><?php echo $rowDetailInvoicePenjualan['quantity'] ?></td>
                                                         <td><input type="number" name="qty-terjual[]" value="<?php echo $rowDetailInvoicePenjualan['quantity_terjual'] ?>" class="form-control form-control-sm" oninput="putTotalPrices(this)"></td>
                                                         <td><input type="hidden" name="harga[]"><?php echo $rowDetailInvoicePenjualan['harga'] ?></td>
@@ -214,35 +214,35 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                             <div class="row">
                                 <div class="col-6">
                                     <label for="keterangan">Keterangan:</label>
-                                    <textarea name="keterangan" id="keterangan" rows="3" class="form-control"></textarea>
+                                    <textarea name="keterangan" id="keterangan" rows="3" class="form-control"><?php echo htmlspecialchars($dataInvoicePenjualan['keterangan']) ?></textarea>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group row float-right col-9">
                                         <label for="subtotal" class="col-sm-4 col-form-label-sm">Subtotal:</label>
                                         <div class="col-sm-7 ">
-                                            <input type="number" name="subtotal" class="form-control form-control-sm" id="subtotal" value="<?php echo $dataInvoicePenjualan['subtotal'] ?>" readonly>
+                                            <input type="number" name="subtotal" class="form-control form-control-sm" id="subtotal" value="<?php echo htmlspecialchars($dataInvoicePenjualan['subtotal']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9">
                                         <label for="diskon" class="col-sm-4 col-form-label-sm">Diskon:</label>
                                         <div class="col-sm-7">
-                                            <input type="number" name="diskon" id="diskon-keseluruhan" class="form-control form-control-sm" oninput="putDPP()" value="<?php echo $dataInvoicePenjualan['diskon'] ?>" value="0">
+                                            <input type="number" name="diskon" id="diskon-keseluruhan" class="form-control form-control-sm" oninput="putDPP()" value="<?php echo htmlspecialchars($dataInvoicePenjualan['diskon']) ?>" value="0">
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9">
                                         <label for="DPP" class="col-sm-4 col-form-label-sm">DPP:</label>
                                         <div class="col-sm-7 ">
-                                            <input type="number" name="dpp" class="form-control form-control-sm" id="dpp" value="<?php echo $dataInvoicePenjualan['dpp'] ?>" readonly>
+                                            <input type="number" name="dpp" class="form-control form-control-sm" id="dpp" value="<?php echo htmlspecialchars($dataInvoicePenjualan['dpp']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9" id="container_ppn" style="display: none;">
                                         <label for="ppn" class="col-sm-4 col-form-label-sm">PPN:</label>
                                         <div class="col-sm-3 d-flex">
-                                            <input type="number" name="ppn-persen" id="ppn-persen" class="form-control form-control-sm" value="<?php echo $dataInvoicePenjualan['ppn_persentase'] ?>" readonly>
+                                            <input type="number" name="ppn-persen" id="ppn-persen" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataInvoicePenjualan['ppn_persentase']) ?>" readonly>
                                             <p class="ml-1">%</p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="number" name="ppn" class="form-control form-control-sm" id="ppn" value="<?php echo $dataInvoicePenjualan['ppn'] ?>" readonly>
+                                            <input type="number" name="ppn" class="form-control form-control-sm" id="ppn" value="<?php echo htmlspecialchars($dataInvoicePenjualan['ppn']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row float-right col-9">

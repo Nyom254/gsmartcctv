@@ -70,10 +70,10 @@
                                     if ($queryDepartemen->num_rows > 0) {
                                         while ($rowDepartemen = mysqli_fetch_assoc($queryDepartemen)) { ?>
                                             <tr>
-                                                <td><?php echo $rowDepartemen['kode'] ?></td>
-                                                <td><?php echo $rowDepartemen['nama'] ?></td>
-                                                <td><?php echo $rowDepartemen['keterangan'] ?></td>
-                                                <td><?php echo $rowDepartemen['inisial'] ?></td>
+                                                <td><?php echo htmlspecialchars($rowDepartemen['kode']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowDepartemen['nama']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowDepartemen['keterangan']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowDepartemen['inisial']) ?></td>
                                                 <td><?php
                                                     if ($rowDepartemen['status_aktif'] == 1) {
                                                         echo "aktif";
@@ -81,25 +81,25 @@
                                                         echo "tidak aktif";
                                                     } ?></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditDepartemen<?php echo $rowDepartemen['kode'] ?>"><span class="material-symbols-outlined">edit</span></button>
-                                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusDepartemen<?php echo $rowDepartemen['kode'] ?>"><span class="material-symbols-outlined">delete</span></button>
+                                                    <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditDepartemen<?php echo htmlspecialchars($rowDepartemen['kode']) ?>"><span class="material-symbols-outlined">edit</span></button>
+                                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusDepartemen<?php echo htmlspecialchars($rowDepartemen['kode']) ?>"><span class="material-symbols-outlined">delete</span></button>
                                                 </td>
                                             </tr>
 
-                                            <div class="card card-outline card-warning collapse" id="cardEditDepartemen<?php echo $rowDepartemen['kode'] ?>">
-                                                <form method="post" action="./master/departemen/edit_action.php?kode=<?php echo $rowDepartemen['kode'] ?>">
+                                            <div class="card card-outline card-warning collapse" id="cardEditDepartemen<?php echo htmlspecialchars($rowDepartemen['kode']) ?>">
+                                                <form method="post" action="./master/departemen/edit_action.php?kode=<?php echo htmlspecialchars($rowDepartemen['kode']) ?>">
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="nama">Nama:</label>
-                                                            <input type="text" name="nama" class="form-control" placeholder="nama" value="<?php echo $rowDepartemen['nama'] ?>">
+                                                            <input type="text" name="nama" class="form-control" placeholder="nama" value="<?php echo htmlspecialchars($rowDepartemen['nama']) ?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="keterangan">Keterangan:</label>
-                                                            <textarea class="form-control" name="keterangan"><?php echo $rowDepartemen['keterangan'] ?></textarea>
+                                                            <textarea class="form-control" name="keterangan"><?php echo htmlspecialchars($rowDepartemen['keterangan']) ?></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="inisial">Inisial:</label>
-                                                            <input type="text" class="form-control" value="<?php echo $rowDepartemen['inisial'] ?>" name="inisial">
+                                                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($rowDepartemen['inisial']) ?>" name="inisial">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="status">status aktif:</label>
@@ -114,13 +114,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-footer">
-                                                        <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditDepartemencardEditDepartemen<?php echo $rowDepartemen['kode'] ?>">Cancel</button>
+                                                        <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditDepartemencardEditDepartemen<?php echo htmlspecialchars($rowDepartemen['kode']) ?>">Cancel</button>
                                                         <button type="submit" class="btn btn-warning float-right">Submit</button>
                                                     </div>
                                                 </form>
                                             </div>
 
-                                            <div class="modal fade" id="modalHapusDepartemen<?php echo $rowDepartemen['kode'] ?>">
+                                            <div class="modal fade" id="modalHapusDepartemen<?php echo htmlspecialchars($rowDepartemen['kode']) ?>">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -134,7 +134,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger" onclick="location.href='./master/departemen/delete_action.php?kode=<?php echo $rowDepartemen['kode'] ?>'">DELETE</button>
+                                                            <button type="button" class="btn btn-danger" onclick="location.href='./master/departemen/delete_action.php?kode=<?php echo htmlspecialchars($rowDepartemen['kode']) ?>'">DELETE</button>
                                                         </div>
                                                     </div>
                                                     <!-- /.modal-content -->

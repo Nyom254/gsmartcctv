@@ -42,28 +42,28 @@
 
                                 if ($cekDataPO > 0) {
                                     while ($rowPO = mysqli_fetch_assoc($dataPO)) { ?>
-                                        <tr onclick="getDetailPurchaseOrder('<?php echo $rowPO['NO_TRANSAKSI'] ?>')">
-                                            <td><?php echo $rowPO['NO_TRANSAKSI']  ?></td>
-                                            <td><?php echo $rowPO['TANGGAL'] ?></td>
+                                        <tr onclick="getDetailPurchaseOrder('<?php echo htmlspecialchars($rowPO['NO_TRANSAKSI']) ?>')">
+                                            <td><?php echo htmlspecialchars($rowPO['NO_TRANSAKSI'])  ?></td>
+                                            <td><?php echo htmlspecialchars($rowPO['TANGGAL']) ?></td>
                                             <td><?php
                                                 $queryNamaSupplier = mysqli_query($conn, "select nama from supplier where id_supplier = '" . $rowPO['KODE_SUPPLIER'] . "' ");
                                                 $namaSupplier = mysqli_fetch_assoc($queryNamaSupplier);
-                                                echo $namaSupplier['nama'];
+                                                echo htmlspecialchars($namaSupplier['nama']);
                                                 ?>
                                             </td>
-                                            <td class="text-break"><?php echo $rowPO['KETERANGAN']  ?></td>
-                                            <td><?php echo $rowPO['TERM']  ?></td>
-                                            <td><?php echo $rowPO['JATUH_TEMPO']  ?></td>
+                                            <td class="text-break"><?php echo htmlspecialchars($rowPO['KETERANGAN'])  ?></td>
+                                            <td><?php echo htmlspecialchars($rowPO['TERM']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowPO['JATUH_TEMPO']) ?></td>
                                             <td><?php
                                                 $jumlahTotal = $rowPO['DPP'] + $rowPO['PPN'] ;
                                                 $total = number_format($jumlahTotal, '2', ",", ".");
-                                                echo $total;
+                                                echo htmlspecialchars($total);
                                                 ?></td>
-                                            <td><?php echo $rowPO['status']  ?></td>
+                                            <td><?php echo htmlspecialchars($rowPO['status']) ?></td>
                                             <td class="small">
-                                                <a class="a" href="./pembelian/purchase-order/cetak_po.php?no=<?php echo $rowPO['NO_TRANSAKSI'] ?>" target="_blank" style="cursor: pointer;">Cetak PO</a>
+                                                <a class="a" href="./pembelian/purchase-order/cetak_po.php?no=<?php echo htmlspecialchars($rowPO['NO_TRANSAKSI']) ?>" target="_blank" style="cursor: pointer;">Cetak PO</a>
                                                 |
-                                                <a class="a" href="?content=edit-purchase-order&no=<?php echo $rowPO['NO_TRANSAKSI'] ?>" style="cursor: pointer;">Edit</a>
+                                                <a class="a" href="?content=edit-purchase-order&no=<?php echo htmlspecialchars($rowPO['NO_TRANSAKSI']) ?>" style="cursor: pointer;">Edit</a>
                                             </td>
                                         </tr>
                                 <?php

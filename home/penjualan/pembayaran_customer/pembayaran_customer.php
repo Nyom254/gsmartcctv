@@ -43,23 +43,23 @@
                                     $queryPembayaranCustomer = mysqli_query($conn, "SELECT A.no_pembayaran, A.tanggal, B.nama AS customer, A.jenis_pembayaran, A.total, C.nama AS departemen, A.attachment from pembayaran_customer AS A LEFT JOIN customer AS B ON A.kode_customer = B.id_customer LEFT JOIN departemen AS C ON C.kode = A.kode_departemen");
                                     if ($queryPembayaranCustomer->num_rows > 0) {
                                         while ($rowPembayaranCustomer = mysqli_fetch_assoc($queryPembayaranCustomer)) { ?>
-                                            <tr onclick="showDetailPembayaran('<?php echo $rowPembayaranCustomer['no_pembayaran'] ?>')">
-                                                <td><?php echo $rowPembayaranCustomer['no_pembayaran'] ?></td>
-                                                <td><?php echo $rowPembayaranCustomer['tanggal'] ?></td>
-                                                <td><?php echo $rowPembayaranCustomer['customer'] ?></td>
-                                                <td><?php echo $rowPembayaranCustomer['jenis_pembayaran'] ?></td>
+                                            <tr onclick="showDetailPembayaran('<?php echo htmlspecialchars($rowPembayaranCustomer['no_pembayaran']) ?>')">
+                                                <td><?php echo htmlspecialchars($rowPembayaranCustomer['no_pembayaran']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowPembayaranCustomer['tanggal']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowPembayaranCustomer['customer']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowPembayaranCustomer['jenis_pembayaran']) ?></td>
                                                 <td>
                                                     <?php
                                                     if ($rowPembayaranCustomer['attachment'] != null) { ?>
-                                                        <a href="./penjualan/pembayaran_customer/data_attachment.php?id='<?php echo urlencode($rowPembayaranCustomer['no_pembayaran']) ?>'" data-toggle="lightbox" data-title="<?php echo $rowPembayaranCustomer['no_pembayaran'] ?>" data-type="image">
-                                                            <img src="./penjualan/pembayaran_customer/data_attachment.php?id='<?php echo urlencode($rowPembayaranCustomer['no_pembayaran']) ?>'" width="100px" height="100px" class="img-fluid mb-2" />
+                                                        <a href="./penjualan/pembayaran_customer/data_attachment.php?id='<?php echo htmlspecialchars(urlencode($rowPembayaranCustomer['no_pembayaran'])) ?>'" data-toggle="lightbox" data-title="<?php echo htmlspecialchars($rowPembayaranCustomer['no_pembayaran']) ?>" data-type="image">
+                                                            <img src="./penjualan/pembayaran_customer/data_attachment.php?id='<?php echo htmlspecialchars(urlencode($rowPembayaranCustomer['no_pembayaran'])) ?>'" width="100px" height="100px" class="img-fluid mb-2" />
                                                         </a>
                                                     <?php
                                                     }
                                                     ?>
                                                 </td>
-                                                <td><?php echo $rowPembayaranCustomer['total'] ?></td>
-                                                <td><?php echo $rowPembayaranCustomer['departemen'] ?></td>
+                                                <td><?php echo htmlspecialchars($rowPembayaranCustomer['total']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowPembayaranCustomer['departemen']) ?></td>
                                             </tr>
                                     <?php
                                         }

@@ -36,13 +36,13 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                     <div class="form-group row">
                                         <label for="no_transaksi" class="col-sm-4 col-form-label col-form-label-sm">No. Transaksi:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" value="<?php echo $dataSO['no_transaksi'] ?>" readonly>
+                                            <input type="text" id="no_transaksi" name="no_transaksi" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataSO['no_transaksi']) ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="tanggal" class="col-sm-4 col-form-label col-form-label-sm"> Tanggal:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" oninput="generateNoTransaksi()" value="<?php echo $dataSO['tanggal'] ?>" required>
+                                            <input type="date" id="tanggal" name="tanggal" class="form-control form-control-sm" oninput="generateNoTransaksi()" value="<?php echo htmlspecialchars($dataSO['tanggal']) ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -54,9 +54,9 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>" <?php if ($rowDepartemen['kode'] == $dataSO['kode_departemen']) {
+                                                        <option value="<?php echo htmlspecialchars($rowDepartemen['kode']); ?>" <?php if ($rowDepartemen['kode'] == $dataSO['kode_departemen']) {
                                                                                                                     echo "selected";
-                                                                                                                } ?>> <?php echo $rowDepartemen['inisial']; ?></option>
+                                                                                                                } ?>> <?php echo htmlspecialchars($rowDepartemen['inisial']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -75,9 +75,9 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                                 $cekCustomer = $dataCustomer->num_rows;
                                                 if ($cekCustomer > 0) {
                                                     while ($rowCustomer = mysqli_fetch_assoc($dataCustomer)) { ?>
-                                                        <option value="<?php echo $rowCustomer['id_customer']; ?>" <?php if ($rowCustomer['id_customer'] == $dataSO['kode_customer']) {
+                                                        <option value="<?php echo htmlspecialchars($rowCustomer['id_customer']); ?>" <?php if ($rowCustomer['id_customer'] == $dataSO['kode_customer']) {
                                                                                                                         echo "selected";
-                                                                                                                    } ?>> <?php echo $rowCustomer['nama']; ?></option>
+                                                                                                                    } ?>> <?php echo htmlspecialchars($rowCustomer['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -88,7 +88,7 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                     <div class="form-group row">
                                         <label for="jatuh_tempo" class="col-sm-4 col-form-label col-form-label-sm">Jatuh Tempo:</label>
                                         <div class="col-sm-8">
-                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo $dataSO['jatuh_tempo']; ?>" required>
+                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataSO['jatuh_tempo']); ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -100,9 +100,9 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                                 $cekUser = $dataUser->num_rows;
                                                 if ($cekUser > 0) {
                                                     while ($rowUser = mysqli_fetch_assoc($dataUser)) { ?>
-                                                        <option value="<?php echo $rowUser['nama'] ?>" <?php if ($rowUser['nama'] == $dataSO['pengirim']) {
+                                                        <option value="<?php echo htmlspecialchars($rowUser['nama']) ?>" <?php if ($rowUser['nama'] == $dataSO['pengirim']) {
                                                                                                             echo "selected";
-                                                                                                        } ?>><?php echo $rowUser['nama'] ?></option>
+                                                                                                        } ?>><?php echo htmlspecialchars($rowUser['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -115,7 +115,7 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                     <div class="form-group row">
                                         <label for="no_ref" class="col-sm-4 col-form-label col-form-label-sm">No. Ref:</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm" value="<?php echo $dataSO['no_ref'] ?>">
+                                            <input type="text" name="no_ref" id="no_ref" class="form-control form-control-sm" value="<?php echo htmlspecialchars($dataSO['no_ref']) ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -182,9 +182,9 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                                                             if ($cekBarang > 0) {
                                                                                 while ($rowBarang = mysqli_fetch_assoc($dataBarang)) { ?>
                                                                                     <tr>
-                                                                                        <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo $rowBarang['id_barang'] ?>','<?php echo $rowBarang['harga'] ?>','<?php echo $rowBarang['nama'] ?>' ), getSubTotal(), getProfit()"><?php echo $rowBarang['id_barang'] ?></a></td>
-                                                                                        <td> <?php echo $rowBarang['nama'] ?></td>
-                                                                                        <td> <?php echo $rowBarang['harga'] ?></td>
+                                                                                        <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo htmlspecialchars($rowBarang['id_barang']) ?>','<?php echo htmlspecialchars($rowBarang['harga']) ?>','<?php echo htmlspecialchars($rowBarang['nama']) ?>' ), getSubTotal(), getProfit()"><?php echo htmlspecialchars($rowBarang['id_barang']) ?></a></td>
+                                                                                        <td> <?php echo htmlspecialchars($rowBarang['nama']) ?></td>
+                                                                                        <td> <?php echo htmlspecialchars($rowBarang['harga']) ?></td>
                                                                                     </tr>
                                                                             <?php
                                                                                 }
@@ -218,7 +218,7 @@ $dataSO = mysqli_fetch_assoc($querySalesOrder);
                                                     <td><input type="text" name="no-urut[]" value="<?php echo $rowDetailSO['urutan']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;width:20px;" readonly></td>
                                                     <td><input type="text" name="kode-barang[]" value="<?php echo $rowDetailSO['kode_barang']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:left;" readonly></td>
                                                     <td><?php echo $rowDetailSO['nama']?></td>
-                                                    <td><input id="keteranganBarang" type="text" name="keterangan-detail[]" value="<?php echo $rowDetailSO['keterangan']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:left;" ></td>
+                                                    <td><input id="keteranganBarang" type="text" name="keterangan-detail[]" value="<?php echo htmlspecialchars($rowDetailSO['keterangan'])?>" style="pointer-events:none; background-color:transparent;border:none;text-align:left;" ></td>
                                                     <td><input id="quantityBarang" type="text" name="quantity[]" value="<?php echo $rowDetailSO['quantity']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;" oninput="hasilTotalRow(this)" ></td>
                                                     <td><input type="text" name="harga[]" value="<?php echo $rowDetailSO['harga']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;" readonly></td>
                                                     <td><input id="diskonPersentaseBarang" type="text" name="diskon-persentase[]" value="<?php echo $rowDetailSO['diskon_persentase']?>" style="pointer-events:none; background-color:transparent;border:none;text-align:right;" oninput="hasilTotalRow(this)"></td>

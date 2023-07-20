@@ -72,7 +72,7 @@
                     while ($rowGroupBarang = mysqli_fetch_assoc($dataGroupBarang)) {
                   ?>
                       <tr>
-                        <td class="col-6"><?php echo $rowGroupBarang['nama_group']  ?></td>
+                        <td class="col-6"><?php echo htmlspecialchars($rowGroupBarang['nama_group'])  ?></td>
                         <td class="col-4"><?php
                                           if ($rowGroupBarang['status_aktif'] == 0) {
                                             echo "tidak aktif";
@@ -82,17 +82,17 @@
                                           ?>
                         </td>
                         <td class="col2">
-                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditGroupBarang<?php echo $rowGroupBarang['id_group'] ?>"><span class="material-symbols-outlined">edit</span></button>
-                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusGroupBarang<?php echo $rowGroupBarang['id_group'] ?>"><span class="material-symbols-outlined">delete</span></button>
+                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditGroupBarang<?php echo htmlspecialchars($rowGroupBarang['id_group']) ?>"><span class="material-symbols-outlined">edit</span></button>
+                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusGroupBarang<?php echo htmlspecialchars($rowGroupBarang['id_group']) ?>"><span class="material-symbols-outlined">delete</span></button>
                         </td>
-                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditGroupBarang<?php echo $rowGroupBarang['id_group'] ?>">
+                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditGroupBarang<?php echo htmlspecialchars($rowGroupBarang['id_group']) ?>">
                           <!-- /.card-header -->
                           <!-- form start -->
-                          <form method="post" action="./master/group_barang/edit_action.php?id_group=<?php echo $rowGroupBarang['id_group'] ?>">
+                          <form method="post" action="./master/group_barang/edit_action.php?id_group=<?php echo htmlspecialchars($rowGroupBarang['id_group']) ?>">
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="nama_grou">Nama Group</label>
-                                <input type="text" name="nama_group" class="form-control" id="nama_group" placeholder="Nama Group" value="<?php echo $rowGroupBarang['nama_group'] ?>">
+                                <input type="text" name="nama_group" class="form-control" id="nama_group" placeholder="Nama Group" value="<?php echo htmlspecialchars($rowGroupBarang['nama_group']) ?>">
                               </div>
                               <div class="form-group ">
                                 <label for="status">status aktif</label>
@@ -108,13 +108,13 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditGroupBarang<?php echo $rowGroupBarang['id_group'] ?>">Cancel</button>
+                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditGroupBarang<?php echo htmlspecialchars($rowGroupBarang['id_group']) ?>">Cancel</button>
                               <button type="submit" class="btn btn-warning float-right ml-3">Submit</button>
                             </div>
                           </form>
                         </div>
                       </tr>
-                      <div class="modal fade" id="modalHapusGroupBarang<?php echo $rowGroupBarang['id_group'] ?>">
+                      <div class="modal fade" id="modalHapusGroupBarang<?php echo htmlspecialchars($rowGroupBarang['id_group']) ?>">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -128,7 +128,7 @@
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-danger" onclick="location.href='./master/group_barang/delete_action.php?id_group=<?php echo $rowGroupBarang['id_group'] ?>'">DELETE</button>
+                              <button type="button" class="btn btn-danger" onclick="location.href='./master/group_barang/delete_action.php?id_group=<?php echo htmlspecialchars($rowGroupBarang['id_group']) ?>'">DELETE</button>
                             </div>
                           </div>
                           <!-- /.modal-content -->

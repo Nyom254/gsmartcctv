@@ -85,32 +85,32 @@
                                         while ($rowGudang = mysqli_fetch_assoc($dataGudang)) {
                                     ?>
                                             <tr>
-                                                <td><?php echo $rowGudang['kode'] ?></td>
-                                                <td><?php echo $rowGudang['nama']  ?></td>
-                                                <td><?php echo $rowGudang['alamat'] ?></td>
-                                                <td><?php echo $rowGudang['penanggung_jawab'] ?></td>
+                                                <td><?php echo htmlspecialchars($rowGudang['kode']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowGudang['nama']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowGudang['alamat']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowGudang['penanggung_jawab']) ?></td>
                                                 <td><?php if($rowGudang['status_aktif'] == 1) { echo 'aktif';} else { echo  'tidak aktif';} ?></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditGudang<?php echo $rowGudang['kode'] ?>"><span class="material-symbols-outlined">edit</span></button>
-                                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusGudang<?php echo $rowGudang['kode'] ?>"><span class="material-symbols-outlined">delete</span></button>
+                                                    <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditGudang<?php echo htmlspecialchars($rowGudang['kode']) ?>"><span class="material-symbols-outlined">edit</span></button>
+                                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusGudang<?php echo htmlspecialchars($rowGudang['kode']) ?>"><span class="material-symbols-outlined">delete</span></button>
                                                 </td>
-                                                <div class="card card-outline card-warning mt-2 collapse" id="cardEditGudang<?php echo $rowGudang['kode'] ?>">
+                                                <div class="card card-outline card-warning mt-2 collapse" id="cardEditGudang<?php echo htmlspecialchars($rowGudang['kode']) ?>">
                                                     <!-- /.card-header -->
                                                     <!-- form start -->
-                                                    <form method="post" action="./master/gudang/edit_gudang.php?kode=<?php echo $rowGudang['kode'] ?>">
+                                                    <form method="post" action="./master/gudang/edit_gudang.php?kode=<?php echo htmlspecialchars($rowGudang['kode']) ?>">
                                                         <div class="card-body">
                                                             <div class="card-body">
                                                                 <div class="form-group">
                                                                     <label for="nama">Nama:</label>
-                                                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo $rowGudang['nama'] ?>" required>
+                                                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo htmlspecialchars($rowGudang['nama']) ?>" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="alamat">Alamat:</label>
-                                                                    <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat" value="<?php echo $rowGudang['alamat'] ?>" required>
+                                                                    <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat" value="<?php echo htmlspecialchars($rowGudang['alamat']) ?>" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="penanggung_jawab">Penanggung Jawab</label>
-                                                                    <input type="text" name="penanggung_jawab" class="form-control" id="penanggung_jawab" value="<?php echo $rowGudang['penanggung_jawab'] ?>" placeholder="Penanggung jawab" required>
+                                                                    <input type="text" name="penanggung_jawab" class="form-control" id="penanggung_jawab" value="<?php echo htmlspecialchars($rowGudang['penanggung_jawab']) ?>" placeholder="Penanggung jawab" required>
                                                                 </div>
                                                                 <div class="form-group col-md-2">
                                                                     <label for="status" class="form-label">Status Aktif:</label>
@@ -127,13 +127,13 @@
                                                         </div>
                                                         <!-- /.card-body -->
                                                         <div class="card-footer">
-                                                            <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditGudang<?php echo $rowGudang['kode'] ?>">Cancel</button>
+                                                            <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditGudang<?php echo htmlspecialchars($rowGudang['kode']) ?>">Cancel</button>
                                                             <button type="submit" class="btn btn-warning float-right">Submit</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </tr>
-                                            <div class="modal fade" id="modalHapusGudang<?php echo $rowGudang['kode'] ?>">
+                                            <div class="modal fade" id="modalHapusGudang<?php echo htmlspecialchars($rowGudang['kode']) ?>">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -147,7 +147,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger" onclick="location.href='./master/gudang/delete_gudang.php?kode=<?php echo $rowGudang['kode'] ?>'">DELETE</button>
+                                                            <button type="button" class="btn btn-danger" onclick="location.href='./master/gudang/delete_gudang.php?kode=<?php echo htmlspecialchars($rowGudang['kode']) ?>'">DELETE</button>
                                                         </div>
                                                     </div>
                                                     <!-- /.modal-content -->
@@ -165,15 +165,6 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Stok</h3>
-                        </div>
-                        <div class="card-body">
-                            
-                        </div>
-                    </div>
-                </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->

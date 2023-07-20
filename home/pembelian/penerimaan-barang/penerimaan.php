@@ -42,35 +42,35 @@
 
                                 if ($queryPenerimaan->num_rows > 0) {
                                     while ($rowPoPenerimaan = mysqli_fetch_assoc($queryPenerimaan)) { ?>
-                                        <tr onclick="getDetailPenerimaan('<?php echo $rowPoPenerimaan['no_penerimaan'] ?>')">
-                                            <td><?php echo $rowPoPenerimaan['no_penerimaan'] ?></td>
-                                            <td><?php echo $rowPoPenerimaan['tgl'] ?></td>
-                                            <td><?php echo $rowPoPenerimaan['no_po'] ?></td>
-                                            <td><?php echo $rowPoPenerimaan['kode_supplier'] ?></td>
-                                            <td><?php echo $rowPoPenerimaan['keterangan'] ?></td>
-                                            <td><a href="" data-toggle="collapse" data-target="#cardEditPenerimaan<?php echo str_replace('/', '',$rowPoPenerimaan['no_penerimaan']) ?>">Edit</a></td>
+                                        <tr onclick="getDetailPenerimaan('<?php echo htmlspecialchars($rowPoPenerimaan['no_penerimaan']) ?>')">
+                                            <td><?php echo htmlspecialchars($rowPoPenerimaan['no_penerimaan']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowPoPenerimaan['tgl']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowPoPenerimaan['no_po']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowPoPenerimaan['kode_supplier']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowPoPenerimaan['keterangan']) ?></td>
+                                            <td><a href="" data-toggle="collapse" data-target="#cardEditPenerimaan<?php echo htmlspecialchars(str_replace('/', '',$rowPoPenerimaan['no_penerimaan'])) ?>">Edit</a></td>
                                         </tr>
-                                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditPenerimaan<?php echo str_replace('/', '',$rowPoPenerimaan['no_penerimaan']) ?>">
+                                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditPenerimaan<?php echo htmlspecialchars(str_replace('/', '',$rowPoPenerimaan['no_penerimaan'])) ?>">
                                             <!-- /.card-header -->
                                             <!-- form start -->
-                                            <form method="post" action="./pembelian/penerimaan-barang/edit_action.php?no=<?php echo urlencode($rowPoPenerimaan['no_penerimaan']); ?>">
+                                            <form method="post" action="./pembelian/penerimaan-barang/edit_action.php?no=<?php echo htmlspecialchars(urlencode($rowPoPenerimaan['no_penerimaan'])); ?>">
                                                 <div class="card-body">
                                                     <div class="form-group">
                                                         <label for="tanggal">Tanggal:</label>
-                                                        <input type="date" name="tanggal" class="form-control" id="tanggal" placeholder="tanggal" value="<?php echo $rowPoPenerimaan['tgl'] ?>" required>
+                                                        <input type="date" name="tanggal" class="form-control" id="tanggal" placeholder="tanggal" value="<?php echo htmlspecialchars($rowPoPenerimaan['tgl']) ?>" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="no_ref">no Ref:</label>
-                                                        <input type="text" name="no_ref" class="form-control" id="no_ref" placeholder="no_ref" value="<?php echo $rowPoPenerimaan['no_ref'] ?>" required>
+                                                        <input type="text" name="no_ref" class="form-control" id="no_ref" placeholder="no_ref" value="<?php echo htmlspecialchars($rowPoPenerimaan['no_ref']) ?>" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="keterangan">Keterangan:</label>
-                                                        <textarea type="text" name="keterangan" class="form-control" id="keterangan" placeholder="keterangan"><?php echo $rowPoPenerimaan['keterangan'] ?></textarea>
+                                                        <textarea type="text" name="keterangan" class="form-control" id="keterangan" placeholder="keterangan"><?php echo htmlspecialchars($rowPoPenerimaan['keterangan']) ?></textarea>
                                                     </div>
                                                 </div>
                                                 <!-- /.card-body -->
                                                 <div class="card-footer">
-                                                    <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditPenerimaan<?php echo str_replace('/', '', $rowPoPenerimaan['no_penerimaan']) ?>">Cancel</button>
+                                                    <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditPenerimaan<?php echo htmlspecialchars(str_replace('/', '', $rowPoPenerimaan['no_penerimaan'])) ?>">Cancel</button>
                                                     <button type="submit" class="btn btn-warning float-right">Submit</button>
                                                 </div>
                                             </form>

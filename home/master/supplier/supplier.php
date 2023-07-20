@@ -99,12 +99,12 @@
                     while ($rowSupplier = mysqli_fetch_assoc($dataSupplier)) {
                   ?>
                       <tr>
-                        <td><?php echo $rowSupplier['nama']  ?></td>
-                        <td><?php echo $rowSupplier['alamat'] ?></td>
-                        <td><?php echo $rowSupplier['kota'] ?></td>
-                        <td><?php echo $rowSupplier['email'] ?></td>
-                        <td><?php echo $rowSupplier['contact'] ?></td>
-                        <td><?php echo $rowSupplier['keterangan'] ?></td>
+                        <td><?php echo htmlspecialchars($rowSupplier['nama']) ?></td>
+                        <td><?php echo htmlspecialchars($rowSupplier['alamat']) ?></td>
+                        <td><?php echo htmlspecialchars($rowSupplier['kota']) ?></td>
+                        <td><?php echo htmlspecialchars($rowSupplier['email']) ?></td>
+                        <td><?php echo htmlspecialchars($rowSupplier['contact']) ?></td>
+                        <td><?php echo htmlspecialchars($rowSupplier['keterangan']) ?></td>
                         <td><?php
                             if ($rowSupplier['status_aktif'] == 0) {
                               echo "tidak aktif";
@@ -114,37 +114,37 @@
                             ?>
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditSupplier<?php echo $rowSupplier['id_supplier'] ?>"><span class="material-symbols-outlined">edit</span></button>
-                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusSupplier<?php echo $rowSupplier['id_supplier'] ?>"><span class="material-symbols-outlined">delete</span></button>
+                          <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditSupplier<?php echo htmlspecialchars($rowSupplier['id_supplier']) ?>"><span class="material-symbols-outlined">edit</span></button>
+                          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modalHapusSupplier<?php echo htmlspecialchars($rowSupplier['id_supplier']) ?>"><span class="material-symbols-outlined">delete</span></button>
                         </td>
-                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditSupplier<?php echo $rowSupplier['id_supplier'] ?>">
+                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditSupplier<?php echo htmlspecialchars($rowSupplier['id_supplier']) ?>">
                           <!-- /.card-header -->
                           <!-- form start -->
-                          <form method="post" action="./master/supplier/edit_action.php?id_supplier=<?php echo $rowSupplier['id_supplier'] ?>">
+                          <form method="post" action="./master/supplier/edit_action.php?id_supplier=<?php echo htmlspecialchars($rowSupplier['id_supplier']) ?>">
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="nama">Nama:</label>
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo $rowSupplier['nama'] ?>">
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama" value="<?php echo htmlspecialchars($rowSupplier['nama']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="alamat">Alamat:</label>
-                                <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat" value="<?php echo $rowSupplier['alamat'] ?>">
+                                <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Alamat" value="<?php echo htmlspecialchars($rowSupplier['alamat']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="kota">Kota:</label>
-                                <input type="text" name="kota" class="form-control" id="kota" placeholder="Kota" value="<?php echo $rowSupplier['kota'] ?>">
+                                <input type="text" name="kota" class="form-control" id="kota" placeholder="Kota" value="<?php echo htmlspecialchars($rowSupplier['kota']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="text" name="email" class="form-control" id="email" placeholder="Email" value="<?php echo $rowSupplier['email'] ?>">
+                                <input type="text" name="email" class="form-control" id="email" placeholder="Email" value="<?php echo htmlspecialchars($rowSupplier['email']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="contact">Contact Person:</label>
-                                <input type="number" name="contact" class="form-control" id="contact" placeholder="contact person" value="<?php echo $rowSupplier['contact'] ?>">
+                                <input type="number" name="contact" class="form-control" id="contact" placeholder="contact person" value="<?php echo htmlspecialchars($rowSupplier['contact']) ?>">
                               </div>
                               <div class="form-group">
                                 <label for="keterangan">keterangan:</label>
-                                <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?php echo $rowSupplier['keterangan'] ?>">
+                                <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?php echo htmlspecialchars($rowSupplier['keterangan']) ?>">
                               </div>
                               <div class="form-group ">
                                 <label for="status" class="form-label">status</label>
@@ -160,13 +160,13 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditSupplier<?php echo $rowSupplier['id_supplier'] ?>">Cancel</button>
+                              <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditSupplier<?php echo htmlspecialchars($rowSupplier['id_supplier']) ?>">Cancel</button>
                               <button type="submit" class="btn btn-warning float-right">Submit</button>
                             </div>
                           </form>
                         </div>
                       </tr>
-                      <div class="modal fade" id="modalHapusSupplier<?php echo $rowSupplier['id_supplier'] ?>">
+                      <div class="modal fade" id="modalHapusSupplier<?php echo htmlspecialchars($rowSupplier['id_supplier']) ?>">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -180,7 +180,7 @@
                             </div>
                             <div class="modal-footer justify-content-between">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-danger" onclick="location.href='./master/supplier/delete_action.php?id_supplier=<?php echo $rowSupplier['id_supplier'] ?>'">DELETE</button>
+                              <button type="button" class="btn btn-danger" onclick="location.href='./master/supplier/delete_action.php?id_supplier=<?php echo htmlspecialchars($rowSupplier['id_supplier']) ?>'">DELETE</button>
                             </div>
                           </div>
                           <!-- /.modal-content -->

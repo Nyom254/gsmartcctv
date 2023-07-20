@@ -47,7 +47,7 @@
                                                 $cekDepartemen = $dataDepartemen->num_rows;
                                                 if ($cekDepartemen > 0) {
                                                     while ($rowDepartemen = mysqli_fetch_assoc($dataDepartemen)) { ?>
-                                                        <option value="<?php echo $rowDepartemen['kode']; ?>"> <?php echo $rowDepartemen['inisial']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowDepartemen['kode']); ?>"> <?php echo htmlspecialchars($rowDepartemen['inisial']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -66,7 +66,7 @@
                                                 $cekSupplier = $dataSupplier->num_rows;
                                                 if ($cekSupplier > 0) {
                                                     while ($rowSupplier = mysqli_fetch_assoc($dataSupplier)) { ?>
-                                                        <option value="<?php echo $rowSupplier['id_supplier']; ?>"> <?php echo $rowSupplier['nama']; ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowSupplier['id_supplier']); ?>"> <?php echo htmlspecialchars($rowSupplier['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -89,7 +89,7 @@
                                                 $cekUser = $dataUser->num_rows;
                                                 if ($cekUser > 0) {
                                                     while ($rowUser = mysqli_fetch_assoc($dataUser)) { ?>
-                                                        <option value="<?php echo $rowUser['nama'] ?>"><?php echo $rowUser['nama'] ?></option>
+                                                        <option value="<?php echo htmlspecialchars($rowUser['nama']) ?>"><?php echo htmlspecialchars($rowUser['nama']) ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -169,9 +169,9 @@
                                                                         if ($cekBarang > 0) {
                                                                             while ($rowBarang = mysqli_fetch_assoc($dataBarang)) { ?>
                                                                                 <tr>
-                                                                                    <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo $rowBarang['id_barang'] ?>',' <?php echo $rowBarang['harga'] ?>'), getTotalSatuan()"><?php echo $rowBarang['id_barang'] ?></a></td>
-                                                                                    <td> <?php echo $rowBarang['nama'] ?></td>
-                                                                                    <td> <?php echo $rowBarang['harga'] ?></td>
+                                                                                    <td><a class="a" data-dismiss="modal" style="cursor: pointer;" onclick="getBarang('<?php echo htmlspecialchars($rowBarang['id_barang']) ?>',' <?php echo htmlspecialchars($rowBarang['harga']) ?>'), getTotalSatuan()"><?php echo htmlspecialchars($rowBarang['id_barang']) ?></a></td>
+                                                                                    <td> <?php echo htmlspecialchars($rowBarang['nama']) ?></td>
+                                                                                    <td> <?php echo htmlspecialchars($rowBarang['harga']) ?></td>
                                                                                 </tr>
                                                                         <?php
                                                                             }

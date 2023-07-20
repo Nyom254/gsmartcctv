@@ -110,25 +110,25 @@
                                         while ($rowInvetarisKantor = mysqli_fetch_assoc($queryInventarisKantor)) { ?>
 
                                             <tr>
-                                                <td><?php echo $rowInvetarisKantor['no_inventaris'] ?></td>
-                                                <td><?php echo $rowInvetarisKantor['tgl'] ?></td>
-                                                <td><?php echo $rowInvetarisKantor['nama_barang'] ?></td>
-                                                <td><?php echo $rowInvetarisKantor['posisi'] ?></td>
-                                                <td><?php echo str_replace('\r\n', PHP_EOL, $rowInvetarisKantor['keterangan']) ?></td>
-                                                <td><?php echo $rowInvetarisKantor['qty'] ?></td>
+                                                <td><?php echo htmlspecialchars($rowInvetarisKantor['no_inventaris']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowInvetarisKantor['tgl']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowInvetarisKantor['nama_barang']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowInvetarisKantor['posisi']) ?></td>
+                                                <td><?php echo htmlspecialchars(str_replace('\r\n', PHP_EOL, $rowInvetarisKantor['keterangan'])) ?></td>
+                                                <td><?php echo htmlspecialchars($rowInvetarisKantor['qty']) ?></td>
                                                 <td>
-                                                    <a href="./inventaris_kantor/data_attachment.php?id='<?php echo urlencode($rowInvetarisKantor['no_inventaris']) ?>'" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>" data-type="image">
-                                                        <img src="./inventaris_kantor/data_attachment.php?id='<?php echo urlencode($rowInvetarisKantor['no_inventaris']) ?>'" width="100px" height="100px" class="img-fluid mb-2" />
+                                                    <a href="./inventaris_kantor/data_attachment.php?id='<?php echo htmlspecialchars(urlencode($rowInvetarisKantor['no_inventaris'])) ?>'" data-toggle="lightbox" data-title="<?php echo $rowInvetarisKantor['no_inventaris'] ?>" data-type="image">
+                                                        <img src="./inventaris_kantor/data_attachment.php?id='<?php echo htmlspecialchars(urlencode($rowInvetarisKantor['no_inventaris'])) ?>'" width="100px" height="100px" class="img-fluid mb-2" />
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-warning btn-sm" data-toggle="collapse" data-target="#cardEditInventarisKantor<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']);
+                                                    <button class="btn btn-warning btn-sm" data-toggle="collapse" data-target="#cardEditInventarisKantor<?php echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris']));
                                                                                                                                                         ?>"><span class="material-symbols-outlined">edit</span></button>
-                                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapusInventaris<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>"><span class="material-symbols-outlined">delete</span></button>
+                                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalHapusInventaris<?php echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris'])) ?>"><span class="material-symbols-outlined">delete</span></button>
                                                 </td>
                                             </tr>
                                             <div class="card card-outline card-warning mt-2 collapse" id="cardEditInventarisKantor<?php
-                                                                                                                                    echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']);
+                                                                                                                                    echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris']));
                                                                                                                                     ?>">
                                                 <!-- /.card-header -->
                                                 <!-- form start -->
@@ -137,43 +137,43 @@
                                                         <div class="form-group row">
                                                             <label for="no_inventaris" class="col-sm-6 col-form-label">No Inventaris</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" name="no_inventaris" class="form-control" id="no_inventaris" value="<?php echo $rowInvetarisKantor['no_inventaris'] ?>" readonly>
+                                                                <input type="text" name="no_inventaris" class="form-control" id="no_inventaris" value="<?php echo htmlspecialchars($rowInvetarisKantor['no_inventaris']) ?>" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="tanggal" class="col-sm-6 col-form-label">Tanggal</label>
                                                             <div class="col-sm-6">
-                                                                <input type="date" name="tanggal" class="form-control" id="tanggal" value="<?php echo $rowInvetarisKantor['tgl'] ?>">
+                                                                <input type="date" name="tanggal" class="form-control" id="tanggal" value="<?php echo htmlspecialchars($rowInvetarisKantor['tgl']) ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="barang" class="col-sm-6 col-form-label">Barang</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" name="nama_barang" class="form-control" value="<?php echo $rowInvetarisKantor['nama_barang'] ?>">
+                                                                <input type="text" name="nama_barang" class="form-control" value="<?php echo htmlspecialchars($rowInvetarisKantor['nama_barang']) ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="posisi" class="col-sm-6 col-form-label">Posisi</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" name="posisi" class="form-control" value="<?php echo $rowInvetarisKantor['posisi'] ?>">
+                                                                <input type="text" name="posisi" class="form-control" value="<?php echo htmlspecialchars($rowInvetarisKantor['posisi']) ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="quantity" class="col-sm-6 col-form-label">Quantity</label>
                                                             <div class="col-sm-6">
-                                                                <input type="number" name="quantity" class="form-control" id="quantity" value="<?php echo $rowInvetarisKantor['qty'] ?>">
+                                                                <input type="number" name="quantity" class="form-control" id="quantity" value="<?php echo htmlspecialchars($rowInvetarisKantor['qty']) ?>">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row">
                                                             <label for="keterangan" class="col-sm-6 col-form-label">Keterangan</label>
                                                             <div class="col-sm-6">
-                                                                <textarea name="keterangan" class="form-control" id="keterangan"><?php echo str_replace('\r\n', PHP_EOL, $rowInvetarisKantor['keterangan']) ?></textarea>
+                                                                <textarea name="keterangan" class="form-control" id="keterangan"><?php echo htmlspecialchars(str_replace('\r\n', PHP_EOL, $rowInvetarisKantor['keterangan'])) ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-10">
-                                                                <img id="previewEdit<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])  ?>" src="#" max-width="150px" height="150px" class="float-right m-1" style="display: none;" />
+                                                                <img id="previewEdit<?php echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris']))  ?>" src="#" max-width="150px" height="150px" class="float-right m-1" style="display: none;" />
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -181,11 +181,11 @@
                                                             <div class="input-group col-sm-6">
                                                                 <div class="custom-file">
                                                                     <input type="file" name="gambar" accept="image/;capture=camera" class="custom-file-input" id="inputFileEdit<?php
-                                                                                                                                                                                echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>" aria-describedby="inputGroupFileAddon01" onchange="displayImagePreviewEdit('inputFileEdit<?php
+                                                                                                                                                                                echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris'])) ?>" aria-describedby="inputGroupFileAddon01" onchange="displayImagePreviewEdit('inputFileEdit<?php
                                                                                                                                                                                                                                                                                                                                                 echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>', 'previewEdit<?php
                                                                                                                                                                                                                                                                                                                                                                                                 echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>')">
                                                                     <label class="custom-file-label" for="inputFileEdit" id="labelFileEdit<?php
-                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])
+                                                                                                                                            echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris']))
                                                                                                                                             ?>">Choose file</label>
                                                                 </div>
                                                             </div>
@@ -193,11 +193,11 @@
                                                     </div>
                                                     <div class="card-footer">
                                                         <button type="reset" class="btn btn-secondary float-right ml-3" data-toggle="collapse" onclick="removeImagePreview('previewEdit<?php
-                                                                                                                                                                                        echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])
+                                                                                                                                                                                        echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris']))
                                                                                                                                                                                         ?>', 'labelFileEdit<?php
-                                                                                                                                                                                                            echo str_replace('/', '', $rowInvetarisKantor['no_inventaris'])
+                                                                                                                                                                                                            echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris']))
                                                                                                                                                                                                             ?>')" data-target="#cardEditInventarisKantor<?php
-                                                                                                                                                                                                                                                        echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']);
+                                                                                                                                                                                                                                                        echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris']));
                                                                                                                                                                                                                                                         ?>">Cancel</button>
                                                         <button type="submit" class="btn btn-warning float-right">Submit</button>
                                                     </div>
@@ -205,7 +205,7 @@
                                             </div>
 
 
-                                            <div class="modal fade" id="modalHapusInventaris<?php echo str_replace('/', '', $rowInvetarisKantor['no_inventaris']) ?>">
+                                            <div class="modal fade" id="modalHapusInventaris<?php echo htmlspecialchars(str_replace('/', '', $rowInvetarisKantor['no_inventaris'])) ?>">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -219,7 +219,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger" onclick="location.href='./inventaris_kantor/delete_action.php?no_inventaris=<?php echo $rowInvetarisKantor['no_inventaris'] ?>'">DELETE</button>
+                                                            <button type="button" class="btn btn-danger" onclick="location.href='./inventaris_kantor/delete_action.php?no_inventaris=<?php echo htmlspecialchars($rowInvetarisKantor['no_inventaris']) ?>'">DELETE</button>
                                                         </div>
                                                     </div>
                                                     <!-- /.modal-content -->

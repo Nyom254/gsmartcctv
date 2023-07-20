@@ -2,12 +2,13 @@
     include '../../../conn.php';
     session_start();
 
-    $queryEditDepartemen = mysqli_prepare($conn,"update departemen set nama = ?, keterangan = ?, status_aktif = ?  where kode = ? ");
-    mysqli_stmt_bind_param($queryEditDepartemen,"ssis", $nama, $keterangan, $status,$kode);
+    $queryEditDepartemen = mysqli_prepare($conn,"update departemen set nama = ?, keterangan = ?, status_aktif = ?, inisial = ? where kode = ? ");
+    mysqli_stmt_bind_param($queryEditDepartemen,"ssiss", $nama, $keterangan, $status, $inisial,$kode);
 
     $nama = mysqli_escape_string($conn, $_POST['nama']);
     $keterangan = mysqli_escape_string($conn, $_POST['keterangan']);
     $status = mysqli_escape_string($conn, $_POST['status']);
+    $inisial = mysqli_escape_string($conn, $_POST['inisial']);
     $kode = $_GET['kode'];
 
     $queryLogEditDepartemen = mysqli_prepare($conn, "insert into log_transaksi (NO_TRANSAKSI, ACTION, KETERANGAN, USERID) values (?, ?, ?, ?)");

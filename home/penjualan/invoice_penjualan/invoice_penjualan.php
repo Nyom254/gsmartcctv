@@ -42,23 +42,23 @@
 
                                 if ($cekDataSO > 0) {
                                     while ($rowSO = mysqli_fetch_assoc($dataSO)) { ?>
-                                        <tr onclick="getDetailInvoicePenjualan('<?php echo $rowSO['no_transaksi'] ?>')">
-                                            <td><?php echo $rowSO['no_transaksi']  ?></td>
-                                            <td><?php echo $rowSO['tanggal'] ?></td>
-                                            <td><?php echo $rowSO['no_so'] ?></td>
-                                            <td><?php echo $rowSO['pengirim'] ?></td>
-                                            <td><?php echo $rowSO['nama'] ?></td>
-                                            <td class="text-break"><?php echo $rowSO['keterangan']  ?></td>
-                                            <td><?php echo $rowSO['jatuh_tempo']  ?></td>
+                                        <tr onclick="getDetailInvoicePenjualan('<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>')">
+                                            <td><?php echo htmlspecialchars($rowSO['no_transaksi'])  ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['tanggal']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['no_so']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['pengirim']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['nama']) ?></td>
+                                            <td class="text-break"><?php echo htmlspecialchars($rowSO['keterangan']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['jatuh_tempo']) ?></td>
                                             <td><?php
                                                 $jumlahTotal = $rowSO['dpp'] + $rowSO['ppn'];
                                                 $total = number_format($jumlahTotal, '2', ",", ".");
-                                                echo $total;
+                                                echo htmlspecialchars($total);
                                                 ?></td>
                                             <td class="small">
-                                                <a class="a" href="./penjualan/invoice_penjualan/cetak_invoice.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak Invoice</a> |
-                                                <a class="a" href="./penjualan/invoice_penjualan/cetak_surat_jalan.php?no=<?php echo $rowSO['no_transaksi'] ?>" target="_blank" style="cursor: pointer;">Cetak Surat Jalan</a> |
-                                                <a class="a" href="?content=edit-invoice-penjualan&no=<?php echo $rowSO['no_transaksi'] ?>" style="cursor: pointer;">Edit</a>
+                                                <a class="a" href="./penjualan/invoice_penjualan/cetak_invoice.php?no=<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>" target="_blank" style="cursor: pointer;">Cetak Invoice</a> |
+                                                <a class="a" href="./penjualan/invoice_penjualan/cetak_surat_jalan.php?no=<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>" target="_blank" style="cursor: pointer;">Cetak Surat Jalan</a> |
+                                                <a class="a" href="?content=edit-invoice-penjualan&no=<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>" style="cursor: pointer;">Edit</a>
                                             </td>
                                         </tr>
                                 <?php
