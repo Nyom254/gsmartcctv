@@ -54,22 +54,22 @@
                                                         while ($rowPO = mysqli_fetch_assoc($dataPO)) { ?>
                                                             <tr onclick="getDetailPurchaseOrder('<?php echo $rowPO['NO_TRANSAKSI'] ?>')">
                                                                 <td> <a class="a" data-dismiss="modal" onclick="putBarangPO('<?php echo $rowPO['NO_TRANSAKSI'] ?>')" style="cursor:pointer;"><?php echo $rowPO['NO_TRANSAKSI'] ?></a></td>
-                                                                <td><?php echo $rowPO['TANGGAL'] ?></td>
+                                                                <td><?php echo htmlspecialchars($rowPO['TANGGAL']) ?></td>
                                                                 <td><?php
                                                                     $queryNamaSupplier = mysqli_query($conn, "select nama from supplier where id_supplier = '" . $rowPO['KODE_SUPPLIER'] . "' ");
                                                                     $namaSupplier = mysqli_fetch_assoc($queryNamaSupplier);
-                                                                    echo $namaSupplier['nama'];
+                                                                    echo htmlspecialchars($namaSupplier['nama']);
                                                                     ?>
                                                                 </td>
-                                                                <td class="text-break"><?php echo $rowPO['KETERANGAN']  ?></td>
-                                                                <td><?php echo $rowPO['TERM']  ?></td>
-                                                                <td><?php echo $rowPO['JATUH_TEMPO']  ?></td>
+                                                                <td class="text-break"><?php echo htmlspecialchars($rowPO['KETERANGAN'])  ?></td>
+                                                                <td><?php echo htmlspecialchars($rowPO['TERM']) ?></td>
+                                                                <td><?php echo htmlspecialchars($rowPO['JATUH_TEMPO'])  ?></td>
                                                                 <td><?php
                                                                     $jumlahTotal = $rowPO['DPP'] + $rowPO['PPN'];
                                                                     $total = number_format($jumlahTotal, '0', ',', '.');
-                                                                    echo $total;
+                                                                    echo htmlspecialchars($total);
                                                                     ?></td>
-                                                                <td><?php echo $rowPO['status'] ?></td>
+                                                                <td><?php echo htmlspecialchars($rowPO['status']) ?></td>
                                                             </tr>
                                                     <?php
                                                         }
@@ -128,7 +128,7 @@
                                                 $cekSupplier = $dataSupplier->num_rows;
                                                 if ($cekSupplier > 0) {
                                                     while ($rowSupplier = mysqli_fetch_assoc($dataSupplier)) { ?>
-                                                        <option value="<?php echo $rowSupplier['id_supplier']; ?>"> <?php echo $rowSupplier['nama']; ?></option>
+                                                        <option value="<?php echo $rowSupplier['id_supplier']; ?>"> <?php echo htmlspecialchars($rowSupplier['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -145,7 +145,7 @@
                                                 $cekGudang = $dataGudang->num_rows;
                                                 if ($cekGudang > 0) {
                                                     while ($rowGudang = mysqli_fetch_assoc($dataGudang)) { ?>
-                                                        <option value="<?php echo $rowGudang['kode']; ?>"> <?php echo $rowGudang['nama']; ?></option>
+                                                        <option value="<?php echo $rowGudang['kode']; ?>"> <?php echo htmlspecialchars($rowGudang['nama']); ?></option>
                                                 <?php
                                                     }
                                                 }
