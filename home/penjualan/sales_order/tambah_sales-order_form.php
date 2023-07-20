@@ -83,7 +83,7 @@
                                     <div class="form-group row">
                                         <label for="pengirim" class="col-sm-4 col-form-label col-form-label-sm"> Pengirim:</label>
                                         <div class="col-sm-8">
-                                            <select type="" id="pengirim" name="pengirim" class="form-control form-control-sm">
+                                            <select type="" id="pengirim" name="pengirim" class="form-control form-control-sm select2">
                                                 <?php
                                                 $dataUser = mysqli_query($conn, "select * from user where status_aktif = 1");
                                                 $cekUser = $dataUser->num_rows;

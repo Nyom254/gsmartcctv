@@ -56,6 +56,7 @@ if (array_key_exists('kode-barang', $_POST)) {
 
             $queryTambahDetailInvoicePenjualan = mysqli_prepare($conn, "insert into detail_invoice_penjualan (no_transaksi, kode_barang, keterangan, quantity, harga, diskon_persentase, diskon) values (?, ?, ?, ?, ?, ?, ?)");
             mysqli_stmt_bind_param($queryTambahDetailInvoicePenjualan, "sssiddd", $no_transaksi, $kode_barang[$i], $keteranganDetail[$i], $quantity[$i], $harga[$i], $diskonPersentase[$i], $diskonDetail[$i]);
+            mysqli_stmt_execute($queryTambahDetailInvoicePenjualan);
 
             if (isset($quantity[$i]) && $quantity[$i] != '' && $quantity[$i] != 0) {
                 $queryBarang = mysqli_query($conn, "select satuan, harga, type, kode_departemen from barang where id_barang = '$kode_barang[$i]'");
@@ -71,10 +72,7 @@ if (array_key_exists('kode-barang', $_POST)) {
                 $quantityDetail = -$quantity[$i];
                 $queryTambahSaldoStok = mysqli_prepare($conn, "insert into saldo_stok (no_transaksi, tgl, gudang, kode_barang, qty, satuan, harga, status_stok, kode_departmen) values (?, ?, ?, ?, ?, ?, ?, ?, ?) ");
                 mysqli_stmt_bind_param($queryTambahSaldoStok, "ssssisiis", $no_transaksi, $tanggal, $gudang, $kode_barang[$i], $quantityDetail, $satuan, $harga[$i], $status_stok, $kode_departemen);
-                mysqli_stmt_execute($queryTambahDetailInvoicePenjualan);
                 mysqli_stmt_execute($queryTambahSaldoStok);
-            } else {
-                continue;
             }
         }
         mysqli_stmt_execute($queryUpdateSO);
