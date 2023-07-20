@@ -122,7 +122,7 @@
                                     <div class="form-group row">
                                         <label for="kode_vendor" class="col-sm-4 col-form-label col-form-label-sm">Kode Vendor:</label>
                                         <div class="col-sm-8">
-                                            <select type="text" name="kode_vendor" id="kode_vendor" class="form-control form-control-sm">
+                                            <select type="text" name="kode_vendor" id="kode_vendor" class="form-control form-control-sm select2">
                                                 <?php
                                                 $dataSupplier = mysqli_query($conn, "select * from supplier where status_aktif = '1'");
                                                 $cekSupplier = $dataSupplier->num_rows;
@@ -151,6 +151,12 @@
                                                 }
                                                 ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="no_ref" class="col-sm-4 col-form-label col-form-label-sm">No. Ref:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="no_ref" name="no_ref" class="form-control form-control-sm" required>
                                         </div>
                                     </div>
                                 </div>
@@ -316,7 +322,7 @@
                         "name", 'qty-terima[]',
                         'class', 'form-control form-control-sm',
                         'oninput', 'getTotalQty()',
-                        'required',''
+                        'required', ''
                     )
                     cell5.appendChild(elemQtyTerima)
 
@@ -336,15 +342,17 @@
         for (i = 1; i < tr.length; i++) {
             let td = tr[i].children
             let input = td[4].children[0]
-            totalQty += parseInt(input.value)
+            if (input.value !== ''){
+                totalQty += parseInt(input.value)
+            }
         }
 
         document.getElementById("totalQty").value = totalQty
     }
 
     document.getElementById("form_tambah_penerimaan_barang").addEventListener("keydown", (event) => {
-    if (event.key === 'Enter' || event.keycode === 13) {
-        event.preventDefault();
-    }
-})
+        if (event.key === 'Enter' || event.keycode === 13) {
+            event.preventDefault();
+        }
+    })
 </script>

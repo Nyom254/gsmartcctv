@@ -201,6 +201,9 @@ $dataPurchaseOrder = mysqli_fetch_assoc($queryPurchaseOrder);
                                             <td class="col-2"> <input type="number" class="form-control form-control-sm" id="total-satuan" readonly></td>
                                             <td><i class="fas fa-plus" style="cursor:pointer" onclick="addBarangRowTable()"></i></td>
                                         </tr>
+                                        <?php
+                                        
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -33,6 +33,7 @@
                                     <th>Nomor PO</th>
                                     <th>Kode Supplier</th>
                                     <th>Keterangan</th>
+                                    <th>aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,7 +48,33 @@
                                             <td><?php echo $rowPoPenerimaan['no_po'] ?></td>
                                             <td><?php echo $rowPoPenerimaan['kode_supplier'] ?></td>
                                             <td><?php echo $rowPoPenerimaan['keterangan'] ?></td>
+                                            <td><a href="" data-toggle="collapse" data-target="#cardEditPenerimaan<?php echo str_replace('/', '',$rowPoPenerimaan['no_penerimaan']) ?>">Edit</a></td>
                                         </tr>
+                                        <div class="card card-outline card-warning mt-2 collapse" id="cardEditPenerimaan<?php echo str_replace('/', '',$rowPoPenerimaan['no_penerimaan']) ?>">
+                                            <!-- /.card-header -->
+                                            <!-- form start -->
+                                            <form method="post" action="./pembelian/penerimaan-barang/edit_action.php?no=<?php echo urlencode($rowPoPenerimaan['no_penerimaan']); ?>">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="tanggal">Tanggal:</label>
+                                                        <input type="date" name="tanggal" class="form-control" id="tanggal" placeholder="tanggal" value="<?php echo $rowPoPenerimaan['tgl'] ?>" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="no_ref">no Ref:</label>
+                                                        <input type="text" name="no_ref" class="form-control" id="no_ref" placeholder="no_ref" value="<?php echo $rowPoPenerimaan['no_ref'] ?>" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="keterangan">Keterangan:</label>
+                                                        <textarea type="text" name="keterangan" class="form-control" id="keterangan" placeholder="keterangan"><?php echo $rowPoPenerimaan['keterangan'] ?></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-body -->
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardEditPenerimaan<?php echo str_replace('/', '', $rowPoPenerimaan['no_penerimaan']) ?>">Cancel</button>
+                                                    <button type="submit" class="btn btn-warning float-right">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                 <?php
                                     }
                                 }

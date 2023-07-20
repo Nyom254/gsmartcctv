@@ -60,7 +60,7 @@
                                     <div class="form-group row">
                                         <label for="supplier" class="col-sm-4 col-form-label col-form-label-sm">Supplier:</label>
                                         <div class="col-sm-8">
-                                            <select name="supplier" class="form-control form-control-sm" id="supplier">
+                                            <select name="supplier" class="form-control form-control-sm select2" id="supplier">
                                                 <?php
                                                 $dataSupplier = mysqli_query($conn, "select * from supplier where status_aktif = '1'");
                                                 $cekSupplier = $dataSupplier->num_rows;
@@ -83,7 +83,7 @@
                                     <div class="form-group row">
                                         <label for="pengambil" class="col-sm-4 col-form-label col-form-label-sm"> Pengambil:</label>
                                         <div class="col-sm-8">
-                                            <select type="" id="pengambil" name="pengambil" class="form-control form-control-sm">
+                                            <select type="" id="pengambil" name="pengambil" class="form-control form-control-sm select2">
                                                 <?php
                                                 $dataUser = mysqli_query($conn, "select * from user where status_aktif = 1");
                                                 $cekUser = $dataUser->num_rows;
