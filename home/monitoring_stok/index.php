@@ -51,12 +51,12 @@
                                         while ($rowStok = mysqli_fetch_assoc($dataStok)) {
                                     ?>
                                             <tr>
-                                                <td><?php echo $rowStok['gudang'] ?></td>
-                                                <td><?php echo $rowStok['nama_barang']  ?></td>
-                                                <td><?php echo $rowStok['stok'] ?></td>
-                                                <td><?php echo $rowStok['satuan'] ?></td>
-                                                <td><?php echo $rowStok['status'] ?></td>
-                                                <td><?php echo $rowStok['departemen'] ?></td>
+                                                <td><?php echo htmlspecialchars($rowStok['gudang']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowStok['nama_barang']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowStok['stok']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowStok['satuan']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowStok['status']) ?></td>
+                                                <td><?php echo htmlspecialchars($rowStok['departemen']) ?></td>
                                         <?php
                                         }
                                     }
