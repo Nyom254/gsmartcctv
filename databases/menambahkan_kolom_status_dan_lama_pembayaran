@@ -1,0 +1,1 @@
+ALTER TABLE `invoice_penjualan` ADD `status` BIT(1) NOT NULL DEFAULT b'0' AFTER `no_so`, ADD `lama_pembayaran` INT(5) NULL DEFAULT NULL AFTER `status`;
