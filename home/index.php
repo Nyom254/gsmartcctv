@@ -308,6 +308,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="?content=pembayaran_customer" class="nav-link">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p>
+                      Pembayaran Customer
+                    </p>
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="nav-item">
@@ -323,6 +331,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="nav-icon far fa-circle"></i>
                 <p>
                   inventaris kantor
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="?content=monitoring_stok" class="nav-link">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>
+                  Monitoring Stok
                 </p>
               </a>
             </li>
@@ -396,9 +412,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         case 'penerimaan_barang':
           include './pembelian/penerimaan-barang/penerimaan.php';
           break;
-        case 'edit_penerimaan_barang':
-          include './pembelian/penerimaan-barang/edit_form.php';
-          break;
         case 'tambah-penerimaan-barang':
           include './pembelian/penerimaan-barang/tambah_penerimaan_barang_form.php';
           break;
@@ -431,6 +444,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           break;
         case 'edit-invoice-penjualan':
           include './penjualan/invoice_penjualan/edit_invoice-penjualan_form.php';
+          break;
+        case 'monitoring_stok':
+          include './monitoring_stok/index.php';
+          break;
+        case 'pembayaran_customer':
+          include './penjualan/pembayaran_customer/pembayaran_customer.php';
+          break;
+        case 'tambah_pembayaran_customer':
+          include './penjualan/pembayaran_customer/tambah_pembayaran_customer.php';
           break;
         case 'dashboard':
           include './dashboard/dashboard.php';
@@ -497,533 +519,536 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Page specific script -->
   <script>
-    $.validator.addMethod('filesize', function(value, element, param) {
-      return this.optional(element) || (element.files[0].size <= param * 1000000)
-    }, 'File size must be less than {0} MB');
-    $(function() {
-      $("#example1").DataTable({
-        "responsive": true,
-        "lengthChange": true,
-        "autoWidth": false,
-      })
-      $("#log-data-table").DataTable({
-        "responsive": true,
-        "lengthChange": true,
-        "autoWidth": false,
-        "ordering": false,
-      })
-      $("#info-detail-purchase-order").DataTable({
-        "responsive": false,
-        "lengthChange": true,
-        "autoWidth": false,
-        "ordering": false,
-        "searching": false,
-        "paging": false,
-        "info": false,
-        language: {
-          "zeroRecords": "",
-          "emptyTable": ""
-        }
-      })
-      $("#tabel-purchase-order").DataTable({
-        "responsive": true,
-        "lengthChange": true,
-        "autoWidth": false,
-        order: [
-          [1, 'desc']
-        ],
-      })
-      $("#tabel-po-penerimaan").DataTable({
-        "responsive": true,
-        "lengthChange": true,
-        "autoWidth": false,
-        order: [
-          [1, 'desc']
-        ],
-      })
-      $("#pemakaian_kertas").DataTable({
-        "lengthChange": true,
-        "autoWidth": false,
-        fixedHeader: {
-          header: false,
-          footer: true,
-        },
-      })
-      $("#tabelSetupPerusahaan").DataTable({
-        "searching": false,
-        "lengthChange": false,
-        "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "ordering": false,
-        "paging": false,
-        "info": false,
-      })
-    });
-    $(function() {
-      //Initialize Select2 Elements
-      $('.select2').select2()
+    $(document).ready(() => {
 
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      });
-    });
-    $("#form_transaksi").validate({
-      rules: {
-        tanggal: {
-          required: true,
-        },
-        term: {
-          required: true
-        },
-      },
-      messages: {
-        tanggal: {
-          required: "Mohon isi Tanggal"
-        },
-        term: {
-          required: "Mohon isi term"
-        }
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-    $("#formTambahUser").validate({
-      rules: {
-        nama: {
-          required: true,
-        },
-        username: {
-          required: true
-        },
-        password: {
-          required: true
-        }
-      },
-      messages: {
-        nama: {
-          required: "Mohon isi Nama"
-        },
-        username: {
-          required: "Mohon isi username"
-        },
-        password: {
-          required: "Mohon Isi Password"
-        }
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    })
-    $("#formTambahBarang").validate({
-      rules: {
-        nama: {
-          required: true,
-        },
-        harga: {
-          required: true
-        },
-        satuan: {
-          required: true
-        },
-
-      },
-      messages: {
-        nama: {
-          required: "Mohon isi Nama Barang"
-        },
-        harga: {
-          required: "Mohon isi Harga Barang"
-        },
-        satuan: {
-          required: "Mohon Isi Satuan Barang"
-        }
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    })
-    $("#formTambahGroupBarang").validate({
-      rules: {
-        nama_group: {
-          required: true,
-        },
-      },
-      messages: {
-        nama_group: {
-          required: "Mohon isi Nama Group"
-        },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    })
-    $("#formTambahCustomer").validate({
-      rules: {
-        nama: {
-          required: true,
-        },
-        alamat: {
-          required: true
-        },
-        no_telp: {
-          required: true
-        },
-        kota: {
-          required: true
-        },
-        provinsi: {
-          required: true
-        },
-        keterangan: {
-          required: true,
-        },
-        email: {
-          required: true,
-          email: true
-        }
-      },
-      messages: {
-        nama: {
-          required: "Mohon isi Nama customer"
-        },
-        alamat: {
-          required: "Mohon isi alamat customer"
-        },
-        no_telp: {
-          required: "Mohon Isi Nomor Telepon customer"
-        },
-        kota: {
-          required: "Mohon Isi Kota customer"
-        },
-        provinsi: {
-          required: "Mohon Isi Provinsi customer"
-        },
-        keterangan: {
-          required: "Mohon Isi keterangan"
-        },
-        email: {
-          required: "Mohon Isi Email customer",
-          email: "Mohon isi email customer dengan format yang benar"
-        }
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    })
-    $("#formTambahSupplier").validate({
-      rules: {
-        nama: {
-          required: true,
-        },
-        alamat: {
-          required: true
-        },
-        contact: {
-          required: true
-        },
-        kota: {
-          required: true
-        },
-        keterangan: {
-          required: true,
-        },
-        email: {
-          required: true,
-          email: true
-        }
-      },
-      messages: {
-        nama: {
-          required: "Mohon isi Nama supplier"
-        },
-        alamat: {
-          required: "Mohon isi alamat supplier"
-        },
-        contact: {
-          required: "Mohon Isi Contact supplier"
-        },
-        kota: {
-          required: "Mohon Isi Kota supplier"
-        },
-        keterangan: {
-          required: "Mohon Isi keterangan"
-        },
-        email: {
-          required: "Mohon Isi Email supplier",
-          email: "Mohon isi email supplier dengan benar"
-        }
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    })
-    $("#form_tambah_penerimaan_barang").validate({
-      rules: {
-        tanggal: {
-          required: true,
-        },
-        no_po: {
-          required: true,
-        }
-      },
-      messages: {
-        tanggal: {
-          required: "Mohon isi Tanggal"
-        },
-        no_po: {
-          required: "Mohon pilih PO",
-        }
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    })
-    $("#formTambahDepartemen").validate({
-      rules: {
-        nama: {
-          required: true,
-        },
-      },
-      messages: {
-        nama: {
-          required: "Mohon isi Nama Departemen"
-        },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-    $("#formPemakaianKertas").validate({
-      rules: {
-        tanggal: {
-          required: true,
-        },
-        quantity: {
-          required: true,
-        },
-      },
-      messages: {
-        tanggal: {
-          required: "Mohon isi Tanggal"
-        },
-        quantity: {
-          required: "Mohon isi Quantity"
-        },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-    $("#tambahFormInventarisKantor").validate({
-      rules: {
-        no_inventaris: {
-          required: true,
-        },
-        tanggal: {
-          required: true,
-        },
-        posisi: {
-          required: true,
-        },
-        quantity: {
-          required: true,
-        },
-        gambar: {
-          required: true,
-          extension: "png|jpg|jpeg|svg|avif",
-          accept: "image/*",
-          filesize: 20,
-        },
-      },
-      messages: {
-        no_inventaris: {
-          required: ""
-        },
-        tanggal: {
-          required: "Mohon isi Tanggal"
-        },
-        posisi: {
-          required: "Mohon isi Posisi"
-        },
-        quantity: {
-          required: "Mohon isi Quantity"
-        },
-        gambar: {
-          required: "Mohon Tambahkan attachment",
-          extension: "Mohon Masukan Gambar dengan extensi png,jpg,jpeg,svg atau avif ",
-          filesize: "Ukuran gambar harus kurang dari 20 MB",
-        },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-
-    $("#formTambahInvoicePenjualan").validate({
-      rules: {
-        no_so: {
-          required: true,
-        },
-        tanggal: {
-          required: true,
-        },
-      },
-      messages: {
-        no_so: {
-          required: "Mohon Pilih SO"
-        },
-        tanggal: {
-          required: "Mohon isi Tanggal"
-        },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-
-
-    const urlParams = new URLSearchParams(window.location.search)
-    const toastParameter = urlParams.get('t')
-
-    if (urlParams.get('t')) {
+      $.validator.addMethod('filesize', function(value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param * 1000000)
+      }, 'File size must be less than {0} MB');
       $(function() {
-        var Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000
+        $("#example1").DataTable({
+          "responsive": true,
+          "lengthChange": true,
+          "autoWidth": false,
+        })
+        $("#log-data-table").DataTable({
+          "responsive": true,
+          "lengthChange": true,
+          "autoWidth": false,
+          "ordering": false,
+        })
+        $("#info-detail-purchase-order").DataTable({
+          "responsive": false,
+          "lengthChange": true,
+          "autoWidth": false,
+          "ordering": false,
+          "searching": false,
+          "paging": false,
+          "info": false,
+          language: {
+            "zeroRecords": "",
+            "emptyTable": ""
+          }
+        })
+        $("#tabel-purchase-order").DataTable({
+          "responsive": true,
+          "lengthChange": true,
+          "autoWidth": false,
+          order: [
+            [1, 'desc']
+          ],
+        })
+        $("#tabel-po-penerimaan").DataTable({
+          "responsive": true,
+          "lengthChange": true,
+          "autoWidth": false,
+          order: [
+            [1, 'desc']
+          ],
+        })
+        $("#pemakaian_kertas").DataTable({
+          "lengthChange": true,
+          "autoWidth": false,
+          fixedHeader: {
+            header: false,
+            footer: true,
+          },
+        })
+        $("#tabelSetupPerusahaan").DataTable({
+          "searching": false,
+          "lengthChange": false,
+          "responsive": true,
+          "lengthChange": false,
+          "autoWidth": false,
+          "ordering": false,
+          "paging": false,
+          "info": false,
+        })
+      });
+      $(function() {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+          theme: 'bootstrap4'
         });
-        $(() => {
-          Toast.fire({
-            icon: 'warning',
-            title: toastParameter,
+      });
+      $("#form_transaksi").validate({
+        rules: {
+          tanggal: {
+            required: true,
+          },
+          term: {
+            required: true
+          },
+        },
+        messages: {
+          tanggal: {
+            required: "Mohon isi Tanggal"
+          },
+          term: {
+            required: "Mohon isi term"
+          }
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+      $("#formTambahUser").validate({
+        rules: {
+          nama: {
+            required: true,
+          },
+          username: {
+            required: true
+          },
+          password: {
+            required: true
+          }
+        },
+        messages: {
+          nama: {
+            required: "Mohon isi Nama"
+          },
+          username: {
+            required: "Mohon isi username"
+          },
+          password: {
+            required: "Mohon Isi Password"
+          }
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      })
+      $("#formTambahBarang").validate({
+        rules: {
+          nama: {
+            required: true,
+          },
+          harga: {
+            required: true
+          },
+          satuan: {
+            required: true
+          },
+
+        },
+        messages: {
+          nama: {
+            required: "Mohon isi Nama Barang"
+          },
+          harga: {
+            required: "Mohon isi Harga Barang"
+          },
+          satuan: {
+            required: "Mohon Isi Satuan Barang"
+          }
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      })
+      $("#formTambahGroupBarang").validate({
+        rules: {
+          nama_group: {
+            required: true,
+          },
+        },
+        messages: {
+          nama_group: {
+            required: "Mohon isi Nama Group"
+          },
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      })
+      $("#formTambahCustomer").validate({
+        rules: {
+          nama: {
+            required: true,
+          },
+          alamat: {
+            required: true
+          },
+          no_telp: {
+            required: true
+          },
+          kota: {
+            required: true
+          },
+          provinsi: {
+            required: true
+          },
+          keterangan: {
+            required: true,
+          },
+          email: {
+            required: true,
+            email: true
+          }
+        },
+        messages: {
+          nama: {
+            required: "Mohon isi Nama customer"
+          },
+          alamat: {
+            required: "Mohon isi alamat customer"
+          },
+          no_telp: {
+            required: "Mohon Isi Nomor Telepon customer"
+          },
+          kota: {
+            required: "Mohon Isi Kota customer"
+          },
+          provinsi: {
+            required: "Mohon Isi Provinsi customer"
+          },
+          keterangan: {
+            required: "Mohon Isi keterangan"
+          },
+          email: {
+            required: "Mohon Isi Email customer",
+            email: "Mohon isi email customer dengan format yang benar"
+          }
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      })
+      $("#formTambahSupplier").validate({
+        rules: {
+          nama: {
+            required: true,
+          },
+          alamat: {
+            required: true
+          },
+          contact: {
+            required: true
+          },
+          kota: {
+            required: true
+          },
+          keterangan: {
+            required: true,
+          },
+          email: {
+            required: true,
+            email: true
+          }
+        },
+        messages: {
+          nama: {
+            required: "Mohon isi Nama supplier"
+          },
+          alamat: {
+            required: "Mohon isi alamat supplier"
+          },
+          contact: {
+            required: "Mohon Isi Contact supplier"
+          },
+          kota: {
+            required: "Mohon Isi Kota supplier"
+          },
+          keterangan: {
+            required: "Mohon Isi keterangan"
+          },
+          email: {
+            required: "Mohon Isi Email supplier",
+            email: "Mohon isi email supplier dengan benar"
+          }
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      })
+      $("#form_tambah_penerimaan_barang").validate({
+        rules: {
+          tanggal: {
+            required: true,
+          },
+          no_po: {
+            required: true,
+          }
+        },
+        messages: {
+          tanggal: {
+            required: "Mohon isi Tanggal"
+          },
+          no_po: {
+            required: "Mohon pilih PO",
+          }
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      })
+      $("#formTambahDepartemen").validate({
+        rules: {
+          nama: {
+            required: true,
+          },
+        },
+        messages: {
+          nama: {
+            required: "Mohon isi Nama Departemen"
+          },
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+      $("#formPemakaianKertas").validate({
+        rules: {
+          tanggal: {
+            required: true,
+          },
+          quantity: {
+            required: true,
+          },
+        },
+        messages: {
+          tanggal: {
+            required: "Mohon isi Tanggal"
+          },
+          quantity: {
+            required: "Mohon isi Quantity"
+          },
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+      $("#tambahFormInventarisKantor").validate({
+        rules: {
+          no_inventaris: {
+            required: true,
+          },
+          tanggal: {
+            required: true,
+          },
+          posisi: {
+            required: true,
+          },
+          quantity: {
+            required: true,
+          },
+          gambar: {
+            required: true,
+            extension: "png|jpg|jpeg|svg|avif",
+            accept: "image/*",
+            filesize: 20,
+          },
+        },
+        messages: {
+          no_inventaris: {
+            required: ""
+          },
+          tanggal: {
+            required: "Mohon isi Tanggal"
+          },
+          posisi: {
+            required: "Mohon isi Posisi"
+          },
+          quantity: {
+            required: "Mohon isi Quantity"
+          },
+          gambar: {
+            required: "Mohon Tambahkan attachment",
+            extension: "Mohon Masukan Gambar dengan extensi png,jpg,jpeg,svg atau avif ",
+            filesize: "Ukuran gambar harus kurang dari 20 MB",
+          },
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+
+      $("#formTambahInvoicePenjualan").validate({
+        rules: {
+          no_so: {
+            required: true,
+          },
+          tanggal: {
+            required: true,
+          },
+        },
+        messages: {
+          no_so: {
+            required: "Mohon Pilih SO"
+          },
+          tanggal: {
+            required: "Mohon isi Tanggal"
+          },
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+
+
+      const urlParams = new URLSearchParams(window.location.search)
+      const toastParameter = urlParams.get('t')
+
+      if (urlParams.get('t')) {
+        $(function() {
+          var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          $(() => {
+            Toast.fire({
+              icon: 'warning',
+              title: toastParameter,
+            })
           })
         })
-      })
 
-      // Get the current URL
-      const currentUrl = new URL(window.location.href);
+        // Get the current URL
+        const currentUrl = new URL(window.location.href);
 
-      // Get the search parameters from the URL
-      const searchParams = currentUrl.searchParams;
+        // Get the search parameters from the URL
+        const searchParams = currentUrl.searchParams;
 
-      // Remove the last parameter
-      const paramNames = Array.from(searchParams.keys());
-      const lastParamName = paramNames.pop();
-      searchParams.delete(lastParamName);
+        // Remove the last parameter
+        const paramNames = Array.from(searchParams.keys());
+        const lastParamName = paramNames.pop();
+        searchParams.delete(lastParamName);
 
-      // Construct the updated URL
-      const updatedUrl = currentUrl.origin + currentUrl.pathname + '?' + searchParams.toString();
+        // Construct the updated URL
+        const updatedUrl = currentUrl.origin + currentUrl.pathname + '?' + searchParams.toString();
 
-      // Update the browser's address bar with the modified URL
-      history.pushState({}, '', updatedUrl);
+        // Update the browser's address bar with the modified URL
+        history.pushState({}, '', updatedUrl);
 
-    }
-    jQuery('button[data-toggle="collapse"]').click(function(e) {
-      jQuery('.collapse').collapse('hide');
-    });
-    jQuery('#example1 tbody').on('click', 'button[data-toggle="collapse"]', function(e) {
-      jQuery('.collapse').collapse('hide');
-    });
-    $(".custom-file-input").on("change", function() {
-      var fileName = $(this).val().split("\\").pop();
-      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-      event.preventDefault();
-      $(this).ekkoLightbox({
-        alwaysShowClose: true
+      }
+      jQuery('button[data-toggle="collapse"]').click(function(e) {
+        jQuery('.collapse').collapse('hide');
+      });
+      jQuery('#example1 tbody').on('click', 'button[data-toggle="collapse"]', function(e) {
+        jQuery('.collapse').collapse('hide');
+      });
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+      $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox({
+          alwaysShowClose: true
+        });
       });
     });
   </script>
