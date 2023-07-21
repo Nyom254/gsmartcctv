@@ -54,11 +54,11 @@
                     $reversed_crtime = $crtime_time . " " . $crtime_date;
                 ?>
                     <tr>
-                      <td><?php echo $rowLog['NO_TRANSAKSI']  ?></td>
-                      <td><?php echo $rowLog['ACTION'] ?></td>
-                      <td><?php echo $rowLog['KETERANGAN'] ?></td>
-                      <td><?php echo $rowLog['USERID'] ?></td>
-                      <td><?php echo $reversed_crtime ?></td>
+                      <td><?php echo htmlspecialchars($rowLog['NO_TRANSAKSI'])  ?></td>
+                      <td><?php echo htmlspecialchars($rowLog['ACTION']) ?></td>
+                      <td><?php echo htmlspecialchars($rowLog['KETERANGAN']) ?></td>
+                      <td><?php echo htmlspecialchars($rowLog['USERID']) ?></td>
+                      <td><?php echo htmlspecialchars($reversed_crtime) ?></td>
                     </tr>
                 <?php
                   }
