@@ -1,8 +1,11 @@
 <?php
-    include '../../conn.php';
-
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else {
+    require '../../conn.php';
 
     $queryEditKertas = mysqli_prepare($conn, "update KERTAS set tgl = ?, jenis = ?, qty = ?, keterangan = ?, kode_user = ?, kode_barang = ?, mduser = ?, mdtime = ? where no_kertas = ? ");
     mysqli_stmt_bind_param($queryEditKertas, "ssissssss", $tanggal, $jenis, $qty, $keterangan, $kode_user, $kode_barang, $mduser, $mdtime, $no_kertas);
@@ -67,3 +70,7 @@
         $m = "pemakaian kertas gagal diubah";
         header("location:../index.php?content=pemakaian_kertas&t=$m");
     }
+    }
+} else {
+    http_response_code(405);
+}

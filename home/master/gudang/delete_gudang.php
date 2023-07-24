@@ -4,7 +4,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if (!isset($_SESSION['status'])) {
         http_response_code(403);
-        echo "Anda harus Login untuk mengakses resources ini";
     } else {
     require '../../../conn.php';
 
