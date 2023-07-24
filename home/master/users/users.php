@@ -133,7 +133,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="text" name="password" class="form-control" id="password" placeholder="Password" required>
+                                <input type="text" name="password" class="form-control" id="password" placeholder="Password" >
                               </div>
                               <div class="col-md-2">
                                 <div class="form-group ">

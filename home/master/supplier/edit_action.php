@@ -1,7 +1,13 @@
 <?php 
-    include '../../../conn.php';
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
+
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else {
+    require '../../../conn.php';
+
 
     $queryEditUser = mysqli_prepare($conn,"update supplier set alamat = ?, nama = ?, kota = ?, email = ?, keterangan = ?, status_aktif = ?, contact = ? where id_supplier = ? ");
     mysqli_stmt_bind_param($queryEditUser,"sssssiss", $alamat, $nama, $kota, $email, $keterangan, $status, $contact, $id_supplier);
@@ -63,4 +69,8 @@
         mysqli_close($conn);
         header("location:../../index.php?content=supplier");
     }
+}
+} else {
+    http_response_code(405);
+}
 ?>

@@ -1,6 +1,12 @@
 <?php 
-    include '../../../conn.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
+
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else {
+    require '../../../conn.php';
 
     $kode = $_GET['kode'];
 
@@ -53,4 +59,8 @@
         $m = "gudang gagal diubah";
         header("location:../../index.php?content=gudangt=$m");
     }
+}
+} else {
+    http_response_code(405);
+}
 ?>

@@ -1,6 +1,12 @@
-<?php 
-    include '../../../conn.php';
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
+
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else { 
+    require '../../../conn.php';
 
     $queryTambahGudang = mysqli_prepare($conn, "insert into Gudang (kode, nama, alamat, penanggung_jawab, status_aktif) values (?, ?, ?, ?, ?)");
     mysqli_stmt_bind_param($queryTambahGudang, "ssssi", $kode, $nama, $alamat, $penanggung_jawab, $status_aktif);
@@ -44,5 +50,7 @@
         $m = "gudang gagal ditambahkan";
         header(("location:../../index.php?content=gudang&t=$m"));
     }
-
-?>
+    }
+} else {
+    http_response_code(405);
+}

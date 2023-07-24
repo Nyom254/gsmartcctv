@@ -1,5 +1,12 @@
 <?php 
-    include '../../../conn.php';
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    session_start();
+
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else {
+    require '../../../conn.php';
     session_start();
 
     $kode = $_GET['kode'];
@@ -25,3 +32,7 @@
         $m = "departemen gagal dihapus";
         header("location:../../index.php?content=departemen&t=$m");
     }
+    }
+} else {
+    http_response_code(405);
+}

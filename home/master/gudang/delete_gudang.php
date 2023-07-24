@@ -1,6 +1,12 @@
 <?php 
-    include '../../../conn.php';
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     session_start();
+
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else {
+    require '../../../conn.php';
 
     $kode = $_GET['kode'];
     $queryHapusGudang = mysqli_prepare($conn,"delete from Gudang where kode = ?");
@@ -27,8 +33,8 @@
         $m = "gudang gagal dihapus";
         header("location:../../index.php?content=gudang&t=$m");
     }
-
-?>
-
-
+    }
+} else {
+    http_response_code(405);
+}
 ?>

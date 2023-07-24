@@ -181,7 +181,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="departemen">Departemen</label>
-                                <select name="departemen" class="form-control col-md-3" id="departemen">
+                                <select name="departemen" class="form-control col-md-2" id="departemen">
                                   <?php
                                   $dataDepartemen = mysqli_query($conn, "select * from departemen where status_aktif = '1'");
                                   $cekDepartemen = $dataDepartemen->num_rows;
@@ -199,7 +199,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="type">Type:</label>
-                                <select type="text" name="type" class="form-control col-md-2" id="type">
+                                <select type="text" name="type" class="form-control col-md-3" id="type">
                                   <option value="barang">Barang</option>
                                   <option value="jasa" <?php if ($rowBarang['type'] == 'jasa') {
                                                           echo "selected";

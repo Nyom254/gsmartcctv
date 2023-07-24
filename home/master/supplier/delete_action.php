@@ -1,7 +1,12 @@
 <?php 
-
-    include '../../../conn.php';
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     session_start();
+
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else {
+    require '../../../conn.php';
     
     $idSupplier = $_GET['id_supplier'];
     $queryHapusSupplier = mysqli_prepare($conn,"delete from supplier where id_supplier = ?");
@@ -25,5 +30,8 @@
         mysqli_close($conn);
         header("location:../../index.php?content=supplier");
     }
-
+    }
+} else {
+    http_response_code(405);
+}
 ?>

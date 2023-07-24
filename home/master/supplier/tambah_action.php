@@ -1,7 +1,12 @@
 <?php 
-
-    include '../../../conn.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
+
+    if (!isset($_SESSION['status'])) {
+        http_response_code(403);
+        echo "Anda harus Login untuk mengakses resources ini";
+    } else {
+    require '../../../conn.php';
 
 
     $queryTambahSupplier = mysqli_prepare($conn, "insert into supplier (id_supplier, alamat, nama, kota, email, keterangan, status_aktif, contact) values(?, ?, ?, ?, ?, ?, ?, ?)");
@@ -48,4 +53,8 @@
         mysqli_close($conn);
         header("location:../../index.php?content=supplier");
     }
+}
+} else {
+    http_response_code(405);
+}
 ?>
