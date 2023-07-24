@@ -126,14 +126,14 @@
                                             while ($rowKertas = mysqli_fetch_assoc($dataKertas)) {
                                         ?>
                                                 <tr>
-                                                    <td><?php echo $rowKertas['no_kertas']  ?></td>
+                                                    <td><?php echo htmlspecialchars($rowKertas['no_kertas'])  ?></td>
                                                     <td><?php echo  date('d-m-Y', strtotime($rowKertas['tgl'])) ?></td>
-                                                    <td><?php echo $rowKertas['username'] ?></td>
-                                                    <td><?php echo $rowKertas['nama'] ?></td>
-                                                    <td><?php echo $rowKertas['jenis'] ?></td>
-                                                    <td><?php echo $rowKertas['keterangan'] ?>
+                                                    <td><?php echo htmlspecialchars($rowKertas['username']) ?></td>
+                                                    <td><?php echo htmlspecialchars($rowKertas['nama']) ?></td>
+                                                    <td><?php echo htmlspecialchars($rowKertas['jenis']) ?></td>
+                                                    <td><?php echo htmlspecialchars($rowKertas['keterangan']) ?>
                                                     </td>
-                                                    <td><?php echo $rowKertas['qty'] ?></td>
+                                                    <td><?php echo htmlspecialchars($rowKertas['qty']) ?></td>
                                                     <td>
                                                         <button class="btn btn-sm btn-warning" data-toggle="collapse" data-target="#cardEditKertas<?php
                                                                                                                                                     $sequence = substr($rowKertas['no_kertas'], 7);
@@ -225,7 +225,7 @@
                                                                 <div class="form-group row">
                                                                     <label for="keterangan" class="col-6 col-form-label">Keterangan</label>
                                                                     <div class="col-6">
-                                                                        <textarea name="keterangan" class="form-control" id="keterangan"><?php echo $rowKertas['keterangan'] ?></textarea>
+                                                                        <textarea name="keterangan" class="form-control" id="keterangan"><?php echo htmlspecialchars($rowKertas['keterangan']) ?></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>

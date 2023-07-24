@@ -33,39 +33,39 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="inisial">Inisial:</label>
-                                        <input type="text" name="inisial" class="form-control" id="inisial" placeholder="Inisial Perusahaan">
+                                        <input type="text" name="inisial" class="form-control" id="inisial" placeholder="Inisial Perusahaan" minlength="4" maxlength="4" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="nama">Nama: </label>
-                                        <input type="text" name="nama" class="form-control" id="nama" placeholder="nama perusahaan">
+                                        <input type="text" name="nama" class="form-control" id="nama" placeholder="nama perusahaan" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="alamat">Alamat:</label>
-                                        <input type="text" name="alamat" class="form-control" id="alamat" placeholder="alamat perusahaan">
+                                        <input type="text" name="alamat" class="form-control" id="alamat" placeholder="alamat perusahaan" required>
                                     </div>
                                     <div class="form-group ">
                                         <label for="kota">Kota:</label>
-                                        <input type="text" name="kota" placeholder="kota perusahaan" id="kota" class="form-control">
+                                        <input type="text" name="kota" placeholder="kota perusahaan" id="kota" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="provinsi">Provinsi:</label>
-                                        <input type="text" name="provinsi" placeholder="kota perusahaan" id="provinsi" class="form-control">
+                                        <input type="text" name="provinsi" placeholder="kota perusahaan" id="provinsi" class="form-control" required>
                                     </div>
                                     <div class="form-group ">
                                         <label for="kode_pos">Kode Pos:</label>
-                                        <input type="number" name="kode_pos" id="kode_pos" placeholder="kode pos perusahaan" class="form-control">
+                                        <input type="number" name="kode_pos" id="kode_pos" placeholder="kode pos perusahaan" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_telp">No Telp:</label>
-                                        <input type="number" name="no_telp" class="form-control" id="no_telp" placeholder="nomor telepon perusahaan">
+                                        <input type="number" name="no_telp" class="form-control" id="no_telp" placeholder="nomor telepon perusahaan" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_rek">No Rekening:</label>
-                                        <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="nomor rekening perusahaan">
+                                        <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="nomor rekening perusahaan" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="departemen">Departemen:</label>
-                                        <select name="departemen" id="departemen" class="form-control">
+                                        <select name="departemen" id="departemen" class="form-control" required>
                                             <?php
                                             $queryDepartemen = mysqli_query($conn, "select * from departemen");
                                             if ($queryDepartemen->num_rows > 0) {
@@ -88,7 +88,7 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardTambahSetupPerusahaan">Cancel</button>
+                                    <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="#cardTambahSetupPerusahaan" onclick="reset()">Cancel</button>
                                     <button type="submit" class="btn btn-primary float-right ">Submit</button>
                                 </div>
                             </form>
@@ -117,19 +117,24 @@
                                 ?>
 
                                     <tr>
-                                        <td><?php echo $rowPerusahaan['inisial']  ?></td>
-                                        <td><?php echo $rowPerusahaan['nama'] ?></td>
-                                        <td><?php echo $rowPerusahaan['alamat'] ?></td>
-                                        <td><?php echo $rowPerusahaan['kota'] ?></td>
-                                        <td><?php echo $rowPerusahaan['provinsi'] ?></td>
-                                        <td><?php echo $rowPerusahaan['kode_pos'] ?></td>
-                                        <td><?php echo $rowPerusahaan['no_telp'] ?></td>
-                                        <td><?php echo $rowPerusahaan['no_rek'] ?></td>
-                                        <td><?php echo $rowPerusahaan['kode_departemen'] ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['inisial'])  ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['nama']) ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['alamat']) ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['kota']) ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['provinsi']) ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['kode_pos']) ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['no_telp']) ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['no_rek']) ?></td>
+                                        <td><?php echo htmlspecialchars($rowPerusahaan['kode_departemen']) ?></td>
                                         <td>
-                                            <a href="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" data-toggle="lightbox" data-title="setup perusahaan">
-                                                <img decoding="async" data-lazysrc="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" width="70px" height="70px" class="img-fluid mb-2">
-                                            </a>
+                                            <?php if ($rowPerusahaan['logo_perusahaan'] !== null) { ?>
+                                                <a href="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" data-toggle="lightbox" data-title="setup perusahaan">
+                                                    <img decoding="async" src="data:image/png;base64,<?php echo base64_encode($rowPerusahaan['logo_perusahaan']) ?>" width="70px" height="70px" class="img-fluid mb-2">
+                                                </a>
+                                                <?php
+                                            } else {
+                                                echo "tidak ada logo";
+                                            } ?>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-warning " data-toggle="collapse" data-target="#cardEditSetupPerusahaan<?php echo $rowPerusahaan['inisial'] ?>"><span class="material-symbols-outlined">edit</span></button>
