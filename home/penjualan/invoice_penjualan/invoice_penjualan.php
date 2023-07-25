@@ -26,11 +26,13 @@
                                 <tr>
                                     <th>No Transaksi</th>
                                     <th>Tanggal</th>
+                                    <th>Jatuh Tempo </th>
                                     <th>No SO</th>
                                     <th>Pengirim</th>
                                     <th>Customer</th>
                                     <th>Keterangan</th>
-                                    <th>Jatuh Tempo </th>
+                                    <th>Status</th>
+                                    <th>Lama Pembayaran</th>
                                     <th>Total</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -45,11 +47,13 @@
                                         <tr onclick="getDetailInvoicePenjualan('<?php echo htmlspecialchars($rowSO['no_transaksi']) ?>')">
                                             <td><?php echo htmlspecialchars($rowSO['no_transaksi'])  ?></td>
                                             <td><?php echo htmlspecialchars($rowSO['tanggal']) ?></td>
+                                            <td><?php echo htmlspecialchars($rowSO['jatuh_tempo']) ?></td>
                                             <td><?php echo htmlspecialchars($rowSO['no_so']) ?></td>
                                             <td><?php echo htmlspecialchars($rowSO['pengirim']) ?></td>
                                             <td><?php echo htmlspecialchars($rowSO['nama']) ?></td>
                                             <td class="text-break"><?php echo htmlspecialchars($rowSO['keterangan']) ?></td>
-                                            <td><?php echo htmlspecialchars($rowSO['jatuh_tempo']) ?></td>
+                                            <td><?php  echo $rowSO['status'] == 1 ?  "lunas" :  "belum lunas" ?></td>
+                                            <td><?php echo $rowSO['lama_pembayaran'] !== null ? htmlspecialchars($rowSO['lama_pembayaran']) . " hari" : ' ' ?></td>
                                             <td><?php
                                                 $jumlahTotal = $rowSO['dpp'] + $rowSO['ppn'];
                                                 $total = number_format($jumlahTotal, '2', ",", ".");
