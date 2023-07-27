@@ -444,10 +444,7 @@
                     cell10.innerHTML = 0;
                 }
             }
-        }
-        xhr.open('GET', './penjualan/invoice_penjualan/data_SO.php?no=' + noSO, true)
-        xhr.send()
-        setTimeout(() => {
+
             if (document.getElementById("jenis_ppn").value == "Non_PKP") {
                 document.getElementById("ppn-persen").value = 0
                 document.getElementById("container_ppn").style.display = "none"
@@ -456,8 +453,9 @@
                 document.getElementById("ppn-persen").value = 11
             }
             addEventListenerQtyTerjual();
-        }, 2000);
-        generateNoTransaksi();
+        }
+        xhr.open('GET', './penjualan/invoice_penjualan/data_SO.php?no=' + noSO, true)
+        xhr.send()
     }
 
     function generateNoTransaksi() {
