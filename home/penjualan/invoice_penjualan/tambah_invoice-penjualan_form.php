@@ -456,7 +456,7 @@
                 document.getElementById("ppn-persen").value = 11
             }
             addEventListenerQtyTerjual();
-        }, 100);
+        }, 2000);
         generateNoTransaksi();
     }
 
