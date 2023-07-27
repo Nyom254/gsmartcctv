@@ -322,6 +322,8 @@
                         "name", 'qty-terima[]',
                         'class', 'form-control form-control-sm',
                         'oninput', 'getTotalQty()',
+                        'min', 1,
+                        'max', parseInt(item.qty_po) - parseInt(item.qty_terima),
                         'required', ''
                     )
                     cell5.appendChild(elemQtyTerima)

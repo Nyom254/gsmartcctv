@@ -197,7 +197,7 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
                                                         <td><?php echo $rowDetailInvoicePenjualan['nama_barang'] ?></td>
                                                         <td><input type="text" name="keterangan-detail[]" value="<?php echo htmlspecialchars($rowDetailInvoicePenjualan['keterangan']) ?>" class="form-control form-control-sm"></td>
                                                         <td><?php echo $rowDetailInvoicePenjualan['quantity'] ?></td>
-                                                        <td><input type="number" name="qty-terjual[]" value="<?php echo $rowDetailInvoicePenjualan['quantity_terjual'] ?>" class="form-control form-control-sm" oninput="putTotalPrices(this)"></td>
+                                                        <td><input type="number" name="qty-terjual[]" max="<?php echo $rowDetailInvoicePenjualan['quantity'] ?>" min="1" value="<?php echo $rowDetailInvoicePenjualan['quantity_terjual'] ?>" class="form-control form-control-sm" oninput="putTotalPrices(this)"></td>
                                                         <td><input type="hidden" name="harga[]"><?php echo $rowDetailInvoicePenjualan['harga'] ?></td>
                                                         <td><input type="hidden" name="diskon-persentase[]"><?php echo $rowDetailInvoicePenjualan['diskon_persentase'] ?></td>
                                                         <td><input type="hidden" name="diskon-satuan[]"><?php echo $rowDetailInvoicePenjualan['diskon'] ?></td>
@@ -341,22 +341,4 @@ $dataInvoicePenjualan = mysqli_fetch_assoc($queryInvoicePenjualan);
         document.getElementById("ppn").value = parseInt(ppnPersen.value) / 100 * parseInt(dpp.value);
     }
 
-
-    function filterSOBerdasarkanDepartemen() {
-        const departemen = document.getElementById("departemen").selectedOptions[0].label;
-
-        var rows = document.querySelectorAll("#example1 tbody tr");
-
-        for (var i = 0; i < rows.length; i++) {
-            var row = rows[i];
-            var noSO = row.querySelector("td:nth-child(1)").textContent;
-            var rowDepartemen = noSO.substring(4, 8);
-            console.log(rowDepartemen);
-            if (rowDepartemen === departemen) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        }
-    }
 </script>

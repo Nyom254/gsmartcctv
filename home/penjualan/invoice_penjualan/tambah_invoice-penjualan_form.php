@@ -406,6 +406,8 @@
                         "name", 'qty-terjual[]',
                         'type', 'number',
                         'class', 'form-control form-control-sm',
+                        'min', 1,
+                        'max', parseInt(item.qty_SO) - parseInt(item.qty_terjual),
                         'required', ''
                     )
                     cell6.appendChild(elemQtyTerjual)
