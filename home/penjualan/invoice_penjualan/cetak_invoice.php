@@ -156,20 +156,20 @@
 
     <div style="width: 45%">
         <p>Keterangan:</p>
-        <p><?php echo $dataInvoicePenjualan['keterangan']; ?></p>
+        <p><?php echo htmlspecialchars($dataInvoicePenjualan['keterangan']); ?></p>
     </div>
     <div style="display: flex;margin-top:30px">
         <div style="width: 45%">
             <p>Nomor Rekening BCA:</p>
-            <p><?php echo $dataPerusahaan['no_rek']; ?></p>
+            <p><?php echo htmlspecialchars($dataPerusahaan['no_rek']); ?></p>
         </div>
         <div style="width: 25%;margin-top:30px">
             <p>Pengirim, </p>
-            <p style="margin-top:40px"><?php echo $dataInvoicePenjualan['pengirim'] ?></p>
+            <p style="margin-top:40px"><?php echo ($dataInvoicePenjualan['pengirim']) ?></p>
         </div>
         <div style="margin-top:30px;">
             <p>Pembuat,</p>
-            <p style="margin-top:40px"><?php echo $dataInvoicePenjualan['cruser'] ?></p>
+            <p style="margin-top:40px"><?php echo htmlspecialchars($dataInvoicePenjualan['cruser']) ?></p>
         </div>
     </div>
 </body>

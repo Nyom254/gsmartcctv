@@ -480,7 +480,6 @@
                     if (lastYear == tahun && lastMonth == bulan && lastInisial == inisial) {
                         var lastSequence = parseInt(item.no_transaksi.substr(13));
                         var sequence = (lastSequence + 1).toString().padStart(4, '0');
-                        //console.log(`PO/${tahun}${bulan}/${sequence}`)
                         noTransaksi = `PJ/${inisial}/${tahun}${bulan}/${sequence}`
                     }
                 }
@@ -584,7 +583,6 @@
             var row = rows[i];
             var noSO = row.querySelector("td:nth-child(1)").textContent;
             var rowDepartemen = noSO.substring(4, 8);
-            console.log(rowDepartemen);
             if (rowDepartemen === departemen) {
                 row.style.display = "";
             } else {

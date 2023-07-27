@@ -70,7 +70,7 @@
                                             $queryDepartemen = mysqli_query($conn, "select * from departemen");
                                             if ($queryDepartemen->num_rows > 0) {
                                                 while ($rowDepartemen = mysqli_fetch_assoc($queryDepartemen)) { ?>
-                                                    <option value="<?php echo $rowDepartemen['kode'] ?>"><?php echo $rowDepartemen['nama'] ?></option>
+                                                    <option value="<?php echo $rowDepartemen['kode'] ?>"><?php echo htmlspecialchars($rowDepartemen['nama']) ?></option>
                                             <?php }
                                             }
                                             ?>
@@ -148,35 +148,35 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="inisial">Inisial:</label>
-                                                    <input type="text" name="inisial" class="form-control" id="inisial" placeholder="Inisial Perusahaan" value="<?php echo $rowPerusahaan['inisial'] ?>">
+                                                    <input type="text" name="inisial" class="form-control" id="inisial" placeholder="Inisial Perusahaan" value="<?php echo htmlspecialchars($rowPerusahaan['inisial']) ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nama">Nama: </label>
-                                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="nama perusahaan" value="<?php echo $rowPerusahaan['nama'] ?>">
+                                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="nama perusahaan" value="<?php echo htmlspecialchars($rowPerusahaan['nama']) ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="alamat">Alamat:</label>
-                                                    <input type="text" name="alamat" class="form-control" id="alamat" placeholder="alamat perusahaan" value="<?php echo $rowPerusahaan['alamat'] ?>">
+                                                    <input type="text" name="alamat" class="form-control" id="alamat" placeholder="alamat perusahaan" value="<?php echo htmlspecialchars($rowPerusahaan['alamat']) ?>">
                                                 </div>
                                                 <div class="form-group ">
                                                     <label for="kota">Kota:</label>
-                                                    <input type="text" name="kota" placeholder="kota perusahaan" id="kota" class="form-control" value="<?php echo $rowPerusahaan['kota'] ?>">
+                                                    <input type="text" name="kota" placeholder="kota perusahaan" id="kota" class="form-control" value="<?php echo htmlspecialchars($rowPerusahaan['kota']) ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="provinsi">Provinsi:</label>
-                                                    <input type="text" name="provinsi" placeholder="kota perusahaan" id="provinsi" class="form-control" value="<?php echo $rowPerusahaan['provinsi'] ?>">
+                                                    <input type="text" name="provinsi" placeholder="kota perusahaan" id="provinsi" class="form-control" value="<?php echo htmlspecialchars($rowPerusahaan['provinsi']) ?>">
                                                 </div>
                                                 <div class="form-group ">
                                                     <label for="kode_pos">Kode Pos:</label>
-                                                    <input type="number" name="kode_pos" id="kode_pos" placeholder="kode pos perusahaan" class="form-control" value="<?php echo $rowPerusahaan['kode_pos'] ?>">
+                                                    <input type="number" name="kode_pos" id="kode_pos" placeholder="kode pos perusahaan" class="form-control" value="<?php echo htmlspecialchars($rowPerusahaan['kode_pos']) ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="no_telp">No Telp:</label>
-                                                    <input type="number" name="no_telp" class="form-control" id="no_telp" placeholder="nomor telepon perusahaan" value="<?php echo $rowPerusahaan['no_telp'] ?>">
+                                                    <input type="number" name="no_telp" class="form-control" id="no_telp" placeholder="nomor telepon perusahaan" value="<?php echo htmlspecialchars($rowPerusahaan['no_telp']) ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="no_rek">No Rekening:</label>
-                                                    <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="nomor rekening perusahaan" value="<?php echo $rowPerusahaan['no_rek'] ?>">
+                                                    <input type="text" name="no_rek" class="form-control" id="no_rek" placeholder="nomor rekening perusahaan" value="<?php echo htmlspecialchars($rowPerusahaan['no_rek']) ?>">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="departemen">Departemen:</label>
@@ -187,7 +187,7 @@
                                                             while ($rowDepartemen = mysqli_fetch_assoc($queryDepartemen)) { ?>
                                                                 <option value="<?php echo $rowDepartemen['kode'] ?>" <?php if ($rowDepartemen['kode'] == $rowPerusahaan['kode_departemen']) {
                                                                                                                             echo "selected";
-                                                                                                                        } ?>><?php echo $rowDepartemen['nama'] ?></option>
+                                                                                                                        } ?>><?php echo htmlspecialchars($rowDepartemen['nama']) ?></option>
                                                         <?php }
                                                         }
                                                         ?>
@@ -205,12 +205,12 @@
                                             </div>
                                             <!-- /.card-body -->
                                             <div class="card-footer">
-                                                <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="##cardEditSetupPerusahaan<?php echo $rowPerusahaan['inisial'] ?>">Cancel</button>
+                                                <button type="button" class="btn btn-secondary float-right ml-3" data-toggle="collapse" data-target="##cardEditSetupPerusahaan<?php echo htmlspecialchars($rowPerusahaan['inisial']) ?>">Cancel</button>
                                                 <button type="submit" class="btn btn-warning float-right ">Submit</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal fade" id="modalHapusPerusahaan<?php echo $rowPerusahaan['inisial'] ?>">
+                                    <div class="modal fade" id="modalHapusPerusahaan<?php echo htmlspecialchars($rowPerusahaan['inisial']) ?>">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
